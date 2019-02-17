@@ -17,10 +17,12 @@
   },
   "homepage": "https://github.com/Artak-Mkrtchyan/krasnodar-coffee#readme",
   "dependencies": {
+    "body-parser": "^1.18.3",
     "bootstrap": "^4.3.1",
     "express": "^4.16.4",
     "express-handlebars": "^3.0.0",
     "jquery": "^3.3.1",
+    "mongoose": "^5.4.13",
     "popper.js": "^1.14.7"
   }
 }

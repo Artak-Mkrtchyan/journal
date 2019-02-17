@@ -1,21 +1,39 @@
 const express = require('express');
 const exphbs  = require('express-handlebars');
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 
 const app = express();
+
+const mainRoute = require('./routes/index');
 
 app.engine('handlebars', exphbs({
   defaultLayout: 'main'
 }))
 app.set('view engine', 'handlebars');
 
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+mongoose.Promise = global.Promise;
+// Connect to mongoose
+mongoose.connect('mongodb://localhost/articles', {
+  // useMongoClient: true
+})
+  .then(() => console.log('MongoDB Connected...'))
+  .catch(err => console.log(err));
+
+
 app.use('/svg', express.static(__dirname + '/views/svg'));
 app.use('/js', express.static(__dirname + '/node_modules/bootstrap/dist/js'));
 app.use('/js', express.static(__dirname + '/node_modules/jquery/dist'));
 app.use('/css', express.static(__dirname + '/node_modules/bootstrap/dist/css'));
 
-app.get('/', function(req, res) {
-  res.render('home')
-})
+// app.get('/', function(req, res) {
+//   res.render('home')
+// })
+
+app.use('/', mainRoute);
 
 const port = 5000;
 
