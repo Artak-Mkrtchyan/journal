@@ -57,7 +57,6 @@ router.post('/articles/:id', (req, res) => {
 })
 
 router.post('/articles/add', (req, res) => {
-  console.log(req.body);
 
   if (!req.body.title) {
     // errors.push({text:'Please add a title'});
@@ -78,9 +77,16 @@ router.post('/articles/add', (req, res) => {
       // res.redirect('/ideas');
     })
 
-  
-
   res.render('articles/add')
+})
+
+router.get('/articles/delete/:id', (req, res) => {
+  Article.deleteOne({ _id: req.params.id })
+    .then(() => (
+      console.log('delete article')
+    ))
+    
+  res.redirect('/')
 })
   
 module.exports = router;
