@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const app = express();
 
 const mainRoute = require('./routes/index');
+const articles = require('./routes/articles');
 
 app.engine('handlebars', exphbs({
   defaultLayout: 'main'
@@ -18,7 +19,7 @@ app.use(bodyParser.json());
 mongoose.Promise = global.Promise;
 // Connect to mongoose
 mongoose.connect('mongodb://localhost/articles', {
-  // useMongoClient: true
+  useNewUrlParser: true
 })
   .then(() => console.log('MongoDB Connected...'))
   .catch(err => console.log(err));
@@ -34,6 +35,7 @@ app.use('/css', express.static(__dirname + '/node_modules/bootstrap/dist/css'));
 // })
 
 app.use('/', mainRoute);
+app.use('/articles', articles);
 
 const port = 5000;
 
