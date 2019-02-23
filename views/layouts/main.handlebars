@@ -5,10 +5,14 @@
     <title>Example App</title>
 </head>
 <body>
-    {{> navbar}}
-    {{{body}}}
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
-    <script src="/js/jquery.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
+	{{> navbar}}
+	<div class="container">
+		{{> msg}}
+		{{{body}}}
+	</div>
+	<link href="/assets/main.css" rel="stylesheet">
+	<link href="/css/bootstrap.min.css" rel="stylesheet">
+	<script src="/js/jquery.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
 </body>
 </html>

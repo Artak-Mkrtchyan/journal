@@ -50,7 +50,8 @@ router.post('/:id', (req, res) => {
       article.title = req.body.title;
       article.description = req.body.description;
 
-      article.save()
+      article.save();
+      req.flash('success_msg', 'Article Updated');
       res.redirect('/');
     }
   });
@@ -63,8 +64,10 @@ router.get('/add', (req, res) => {
 
 router.get('/delete/:id', (req, res) => {
   Article.deleteOne({ _id: req.params.id })
-    
-  res.redirect('/')
+  .then(() => {
+    req.flash('success_msg', 'Article removed');
+    res.redirect('/');
+  });
 });
 
 router.post('/', (req, res) => {
@@ -90,9 +93,12 @@ router.post('/', (req, res) => {
       description: req.body.description
     }
 
-    new Article(newArticle).save()
-  
-    res.redirect('/')
+    new Article(newArticle)
+    .save()
+    .then(article => {
+      req.flash('success_msg', 'Article Added')
+      res.redirect('/')
+    });
   }
 });
   

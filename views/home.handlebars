@@ -1,8 +1,6 @@
-<div class="container">
-  <div class="row m-3">
-
+<div class="articles">
   {{#each article}}
-    <div class="col-3 card m-2">
+    <div class="article-card card">
       <h4>{{title}}</h4>
       <div class="card-body">
         {{description}}
@@ -11,6 +9,4 @@
       <a class="btn btn-dark btn-block mb-2" href="/articles/delete/{{_id}}">Delete</a>
     </div>
   {{/each}}
-
-  </div>
 </div>
