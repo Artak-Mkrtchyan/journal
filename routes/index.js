@@ -13,8 +13,6 @@ router.get('/', (req, res) => {
         article: article
       });
     });
-  
-  // res.render('home');
 });
   
 module.exports = router;

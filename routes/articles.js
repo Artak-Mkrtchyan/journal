@@ -17,27 +17,44 @@ router.get('/edit/:id', (req, res) => {
   .then(article => {
     console.log(article);
     res.render('articles/edit', {
-      article: article
+      id: article.id,
+      title: article.title,
+      description: article.description
     });  
   });
-  
-  // res.render('articles/edit');
 });
 
 router.post('/:id', (req, res) => {
+  let errors = [];
+
+  if (!req.body.title) {
+    errors.push({text:'Please add a title'});
+  }
+
+  if (!req.body.description) {
+    errors.push({text:'Please add some description'});
+  }  
+
   Article.findOne({
     _id: req.params.id
   })
   .then(article => {
-    article.title = req.body.title;
-    article.description = req.body.description;
+    if (errors.length > 0) {
+      res.render(`articles/edit`, {
+        errors: errors,
+        id: req.params.id,
+        title: req.body.title,
+        description: req.body.description
+      })
+    } else {
+      article.title = req.body.title;
+      article.description = req.body.description;
 
-    article.save()
-    
-    
+      article.save()
+      res.redirect('/');
+    }
   });
 
-  res.redirect('/');
 });
 
 router.get('/add', (req, res) => {
@@ -46,9 +63,6 @@ router.get('/add', (req, res) => {
 
 router.get('/delete/:id', (req, res) => {
   Article.deleteOne({ _id: req.params.id })
-    .then(() => (
-      console.log('delete article')
-    ))
     
   res.redirect('/')
 });
@@ -75,13 +89,8 @@ router.post('/', (req, res) => {
       title: req.body.title,
       description: req.body.description
     }
-    console.log(req.body);
-    new Article(newArticle)
-      .save()
-      .then(article => {
-        // req.flash('success_msg', 'Video idea added');
-        // res.redirect('/ideas');
-      })
+
+    new Article(newArticle).save()
   
     res.redirect('/')
   }
