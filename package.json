@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/Artak-Mkrtchyan/krasnodar-coffee#readme",
   "dependencies": {
+    "bcrypt": "^3.0.4",
     "body-parser": "^1.18.3",
     "bootstrap": "^4.3.1",
     "connect-flash": "^0.1.1",
@@ -26,6 +27,7 @@
     "jquery": "^3.3.1",
     "mongoose": "^5.4.13",
     "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
     "popper.js": "^1.14.7"
   }
 }

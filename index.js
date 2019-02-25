@@ -12,6 +12,8 @@ const mainRoute = require('./routes/index');
 const articles = require('./routes/articles');
 const user = require('./routes/user');
 
+require('./config/passport')(passport);
+
 app.engine('handlebars', exphbs({
   defaultLayout: 'main'
 }))
@@ -34,6 +36,9 @@ app.use(session({
   saveUninitialized: true
 }));
 
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use(flash());
 
 app.use(function(req, res, next){
@@ -50,10 +55,6 @@ app.use('/js', express.static(__dirname + '/node_modules/bootstrap/dist/js'));
 app.use('/js', express.static(__dirname + '/node_modules/jquery/dist'));
 app.use('/css', express.static(__dirname + '/node_modules/bootstrap/dist/css'));
 
-// app.get('/', function(req, res) {
-//   res.render('home')
-// })
-
 app.use('/', mainRoute);
 app.use('/articles', articles);
 app.use('/user', user);
@@ -62,4 +63,4 @@ const port = 5000;
 
 app.listen(port, () => {
   console.log(`Server started on port ${port}`);
-})
+});

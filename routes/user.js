@@ -1,5 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
+const passport = require('passport');
 
 const router = express.Router();
 
@@ -10,8 +12,12 @@ router.get('/login', (req, res) => {
   res.render('user/login');
 });
 
-router.post('/login', (req, res) => {
-  res.render('user/login');
+router.post('/login',  (req, res, next) => {
+  passport.authenticate('local', {
+    successRedirect:'/',
+    failureRedirect: '/user/login',
+    failureFlash: true
+  })(req, res, next);  
 });
 
 router.get('/register', (req, res) => {
@@ -57,21 +63,24 @@ router.post('/register', (req, res) => {
           email: req.body.email,
           password: req.body.password
         });
-        console.log('qwe');
-        newUser.save()
-          .then(user => {
-            req.flash('success_msg', 'You are now registered and can log in');
-            console.log('qwe');
-            res.redirect('/user/login');
-          })
-          .catch(err => {
-            console.log(err);
-            return;
-          });
+        bcrypt.genSalt(10, function(err, salt) {
+          bcrypt.hash(newUser.password, salt, function(err, hash) {
+            if(err) throw err;
+            newUser.password = hash;
+            newUser.save()
+            .then(user => {
+              req.flash('success_msg', 'You are now registered and can log in');
+              res.redirect('/user/login');
+            })
+            .catch(err => {
+              console.log(err);
+              return;
+            });
+            });
+        });
+        
       }
-    } 
-
-    )
+    });
   }
 
 })
