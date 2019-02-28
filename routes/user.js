@@ -12,6 +12,12 @@ router.get('/login', (req, res) => {
   res.render('user/login');
 });
 
+router.get('/logout', (req, res) => {
+  req.logout();
+  req.flash('success_msg', 'You are logged out');
+  res.redirect('login');
+})
+
 router.post('/login',  (req, res, next) => {
   passport.authenticate('local', {
     successRedirect:'/',
@@ -73,7 +79,6 @@ router.post('/register', (req, res) => {
               res.redirect('/user/login');
             })
             .catch(err => {
-              console.log(err);
               return;
             });
             });
@@ -82,9 +87,6 @@ router.post('/register', (req, res) => {
       }
     });
   }
-
 })
 
-
-  
 module.exports = router;

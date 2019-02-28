@@ -1,6 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
 
+const { ensureAuthenticated } = require('../helpers/auth');
+
 const router = express.Router();
 
 require('../models/article');
@@ -10,12 +12,11 @@ router.get('/', (req, res) => {
 	res.render('articles/index')
 });
 
-router.get('/edit/:id', (req, res) => {
+router.get('/edit/:id', ensureAuthenticated, (req, res) => {
   Article.findOne({
     _id: req.params.id
   })
   .then(article => {
-    console.log(article);
     res.render('articles/edit', {
       id: article.id,
       title: article.title,
@@ -24,7 +25,7 @@ router.get('/edit/:id', (req, res) => {
   });
 });
 
-router.post('/:id', (req, res) => {
+router.post('/:id', ensureAuthenticated, (req, res) => {
   let errors = [];
 
   if (!req.body.title) {
@@ -58,7 +59,7 @@ router.post('/:id', (req, res) => {
 
 });
 
-router.get('/add', (req, res) => {
+router.get('/add', ensureAuthenticated, (req, res) => {
   res.render('articles/add');
 });
 
@@ -70,7 +71,7 @@ router.get('/delete/:id', (req, res) => {
   });
 });
 
-router.post('/', (req, res) => {
+router.post('/', ensureAuthenticated, (req, res) => {
   let errors = [];
 
   if (!req.body.title) {

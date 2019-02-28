@@ -5,8 +5,12 @@
       <div class="card-body">
         {{description}}
       </div>
-      <a class="btn btn-dark btn-block mb-2" href="/articles/edit/{{_id}}">Edit</a>
-      <a class="btn btn-dark btn-block mb-2" href="/articles/delete/{{_id}}">Delete</a>
+      {{#if ../user}}
+        <a class="btn btn-dark btn-block mb-2" href="/articles/edit/{{_id}}">Edit</a>
+        <a class="btn btn-dark btn-block mb-2" href="/articles/delete/{{_id}}">Delete</a>
+      {{else}}
+        <a class="btn btn-dark btn-block mb-2" href="/articles/{{_id}}">More</a>
+      {{/if}}
     </div>
   {{/each}}
 </div>
