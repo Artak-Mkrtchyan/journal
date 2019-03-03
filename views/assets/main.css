@@ -1,11 +1,19 @@
 .articles {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
   margin: 1rem 0;
 }
 
 .article-card {
   width: 220px;
   margin-bottom: 1rem;
+  margin: 10px 8px;
+}
+
+.article-card:nth-child(4n) {
+  margin-right: 0px;
+}
+
+.article-card:nth-child(4n+1) {
+  margin-left: 0px;
 }
