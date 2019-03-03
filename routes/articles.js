@@ -6,6 +6,9 @@ const { ensureAuthenticated } = require('../helpers/auth');
 const router = express.Router();
 
 require('../models/article');
+require('../models/user');
+
+const User = mongoose.model('users');
 const Article = mongoose.model('article');
 
 router.get('/', (req, res) => {
@@ -66,6 +69,15 @@ router.get('/add', ensureAuthenticated, (req, res) => {
 router.get('/delete/:id', (req, res) => {
   Article.deleteOne({ _id: req.params.id })
   .then(() => {
+
+    User.findOne({ _id: req.user._id })
+      .then(user => {
+        let artId = req.params.id;
+        const { [artId]: key, ...newList } = user.articlesList;
+        user.articlesList = newList;
+        user.save();
+      })
+      
     req.flash('success_msg', 'Article removed');
     res.redirect('/');
   });
@@ -91,12 +103,21 @@ router.post('/', ensureAuthenticated, (req, res) => {
   } else {
     const newArticle = {
       title: req.body.title,
-      description: req.body.description
+      description: req.body.description,
+      userId: req.user._id
     }
+
 
     new Article(newArticle)
     .save()
     .then(article => {
+      User.findOne({ _id: req.user._id })
+      .then(user => {
+        let id = article._id;
+        let articleId = { [id]: id };
+        user.articlesList = { ...user.articlesList, ...articleId };
+        user.save();
+      });
       req.flash('success_msg', 'Article Added')
       res.redirect('/')
     });

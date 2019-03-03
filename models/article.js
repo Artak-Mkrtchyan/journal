@@ -11,7 +11,15 @@ const ArticleScema = new Schema({
 	description: {
 		type: String,
 		required: true
-	}
+	},
+	userId: {
+		type: Object,
+		required: true
+	},
+	date: {
+    type: Date,
+    default: Date.now
+  }
 })
 
 mongoose.model('article', ArticleScema);

@@ -15,6 +15,10 @@ const UserScema = new Schema({
     type: String,
     required: true
   },
+  articlesList: {
+    type: Object,
+    required: true
+  },
   date: {
     type: Date,
     default: Date.now
