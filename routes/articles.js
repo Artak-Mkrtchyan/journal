@@ -1,9 +1,9 @@
 const express = require('express');
 const mongoose = require('mongoose');
 
-const { ensureAuthenticated } = require('../helpers/auth');
-
 const router = express.Router();
+
+const { ensureAuthenticated } = require('../helpers/auth');
 
 require('../models/article');
 require('../models/user');
@@ -11,8 +11,22 @@ require('../models/user');
 const User = mongoose.model('users');
 const Article = mongoose.model('article');
 
-router.get('/', (req, res) => {
-	res.render('articles/index')
+router.get('/', ensureAuthenticated, (req, res) => {
+  let userArtcle = [];
+  User.findOne({ _id: req.user._id })
+    .then(user => {
+      Object.keys(user.articlesList).map(key =>
+        Article.findOne({ _id: key })
+          .then(article => {
+            userArtcle.push(article);
+          }));
+    })
+    .then(() => {
+      res.render('articles/index', {
+        article: userArtcle,
+        isMyArticles: true
+      });
+    });
 });
 
 router.get('/edit/:id', ensureAuthenticated, (req, res) => {
@@ -77,7 +91,7 @@ router.get('/delete/:id', (req, res) => {
         user.articlesList = newList;
         user.save();
       })
-      
+
     req.flash('success_msg', 'Article removed');
     res.redirect('/');
   });
@@ -106,7 +120,6 @@ router.post('/', ensureAuthenticated, (req, res) => {
       description: req.body.description,
       userId: req.user._id
     }
-
 
     new Article(newArticle)
     .save()

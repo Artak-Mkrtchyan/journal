@@ -1,0 +1,16 @@
+<div class="articles">
+  {{#each article}}
+    <div class="article-card card">
+      <h4>{{title}}</h4>
+      <div class="card-body">
+        {{description}}
+      </div>
+      {{#if ../isMyArticles}}
+        <a class="btn btn-dark btn-block mb-2" href="/articles/edit/{{_id}}">Edit</a>
+        <a class="btn btn-dark btn-block mb-2" href="/articles/delete/{{_id}}">Delete</a>
+      {{else}}
+        <a class="btn btn-dark btn-block mb-2" href="/articles/{{_id}}">More</a>
+      {{/if}}
+    </div>
+  {{/each}}
+</div>

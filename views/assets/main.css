@@ -4,6 +4,11 @@
   margin: 1rem 0;
 }
 
+.articles-header {
+  display: flex;
+  justify-content: space-between;
+}
+
 .article-card {
   width: 220px;
   margin-bottom: 1rem;
