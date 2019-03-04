@@ -29,6 +29,21 @@ router.get('/', ensureAuthenticated, (req, res) => {
     });
 });
 
+
+router.get('/:id', ensureAuthenticated, (req, res) => {
+  Article.findOne({
+    _id: req.params.id
+  })
+  .then(article => {
+    res.render('articles/read', {
+      id: article.id,
+      title: article.title,
+      description: article.description
+    });  
+  });
+})
+
+
 router.get('/edit/:id', ensureAuthenticated, (req, res) => {
   Article.findOne({
     _id: req.params.id
