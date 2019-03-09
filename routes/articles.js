@@ -30,7 +30,7 @@ router.get('/', ensureAuthenticated, (req, res) => {
 });
 
 
-router.get('/:id', ensureAuthenticated, (req, res) => {
+router.get('/read/:id', ensureAuthenticated, (req, res) => {
   Article.findOne({
     _id: req.params.id
   })
@@ -95,7 +95,7 @@ router.get('/add', ensureAuthenticated, (req, res) => {
   res.render('articles/add');
 });
 
-router.get('/delete/:id', (req, res) => {
+router.get('/delete/:id', ensureAuthenticated, (req, res) => {
   Article.deleteOne({ _id: req.params.id })
   .then(() => {
 

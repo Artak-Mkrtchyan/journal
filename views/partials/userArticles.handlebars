@@ -1,16 +1,20 @@
 <div class="articles">
   {{#each article}}
-    <div class="article-card card">
-      <h4>{{title}}</h4>
-      <div class="card-body">
-        {{description}}
+    <div class="article-card">
+      <div class="article-card__image">
+        <span class="article-card__title">{{title}}</span>
       </div>
-      {{#if ../isMyArticles}}
-        <a class="btn btn-dark btn-block mb-2" href="/articles/edit/{{_id}}">Edit</a>
-        <a class="btn btn-dark btn-block mb-2" href="/articles/delete/{{_id}}">Delete</a>
-      {{else}}
-        <a class="btn btn-dark btn-block mb-2" href="/articles/{{_id}}">More</a>
-      {{/if}}
+      <div class="article-card__content">
+        <div class="">
+          {{description}}
+        </div>
+        {{#if ../isMyArticles}}
+          <a class="" href="/articles/edit/{{_id}}">Edit</a>
+          <a class="" href="/articles/delete/{{_id}}">Delete</a>
+        {{else}}
+          <a class="" href="/articles/{{_id}}">More</a>
+        {{/if}}
+      </div>
     </div>
   {{/each}}
 </div>

@@ -1,14 +1,18 @@
-<div class="col-4 offset-4 card p-3 mt-5">
+<div class="login-form col-4 offset-4 p-3 mt-5">
   <h3 class="text-center">Account Login</h3>
   <form method="post" action="/user/login">
     <div class="form-group">
-      <label for="email">Email</label>
-      <input type="email" class="form-control" name="email">
+      <input class="title-input" type="email" name="email">
+      <label class="title-label" for="email">Email</label>
     </div>
     <div class="form-group">
-      <label for="password">Password</label>
-      <input type="password" class="form-control" name="password">
+      <input class="title-input" type="password" name="password">
+      <label class="title-label" for="password">Password</label>
     </div>
-    <button class="btn btn-info mt-2">Log in</button>
+    <div class="space-between">
+      <button class="btn">Log in</button>
+      <a class="link" href="/user/register">Register</a>
+    </div>
+    
   </form>
 </div>

@@ -2,21 +2,23 @@
   <h3 class="text-center">Account Register</h3>
   <form method="post" action="/user/register">
     <div class="form-group">
-      <label for="">Name</label>
-      <input type="text" class="form-control" name="name" value="{{name}}">
+      <input class="title-input" type="text" name="name" value="{{name}}">
+      <label class="title-label" for="">Name</label>
     </div>
     <div class="form-group">
-      <label for="">Email</label>
-      <input type="email" class="form-control" name="email" value="{{email}}">
+      <input class="title-input" type="email" name="email" value="{{email}}">
+      <label class="title-label" for="">Email</label>
     </div>
     <div class="form-group">
-      <label for="">Password</label>
-      <input type="password" class="form-control" name="password" value="{{password}}">
+      <input class="title-input" type="password" name="password" value="{{password}}">
+      <label class="title-label" for="">Password</label>
     </div>
     <div class="form-group">
-      <label for="">Confirm Password</label>
-      <input type="password" class="form-control" name="password2" value="{{password2}}">
+      <input class="title-input" type="password" name="password2" value="{{password2}}">
+      <label class="title-label" for="">Confirm Password</label>
     </div>
-    <button class="btn btn-info mt-2">Log in</button>
+    <div class="center">
+      <button class="btn">Register</button>
+    </div>
   </form>
 </div>
