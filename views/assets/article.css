@@ -8,6 +8,7 @@
   justify-content: space-between;
   align-items: center;
   margin-right: 20px;
+  margin-top: 30px;
 }
 
 .article-card {
@@ -41,4 +42,5 @@
 
 .article-edit-form {
   width: 100%;
+  margin-top: 30px;
 }

@@ -5,14 +5,14 @@
 {{/each}}
 
 <div class="row">
-    <form action="/articles" method="post" class="w-100 m-5">
+    <form action="/articles" method="post" class="article-edit-form">
         <div class="form-group">
-            <label class="mx-2" for="title">Title</label>
-            <input type="text" class="form-control" name="title" value="{{title}}" >
+            <input class="title-input" type="text" class="form-control" name="title" value="{{title}}" >
+            <label class="title-label" for="title">Title</label>
         </div>
         <div class="form-group">
-            <label class="mx-2" for="description">Description</label>
-            <textarea class="form-control" name="description" >{{description}}</textarea>
+            <textarea class="title-textarea" rows="10" name="description" >{{description}}</textarea>
+            <label class="title-label" for="description">Description</label>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
