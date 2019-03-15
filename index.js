@@ -25,13 +25,13 @@ app.engine('html', exphbs({
 }))
 
 app.set('view engine', 'html');
-app.set("views", path.join(__dirname, '/dist'));
+app.set("views", path.join(__dirname, 'dist'));
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 mongoose.Promise = global.Promise;
-// Connect to mongoose
+
 mongoose.connect('mongodb://localhost/articles', {
   useNewUrlParser: true
 })

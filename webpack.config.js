@@ -2,7 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 let HWPConfig = new HtmlWebpackPlugin({
-  filename: 'index.html',
+  filename: 'home.html',
   template: './views/home.handlebars',
   inject: false
 })
@@ -10,7 +10,7 @@ let HWPConfig = new HtmlWebpackPlugin({
 let pages = [
   'articles/add',
   'articles/edit',
-  'articles/index',
+  'articles/main',
   'articles/read',
   'layouts/main',
   'partials/msg',
@@ -42,12 +42,12 @@ module.exports = {
       {
         test: /\.handlebars$/,
         include: [
-          path.resolve(__dirname, 'views/partials')
+          path.resolve(__dirname, 'dist/partials')
         ],
         loader: "handlebars-loader",
-        // options: {
-        //   partialDirs: [__dirname + 'views/partials'],
-        // }
+        options: {
+          partialDirs: [__dirname + 'dist/partials'],
+        }
       }
     ],
     rules: [

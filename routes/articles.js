@@ -22,13 +22,12 @@ router.get('/', ensureAuthenticated, (req, res) => {
           }));
     })
     .then(() => {
-      res.render('articles/index', {
+      res.render('articles/main', {
         article: userArtcle,
         isMyArticles: true
       });
     });
 });
-
 
 router.get('/read/:id', ensureAuthenticated, (req, res) => {
   Article.findOne({
@@ -42,7 +41,6 @@ router.get('/read/:id', ensureAuthenticated, (req, res) => {
     });  
   });
 })
-
 
 router.get('/edit/:id', ensureAuthenticated, (req, res) => {
   Article.findOne({
