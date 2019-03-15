@@ -1,2 +1,2 @@
-import 'bootstrap/dist/css/bootstrap-grid.min.css';
-import './assets/main.css';
+import 'bootstrap/scss/bootstrap-grid.scss';
+import './assets/main.scss';
