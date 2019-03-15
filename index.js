@@ -1,3 +1,4 @@
+const path = require('path');
 const express = require('express');
 const exphbs  = require('express-handlebars');
 const mongoose = require('mongoose');
@@ -14,11 +15,17 @@ const user = require('./routes/user');
 
 require('./config/passport')(passport);
 
-app.engine('handlebars', exphbs({
-  defaultLayout: 'main'
+app.engine('html', exphbs({
+  defaultLayout: 'main',
+  extname: '.html',
+  layoutsDir: path.join(__dirname, '/dist/layouts'),
+  partialsDir: [
+    'dist/partials/'
+  ]
 }))
 
-app.set('view engine', 'handlebars');
+app.set('view engine', 'html');
+app.set("views", path.join(__dirname, '/dist'));
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -50,11 +57,7 @@ app.use(function(req, res, next){
   next();
 });
 
-app.use('/svg', express.static(__dirname + '/views/svg'));
-app.use('/assets', express.static(__dirname + '/views/assets'));
-app.use('/js', express.static(__dirname + '/node_modules/bootstrap/dist/js'));
-app.use('/js', express.static(__dirname + '/node_modules/jquery/dist'));
-app.use('/css', express.static(__dirname + '/node_modules/bootstrap/dist/css'));
+app.use(express.static('dist'));
 
 app.use('/', mainRoute);
 app.use('/articles', articles);

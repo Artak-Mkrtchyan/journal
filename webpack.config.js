@@ -44,18 +44,21 @@ module.exports = {
         include: [
           path.resolve(__dirname, 'views/partials')
         ],
-        loader: "handlebars-loader"
+        loader: "handlebars-loader",
+        // options: {
+        //   partialDirs: [__dirname + 'views/partials'],
+        // }
       }
     ],
-    // rules: [
-    //   {
-    //     test: /\.css$/,
-    //     use: [
-    //       'style-loader',
-    //       'css-loader'
-    //     ]
-    //   }
-    // ]
+    rules: [
+      {
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          'css-loader'
+        ]
+      }
+    ]
   },
   plugins: [
     HWPConfig
