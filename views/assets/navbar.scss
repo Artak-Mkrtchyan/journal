@@ -16,19 +16,19 @@
   flex-direction: row;
   flex: 1;
   justify-content: space-between;
-}
 
-.navbar-content__items {
-  display: flex;
-  align-items: center;
-}
+  &__items {
+    display: flex;
+    align-items: center;
+  }
 
-.navbar-content__item {
-  margin-right: 15px;
-}
+  &__item {
+    margin-right: 15px;
+  }
 
-.navbar-content__link {
-  color: white;
+  &__link {
+    color: white;
+  }
 }
 
 .navbar-brand {
