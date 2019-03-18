@@ -8,7 +8,7 @@
     "build": "webpack --config webpack.config.js",
     "watch": "npm-run-all --parallel watch:*",
     "watch:client": "npm run build",
-    "watch:wait": "nodemon -e js,scss,handlebars"
+    "watch:wait": "just-wait --timeout 600 && nodemon -e js,scss,handlebars"
   },
   "repository": {
     "type": "git",
