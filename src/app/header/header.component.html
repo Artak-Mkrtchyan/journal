@@ -1,0 +1,35 @@
+<nav class="navbar">
+  <button class="btn-toggle" type="button">
+    <svg viewBox="0 0 30 30"><path stroke="rgba(255, 255, 255, 0.5)" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" d="M4 7h22M4 15h22M4 23h22"/></svg>
+  </button>
+  <a class="navbar-brand" href="/">
+      Journal
+  </a>
+
+  <div class="navbar-content">
+    <ul class="navbar-content__items">
+      <li class="navbar-content__item">
+        <a class="navbar-content__link" href="/">Home</a>
+      </li>
+      <li class="navbar-content__item">
+        <a class="navbar-content__link" href="/articles">Articles</a>
+      </li>
+    </ul>
+    <!-- {{#if user}} -->
+      <ul class="navbar-content__items">
+        <li class="navbar-content__item">
+          <a class="navbar-content__link" href="/user/logout" >Logout</a>
+        </li>
+      </ul>
+    <!-- {{else}} -->
+    <ul class="navbar-content__items">
+      <li class="navbar-content__item">
+        <a class="navbar-content__link" href="/user/login">Login</a>
+      </li>
+      <li class="navbar-content__item">
+        <a class="navbar-content__link" href="/user/register">Register</a>
+      </li>
+    </ul>
+    <!-- {{/if}} -->
+  </div>
+</nav>
