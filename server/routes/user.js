@@ -1,9 +1,9 @@
-// const express = require('express');
-// const mongoose = require('mongoose');
-// const bcrypt = require('bcrypt');
-// const passport = require('passport');
+const express = require('express');
+const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
+const passport = require('passport');
 
-// const router = express.Router();
+const router = express.Router();
 
 // require('../models/user');
 // const User = mongoose.model('users');
@@ -18,13 +18,24 @@
 //   res.redirect('login');
 // })
 
-// router.post('/login',  (req, res, next) => {
-//   passport.authenticate('local', {
-//     successRedirect:'/',
-//     failureRedirect: '/user/login',
-//     failureFlash: true
-//   })(req, res, next);
-// });
+router.post('/login',  (req, res, next) => {
+  console.log('user/login');
+  // passport.authenticate('local', {
+  //   successRedirect:'/',
+  //   // failureRedirect: '/user/login',
+  //   // failureFlash: true
+  // })(req, res, next);
+
+  passport.authenticate('local', function(err, user, info) {
+    // console.log(err, user, info)
+    if (err) { return next(err); }
+    if (!user) { return res.redirect('/'); }
+    req.logIn(user, function(err) {
+      if (err) { return next(err); }
+      return console.log('ok')
+    });
+  })(req, res, next);
+});
 
 // router.get('/register', (req, res) => {
 //   res.render('user/register');
@@ -90,4 +101,4 @@
 //   }
 // })
 
-// module.exports = router;
+module.exports = router;

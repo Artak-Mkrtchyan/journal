@@ -13,7 +13,7 @@ const mainRoute = require('./server/routes/index');
 const articles = require('./server/routes/articles');
 const user = require('./server/routes/user');
 
-// require('./server/config/passport')(passport);
+require('./server/config/passport')(passport);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -49,13 +49,13 @@ app.use(express.static(path.join(__dirname, 'dist')));
 
 app.use('/', mainRoute);
 // app.use('/articles', articles);
-// app.use('/user', user);
+app.use('/user', user);
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist/index.html'));
 });
 
-const port = process.env.PORT || '3000';
+const port = 3000;
 app.set('port', port);
 
 const server = http.createServer(app);
