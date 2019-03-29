@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+
 import { HttpService } from './http.service';
+// import 'hammerjs';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +16,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     console.log('OnInit');
-    this.httpService.getData().subscribe(data => console.log(data, 'data'));
+    // this.httpService.getData().subscribe(data => console.log(data, 'data'));
   }
 }

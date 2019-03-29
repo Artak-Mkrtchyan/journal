@@ -1,35 +1,45 @@
-<nav class="navbar">
-  <button class="btn-toggle" type="button">
-    <svg viewBox="0 0 30 30"><path stroke="rgba(255, 255, 255, 0.5)" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" d="M4 7h22M4 15h22M4 23h22"/></svg>
-  </button>
-  <a class="navbar-brand" href="/">
-      Journal
-  </a>
+<mat-toolbar class="navbar">
+  <mat-sidenav-container class="navbar-button">
 
-  <div class="navbar-content">
-    <ul class="navbar-content__items">
-      <li class="navbar-content__item">
-        <a class="navbar-content__link" href="/">Home</a>
-      </li>
-      <li class="navbar-content__item">
-        <a class="navbar-content__link" href="/articles">Articles</a>
-      </li>
-    </ul>
-    <!-- {{#if user}} -->
-      <ul class="navbar-content__items">
-        <li class="navbar-content__item">
-          <a class="navbar-content__link" href="/user/logout" >Logout</a>
-        </li>
-      </ul>
-    <!-- {{else}} -->
-    <ul class="navbar-content__items">
-      <li class="navbar-content__item">
-        <a class="navbar-content__link" href="/user/login">Login</a>
-      </li>
-      <li class="navbar-content__item">
-        <a class="navbar-content__link" href="/user/register">Register</a>
-      </li>
-    </ul>
-    <!-- {{/if}} -->
-  </div>
-</nav>
+    <mat-sidenav-content>
+      <button class="toogle-button" type="button">
+        <mat-icon mat-button class="icon" (click)="sidenav.toggle()">menu</mat-icon>
+      </button>
+
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+
+  <mat-nav-list class="navbar-content">
+    <a class="navbar-content__item" href="#">
+      <span>Journal</span>
+    </a>
+    <div>
+      <a class="navbar-content__item" href="#">
+        <span>Logout</span>
+      </a>
+      <a class="navbar-content__item" href="user/login">
+        <span>Login</span>
+      </a>
+      <a class="navbar-content__item" href="user/registration">
+        <span>Register</span>
+      </a>
+    </div>
+  </mat-nav-list>
+
+</mat-toolbar>
+
+<mat-sidenav-container class="sidenav" (backdropClick)="sidenav.close()">
+  <mat-sidenav class="sidenav-content" #sidenav (keydown.escape)="sidenav.close()" disableClose>
+    <mat-list>
+      <mat-list-item>
+        <a class="sidenav-content__item" href="#">
+          <span>Articles</span>
+        </a>
+      </mat-list-item>
+    </mat-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <ng-content></ng-content>
+  </mat-sidenav-content>
+</mat-sidenav-container>

@@ -10,7 +10,7 @@ interface IUser {
 }
 
 @Injectable()
-export class HttpService {
+export class RegistrationService {
 
   data: any;
 
@@ -23,17 +23,17 @@ export class HttpService {
   //     return this.data = data;
   //   }));
   // }
-  getData(user: IUser): Observable<{ error: string }> {
-    console.log('user', user);
-    return this.http.post<{redirect: boolean}>('user/login', user).pipe(map((data: {redirect: boolean}) => {
-      console.log(data);
-      // return user;
-      if (data.redirect) {
-        this.router.navigate(['/']);
-      } else {
-        return { error: 'Incorrect email or password'};
-      }
-
+  registUser(name: string, email: string, password: string): Observable<{ error: string }> {
+    console.log('name', name, email, password);
+    return this.http.post<{redirect: boolean}>('user/registration', {name: name, email: email, password: password})
+      .pipe(map((data: {redirect: boolean}) => {
+          console.log(data);
+          // return user;
+          if (data.redirect) {
+            this.router.navigate(['/user/login']);
+          } else {
+            return { error: 'Incorrect email or password'};
+          }
     }))
 
   }
