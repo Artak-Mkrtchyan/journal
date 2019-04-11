@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators, FormArray } from '@angular/forms';
 
 import { HttpService } from '../http.service';
 
@@ -11,26 +10,22 @@ import { HttpService } from '../http.service';
 })
 export class LoginComponent implements OnInit {
   error: string;
+  typeForm: string = "Login";
 
-  loginUserForm = this.fb.group({
-    email: ['', Validators.required],
-    password: ['', Validators.required],
-  });
-
-  constructor(private httpService: HttpService, private fb: FormBuilder) {}
-
-  ngOnInit() {
-    console.log('OnInit');
-    // this.httpService.getData().subscribe(data => console.log(data, 'data'));
-
+  Form: object = {
+    email : 'Email',
+    password : 'Password'
   }
 
-  loginUser(email, password) {
+  linkAttr: object = {
+    actionLink: 'user/login',
+    link: 'user/registration',
+    linkName: 'Registration'
+  }
 
-    this.httpService.getData({email, password}).subscribe(data => {
-      console.log(data, 'data')
-      this.error = data.error;
-    });
+  constructor() {}
+
+  ngOnInit() {
   }
 
 }

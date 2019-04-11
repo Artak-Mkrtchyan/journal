@@ -12,6 +12,7 @@ import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
+import { FlexLayoutModule } from '@angular/flex-layout';
 import {
   MatFormFieldModule,
   MatInputModule,
@@ -20,6 +21,7 @@ import {
   MatSidenavModule,
   MatIconModule,
   MatListModule,
+  MatGridListModule,
 
   MatCardModule,
   MatButtonModule
@@ -28,6 +30,10 @@ import {
 import { HttpService } from './http.service';
 import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
+import { ValidationFormComponent } from './forms/validation-form/validation-form.component';
+import { LogoutComponent } from './logout/logout.component';
+import { ArticleItemComponent } from './articles/article-item/article-item.component';
+import { ArticlesComponent } from './articles/articles.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +41,11 @@ import { RegistrationComponent } from './registration/registration.component';
     HeaderComponent,
     HomeComponent,
     LoginComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    ValidationFormComponent,
+    LogoutComponent,
+    ArticleItemComponent,
+    ArticlesComponent
   ],
   imports: [
     BrowserModule,
@@ -45,6 +55,8 @@ import { RegistrationComponent } from './registration/registration.component';
     ReactiveFormsModule,
     // AlertModule.forRoot(),
     MatButtonModule,
+    MatGridListModule,
+    FlexLayoutModule,
 
     BrowserAnimationsModule,
     MatFormFieldModule,

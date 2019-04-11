@@ -14,7 +14,7 @@
       <span>Journal</span>
     </a>
     <div>
-      <a class="navbar-content__item" href="#">
+      <a class="navbar-content__item" href="user/logout">
         <span>Logout</span>
       </a>
       <a class="navbar-content__item" href="user/login">
@@ -32,14 +32,14 @@
   <mat-sidenav class="sidenav-content" #sidenav (keydown.escape)="sidenav.close()" disableClose>
     <mat-list>
       <mat-list-item>
-        <a class="sidenav-content__item" href="#">
+        <a class="sidenav-content__item" href="articles">
           <span>Articles</span>
         </a>
       </mat-list-item>
     </mat-list>
   </mat-sidenav>
 
-  <mat-sidenav-content>
+  <mat-sidenav-content class="container">
     <ng-content></ng-content>
   </mat-sidenav-content>
 </mat-sidenav-container>

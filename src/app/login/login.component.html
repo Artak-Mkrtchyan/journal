@@ -18,8 +18,8 @@
 </div>
  -->
 
-<form [formGroup]="loginUserForm" (ngSubmit)="loginUser(email, password)" class="" method="post">
-  <mat-card class="login-form">
+<!-- <form [formGroup]="loginUserForm" (ngSubmit)="loginUser(email, password)" class="" method="post"> -->
+  <!-- <mat-card class="login-form">
     <h3 class="text-center">Account Login</h3>
     <mat-form-field color="warn">
       <input matInput type="email" placeholder="Email" formControlName="email">
@@ -33,5 +33,7 @@
       <button class="button" mat-raised-button color="warn">Log in</button>
       <a class="link" href="#">Register</a>
     </div>
-  </mat-card>
-</form>
+  </mat-card> -->
+
+  <app-validation-form [linkAttr]="linkAttr" [typeForm]="typeForm" [validationForm]="Form"></app-validation-form>
+<!-- </form> -->

@@ -1,33 +1,34 @@
-// const express = require('express');
-// const mongoose = require('mongoose');
+const express = require('express');
+const mongoose = require('mongoose');
 
-// const router = express.Router();
+const router = express.Router();
 
-// const { ensureAuthenticated } = require('../helpers/auth');
+const { ensureAuthenticated } = require('../helpers/auth');
 
-// require('../models/article');
-// require('../models/user');
+require('../models/article');
+require('../models/user');
 
-// const User = mongoose.model('users');
-// const Article = mongoose.model('article');
+const User = mongoose.model('users');
+const Article = mongoose.model('article');
 
-// router.get('/', ensureAuthenticated, (req, res) => {
-//   let userArtcle = [];
-//   User.findOne({ _id: req.user._id })
-//     .then(user => {
-//       Object.keys(user.articlesList).map(key =>
-//         Article.findOne({ _id: key })
-//           .then(article => {
-//             userArtcle.push(article);
-//           }));
-//     })
-//     .then(() => {
-//       res.render('articles/main', {
-//         article: userArtcle,
-//         isMyArticles: true
-//       });
-//     });
-// });
+router.get('/', (req, res) => {
+  let userArtcle = [];
+  console.log(req, arguments)
+  User.findOne({ _id: req.user._id })
+    .then(user => {
+      Object.keys(user.articlesList).map(key =>
+        Article.findOne({ _id: key })
+          .then(article => {
+            userArtcle.push(article);
+          }));
+    })
+    .then(() => {
+      res.render('articles/main', {
+        article: userArtcle,
+        isMyArticles: true
+      });
+    });
+});
 
 // router.get('/read/:id', ensureAuthenticated, (req, res) => {
 //   Article.findOne({
@@ -42,18 +43,18 @@
 //   });
 // })
 
-// router.get('/edit/:id', ensureAuthenticated, (req, res) => {
-//   Article.findOne({
-//     _id: req.params.id
-//   })
-//   .then(article => {
-//     res.render('articles/edit', {
-//       id: article.id,
-//       title: article.title,
-//       description: article.description
-//     });
-//   });
-// });
+router.post('/edit/:id', (req, res) => {
+  Article.findOne({
+    _id: req.params.id
+  })
+  .then(article => {
+    res.render('articles/edit', {
+      id: article.id,
+      title: article.title,
+      description: article.description
+    });
+  });
+});
 
 // router.post('/:id', ensureAuthenticated, (req, res) => {
 //   let errors = [];
@@ -150,4 +151,4 @@
 //   }
 // });
 
-// module.exports = router;
+module.exports = router;

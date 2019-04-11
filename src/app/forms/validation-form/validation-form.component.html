@@ -1,0 +1,22 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit(objectKeys(form.controls))" method="post" [action]="linkAttr.actionLink">
+
+  <mat-card class="validation-form">
+    <h3 class="text-center">{{typeForm}}</h3>
+    <mat-error *ngIf="true">
+      error
+    </mat-error>
+    <mat-form-field color="warn" *ngFor="let type of objectKeys(validationForm)">
+      <input matInput [type]="(type==='password2') ? 'password' : type" placeholder="{{validationForm[type]}}" [formControlName]="type">
+      <mat-error *ngIf="form.get(type).errors?.required">
+        {{validationForm[type]}} is required
+      </mat-error>
+      <mat-error *ngIf="!form.hasError(errorsType[type])">
+        {{errorsMessage[errorsType[type]]}}
+      </mat-error>
+    </mat-form-field>
+    <div class="validation-buttons">
+      <button class="button" mat-raised-button color="warn" [disabled]="form.invalid">{{typeForm}}</button>
+      <a class="link" [href]="linkAttr.link">{{linkAttr.linkName}}</a>
+    </div>
+  </mat-card>
+</form>

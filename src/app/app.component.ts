@@ -10,12 +10,10 @@ import { HttpService } from './http.service';
   providers: [HttpService]
 })
 export class AppComponent implements OnInit {
-  title = 'journal';
 
-  constructor(private httpService: HttpService) {}
+  constructor() {}
 
   ngOnInit() {
     console.log('OnInit');
-    // this.httpService.getData().subscribe(data => console.log(data, 'data'));
   }
 }

@@ -8,7 +8,8 @@ const router = express.Router();
 require('../models/article');
 const Article = mongoose.model('article');
 
-router.get('/s', (req, res) => {
+router.post('/', (req, res) => {
+  console.log('get');
   Article.find({})
     .then(article => {
       // console.log(req);
@@ -20,14 +21,12 @@ router.get('/s', (req, res) => {
       });
       return articlesArr;
     })
-    .then(article => {
-      res.json({
-        article: article,
+    .then(articles => {
+      res.send({
+        articles: articles,
         isMyArticles: false
       });
     });
-
-  // res.json({test: 'work'});
 });
 
 module.exports = router;

@@ -1,0 +1,26 @@
+.validation-form {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  width: 260px;
+}
+
+.button {
+  width: 110px;
+}
+
+.link {
+  color: #F44336;
+}
+
+.text-center {
+  display: flex;
+  justify-content: center;
+}
+
+.validation-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 15px;
+}

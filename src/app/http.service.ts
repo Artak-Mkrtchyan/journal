@@ -23,16 +23,16 @@ export class HttpService {
   //     return this.data = data;
   //   }));
   // }
-  getData(user: IUser): Observable<{ error: string }> {
+  getData(user: IUser, action: string): Observable<{ error: string }> {
     console.log('user', user);
-    return this.http.post<{redirect: boolean}>('user/login', user).pipe(map((data: {redirect: boolean}) => {
+    return this.http.post<{redirect: string}>(action, user).pipe(map((data: {redirect: string, error: string}) => {
       console.log(data);
       // return user;
-      if (data.redirect) {
-        this.router.navigate(['/']);
-      } else {
-        return { error: 'Incorrect email or password'};
-      }
+      // if (data.redirect) {
+        this.router.navigate([data.redirect]);
+      // } else {
+        return { error: data.error};
+      // }
 
     }))
 
