@@ -1,75 +1,29 @@
-<!-- <mat-toolbar class="navbar">
-  <mat-sidenav-container class="navbar-button">
+<div class="header">
+  <mat-toolbar class="header-toolbar">
+    <button mat-icon-button (click)="sidenav.toggle()"><mat-icon>menu</mat-icon></button>
 
-    <mat-sidenav-content>
-      <button class="toogle-button" type="button">
-        <mat-icon mat-button class="icon" (click)="sidenav.toggle()">menu</mat-icon>
-      </button>
-
-    </mat-sidenav-content>
-  </mat-sidenav-container>
-
-  <mat-nav-list class="navbar-content">
-    <a class="navbar-content__item" href="#">
-      <span>Journal</span>
-    </a>
-    <div>
-      <a class="navbar-content__item" href="user/logout">
-        <span>Logout</span>
+    <mat-nav-list class="header-toolbar__content">
+      <a class="header-toolbar__content-item" href="#">
+        <span>Journal</span>
       </a>
-      <a class="navbar-content__item" href="user/login">
-        <span>Login</span>
-      </a>
-      <a class="navbar-content__item" href="user/registration">
-        <span>Register</span>
-      </a>
-    </div>
-  </mat-nav-list>
-
-</mat-toolbar> -->
-
-<!-- <mat-sidenav-container class="sidenav" (backdropClick)="sidenav.close()"> -->
-  <!-- <mat-sidenav class="sidenav sidenav-content" #sidenav (keydown.escape)="sidenav.close()" disableClose>
-    <mat-list>
-      <mat-list-item>
-        <a class="sidenav-content__item" href="articles">
-          <span>Articles</span>
+      <div>
+        <a class="header-toolbar__content-item" href="user/logout">
+          <span>Logout</span>
         </a>
-      </mat-list-item>
-    </mat-list>
-  </mat-sidenav> -->
-
-  <!-- <mat-sidenav-content class="container">
-    <ng-content></ng-content>
-  </mat-sidenav-content> -->
-<!-- </mat-sidenav-container> -->
-
-
-
-<div class="example-container">
-  <mat-toolbar color="primary" class="example-toolbar">
-    <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
-    <h1 class="example-app-name">Journal</h1>
-
-    <div>
-      <a class="navbar-content__item" href="user/logout">
-        <span>Logout</span>
-      </a>
-      <a class="navbar-content__item" href="user/login">
-        <span>Login</span>
-      </a>
-      <a class="navbar-content__item" href="user/registration">
-        <span>Register</span>
-      </a>
-    </div>
+        <a class="header-toolbar__content-item" href="user/login">
+          <span>Login</span>
+        </a>
+        <a class="header-toolbar__content-item" href="user/registration">
+          <span>Register</span>
+        </a>
+      </div>
+    </mat-nav-list>
   </mat-toolbar>
 
-  <mat-sidenav-container class="example-sidenav-container"
-                         >
-    <mat-sidenav #snav
-                 >
+  <mat-sidenav-container class="header-sidenav">
+    <mat-sidenav class="header-sidenav__content" #sidenav >
       <mat-nav-list>
-        <a class="sidenav-content__item" href="articles">
+        <a fxLayoutAlign="center center" class="header-sidenav__content-item" href="articles">
           <span>Articles</span>
         </a>
       </mat-nav-list>

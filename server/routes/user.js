@@ -27,9 +27,9 @@ router.post('/login',  (req, res, next) => {
   })(req, res, next);
 });
 
-router.get('/registration', (req, res) => {
-  res.redirect('user/login');
-})
+// router.get('/registration', (req, res) => {
+//   res.redirect('user/login');
+// })
 
 router.post('/registration', (req, res) => {
   User.findOne({email: req.body.email})
