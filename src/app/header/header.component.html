@@ -1,4 +1,4 @@
-<mat-toolbar class="navbar">
+<!-- <mat-toolbar class="navbar">
   <mat-sidenav-container class="navbar-button">
 
     <mat-sidenav-content>
@@ -26,10 +26,10 @@
     </div>
   </mat-nav-list>
 
-</mat-toolbar>
+</mat-toolbar> -->
 
-<mat-sidenav-container class="sidenav" (backdropClick)="sidenav.close()">
-  <mat-sidenav class="sidenav-content" #sidenav (keydown.escape)="sidenav.close()" disableClose>
+<!-- <mat-sidenav-container class="sidenav" (backdropClick)="sidenav.close()"> -->
+  <!-- <mat-sidenav class="sidenav sidenav-content" #sidenav (keydown.escape)="sidenav.close()" disableClose>
     <mat-list>
       <mat-list-item>
         <a class="sidenav-content__item" href="articles">
@@ -37,9 +37,46 @@
         </a>
       </mat-list-item>
     </mat-list>
-  </mat-sidenav>
+  </mat-sidenav> -->
 
-  <mat-sidenav-content class="container">
+  <!-- <mat-sidenav-content class="container">
     <ng-content></ng-content>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+  </mat-sidenav-content> -->
+<!-- </mat-sidenav-container> -->
+
+
+
+<div class="example-container">
+  <mat-toolbar color="primary" class="example-toolbar">
+    <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
+    <h1 class="example-app-name">Journal</h1>
+
+    <div>
+      <a class="navbar-content__item" href="user/logout">
+        <span>Logout</span>
+      </a>
+      <a class="navbar-content__item" href="user/login">
+        <span>Login</span>
+      </a>
+      <a class="navbar-content__item" href="user/registration">
+        <span>Register</span>
+      </a>
+    </div>
+  </mat-toolbar>
+
+  <mat-sidenav-container class="example-sidenav-container"
+                         >
+    <mat-sidenav #snav
+                 >
+      <mat-nav-list>
+        <a class="sidenav-content__item" href="articles">
+          <span>Articles</span>
+        </a>
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <ng-content></ng-content>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
