@@ -1,0 +1,20 @@
+<p>
+  article-add works!
+</p>
+<div [formGroup]="addForm" class="container" fxLayout="column">
+  <mat-form-field>
+    <input matInput placeholder="Input" formControlName="title">
+    <mat-error *ngIf="addForm.get('title').errors?.required">
+      Title is required
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <textarea matInput placeholder="Textarea" formControlName="description"></textarea>
+    <mat-error *ngIf="addForm.get('description').errors?.required">
+      Description is required
+    </mat-error>
+  </mat-form-field>
+
+  <button type="button" name="button" (click)="addArticle()">Save</button>
+</div>

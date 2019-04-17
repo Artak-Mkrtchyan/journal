@@ -1,23 +1,7 @@
-<p>
-  articles works!
-</p>
+<button (click)="add()" type="button" name="button">
+  <mat-icon>add</mat-icon>
+</button>
 
-<div fxLayout="row" *ngFor="let article of articles" class="articles">
-  <app-article-item fxFlex="30" [article]="article"></app-article-item>
-  <app-article-item fxFlex="30" [article]="article"></app-article-item>
-  <app-article-item fxFlex="30" [article]="article"></app-article-item>
-  <app-article-item fxFlex="30" [article]="article"></app-article-item>
-  <app-article-item fxFlex="30" [article]="article"></app-article-item>
-  <app-article-item fxFlex="30" [article]="article"></app-article-item>
-  <app-article-item fxFlex="30" [article]="article"></app-article-item>
-  <app-article-item fxFlex="30" [article]="article"></app-article-item><app-article-item fxFlex="30" [article]="article"></app-article-item>
-  <app-article-item fxFlex="30" [article]="article"></app-article-item>
-  <app-article-item fxFlex="30" [article]="article"></app-article-item>
-  <app-article-item fxFlex="30" [article]="article"></app-article-item><app-article-item fxFlex="30" [article]="article"></app-article-item>
-  <app-article-item fxFlex="30" [article]="article"></app-article-item>
-  <app-article-item fxFlex="30" [article]="article"></app-article-item>
-  <app-article-item fxFlex="30" [article]="article"></app-article-item><app-article-item fxFlex="30" [article]="article"></app-article-item>
-  <app-article-item fxFlex="30" [article]="article"></app-article-item>
-  <app-article-item fxFlex="30" [article]="article"></app-article-item>
+<div class="container articles" fxLayout="row" *ngFor="let article of articles">
   <app-article-item fxFlex="30" [article]="article"></app-article-item>
 </div>

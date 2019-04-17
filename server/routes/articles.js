@@ -43,56 +43,48 @@ router.get('/', (req, res) => {
 //   });
 // })
 
-router.post('/edit/:id', (req, res) => {
+router.post('/:id', (req, res) => {
+  console.log(req.params)
   Article.findOne({
     _id: req.params.id
   })
   .then(article => {
-    res.render('articles/edit', {
-      id: article.id,
-      title: article.title,
-      description: article.description
-    });
+    return res.send({ article });
   });
 });
 
-// router.post('/:id', ensureAuthenticated, (req, res) => {
-//   let errors = [];
+router.post('/:id/edit', (req, res) => {
+  // let errors = [];
+  //
+  // if (!req.body.title) {
+  //   errors.push({text:'Please add a title'});
+  // }
+  //
+  // if (!req.body.description) {
+  //   errors.push({text:'Please add some description'});
+  // }
 
-//   if (!req.body.title) {
-//     errors.push({text:'Please add a title'});
-//   }
+  Article.findOne({
+    _id: req.params.id
+  })
+  .then(article => {
+    // if (errors.length > 0) {
+    //   res.render(`articles/edit`, {
+    //     errors: errors,
+    //     id: req.params.id,
+    //     title: req.body.title,
+    //     description: req.body.description
+    //   })
+    // } else {
+      article.title = req.body.title;
+      article.description = req.body.description;
 
-//   if (!req.body.description) {
-//     errors.push({text:'Please add some description'});
-//   }
+      article.save();
+      res.send({msg: 'ok'});
+    // }
+  });
 
-//   Article.findOne({
-//     _id: req.params.id
-//   })
-//   .then(article => {
-//     if (errors.length > 0) {
-//       res.render(`articles/edit`, {
-//         errors: errors,
-//         id: req.params.id,
-//         title: req.body.title,
-//         description: req.body.description
-//       })
-//     } else {
-//       article.title = req.body.title;
-//       article.description = req.body.description;
-
-//       article.save();
-//       req.flash('success_msg', 'Article Updated');
-//       res.redirect('/');
-//     }
-//   });
-
-// });
-
-// router.get('/add', ensureAuthenticated, (req, res) => {
-//   res.render('articles/add');
-// });
+});
 
 // router.get('/delete/:id', ensureAuthenticated, (req, res) => {
 //   Article.deleteOne({ _id: req.params.id })
@@ -111,44 +103,44 @@ router.post('/edit/:id', (req, res) => {
 //   });
 // });
 
-// router.post('/', ensureAuthenticated, (req, res) => {
-//   let errors = [];
+router.post('/add', (req, res) => {
+  // let errors = [];
+  //
+  // if (!req.body.title) {
+  //   errors.push({text:'Please add a title'});
+  // }
+  //
+  // if (!req.body.description) {
+  //   errors.push({text:'Please add some description'});
+  // }
 
-//   if (!req.body.title) {
-//     errors.push({text:'Please add a title'});
-//   }
+  // if (errors.length > 0) {
+  //   res.render('articles/add', {
+  //     errors: errors,
+  //     title: req.body.title,
+  //     description: req.body.description
+  //   })
+  // } else {
+    const newArticle = {
+      title: req.body.title,
+      description: req.body.description,
+      userId: req.user._id
+    }
 
-//   if (!req.body.description) {
-//     errors.push({text:'Please add some description'});
-//   }
-
-//   if (errors.length > 0) {
-//     res.render('articles/add', {
-//       errors: errors,
-//       title: req.body.title,
-//       description: req.body.description
-//     })
-//   } else {
-//     const newArticle = {
-//       title: req.body.title,
-//       description: req.body.description,
-//       userId: req.user._id
-//     }
-
-//     new Article(newArticle)
-//     .save()
-//     .then(article => {
-//       User.findOne({ _id: req.user._id })
-//       .then(user => {
-//         let id = article._id;
-//         let articleId = { [id]: id };
-//         user.articlesList = { ...user.articlesList, ...articleId };
-//         user.save();
-//       });
-//       req.flash('success_msg', 'Article Added')
-//       res.redirect('/')
-//     });
-//   }
-// });
+    new Article(newArticle)
+    .save()
+    .then(article => {
+      User.findOne({ _id: req.user._id })
+      .then(user => {
+        let id = article._id;
+        let articleId = { [id]: id };
+        user.articlesList = { ...user.articlesList, ...articleId };
+        user.save();
+      });
+      req.flash('success_msg', 'Article Added')
+      res.redirect('/')
+    });
+  // }
+});
 
 module.exports = router;
