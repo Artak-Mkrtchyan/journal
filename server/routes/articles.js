@@ -43,7 +43,7 @@ router.get('/', (req, res) => {
 //   });
 // })
 
-router.post('/:id', (req, res) => {
+router.get('/:id', (req, res) => {
   console.log(req.params)
   Article.findOne({
     _id: req.params.id

@@ -11,20 +11,20 @@ export class ArticlesService {
 
   getArticles() {
     console.log('art');
-    return this.http.post('/', {})
+    return this.http.get('/api')
   }
 
   getArticle(id: string) {
     this.router.navigate([`articles/${id}`]);
-    return this.http.post(`articles/${id}`, {})
+    return this.http.get(`api/articles/${id}`)
   }
 
   editArticle(id: string, title: string, description: string) {
-    return this.http.post(`articles/${id}/edit`, { title: title, description: description })
+    return this.http.post(`api/articles/${id}/edit`, { title: title, description: description })
   }
 
   addArticle(title: string, description: string) {
-    return this.http.post(`articles/add`, {title: title, description: description})
+    return this.http.post(`api/articles/add`, {title: title, description: description})
   }
 
 }

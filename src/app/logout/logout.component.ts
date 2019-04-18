@@ -14,7 +14,7 @@ export class LogoutComponent implements OnInit {
   constructor(private http: HttpClient,  private router: Router) { }
 
   ngOnInit() {
-    this.http.get('/user/logout').pipe(map((data: any) => {
+    this.http.get('api/user/logout').pipe(map((data: any) => {
         console.log(data);
         this.router.navigate(['/']);
         return;

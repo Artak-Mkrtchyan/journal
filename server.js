@@ -38,9 +38,9 @@ app.use(express.static(path.join(__dirname, 'dist')));
 
 const { ensureAuthenticated } = require('./server/helpers/auth');
 
-app.use('', mainRoute);
-app.use('/articles', articles);
-app.use('/user', user);
+app.use('/api', mainRoute);
+app.use('/api/articles', articles);
+app.use('/api/user', user);
 //
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist/index.html'));

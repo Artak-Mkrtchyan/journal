@@ -8,7 +8,7 @@ const router = express.Router();
 require('../models/article');
 const Article = mongoose.model('article');
 
-router.post('/', (req, res) => {
+router.get('/', (req, res) => {
   console.log('get');
   Article.find({})
     .then(article => {
