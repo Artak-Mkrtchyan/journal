@@ -10,18 +10,18 @@ import { HttpService } from '../http.service';
 })
 export class LoginComponent implements OnInit {
   error: string;
-  typeForm: string = "Login";
+  typeForm = 'Login';
 
   Form: object = {
     email : 'Email',
     password : 'Password'
-  }
+  };
 
   linkAttr: object = {
     actionLink: 'user/login',
     link: 'user/registration',
     linkName: 'Registration'
-  }
+  };
 
   constructor() {}
 

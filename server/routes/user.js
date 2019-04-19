@@ -3,26 +3,34 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const passport = require('passport');
 
+const jwt = require('jsonwebtoken');
+
 const router = express.Router();
 
 require('../models/user');
 const User = mongoose.model('users');
 
-router.get('/logout', (req, res) => {
-  req.logout();
-  return res.send({msg: 'logout'});
+router.get('/logout', passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    // req.logout();
+    jwt.sign({ email: 'artak6297@gmail.com' }, 'myPrivateKey', function(err, token) {
+      console.log(token);
+      res.send({ token })
+    });
+    return res.send({msg: 'logout'});
 })
 
 router.post('/login',  (req, res, next) => {
-  console.log('user/login');
   passport.authenticate('local', function(err, user, info) {
     if (err) { return next(err); }
     if (!user) {
       return res.send({ redirect: 'user/login' });
     }
-    req.logIn(user, function(err) {
-      if (err) { return next(err); }
-      return res.send({ redirect: '/', error: user });
+    // console.log('user/login', user);
+    let { id, name, email } = user;
+    jwt.sign({ id, name, email }, 'myPrivateKey', function(err, token) {
+      console.log(token);
+      res.send({ user, token })
     });
   })(req, res, next);
 });

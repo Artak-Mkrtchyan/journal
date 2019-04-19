@@ -25,7 +25,7 @@ export class RegistrationService {
   // }
   registUser(name: string, email: string, password: string): Observable<{ error: string }> {
     console.log('name', name, email, password);
-    return this.http.post<{redirect: boolean}>('user/registration', {name: name, email: email, password: password})
+    return this.http.post<{redirect: boolean}>('user/registration', {name, email, password})
       .pipe(map((data: {redirect: boolean}) => {
           console.log(data);
           // return user;
@@ -34,7 +34,7 @@ export class RegistrationService {
           } else {
             return { error: 'Incorrect email or password'};
           }
-    }))
+    }));
 
   }
 }

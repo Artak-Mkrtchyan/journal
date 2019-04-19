@@ -4,7 +4,6 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const http = require('http');
 const passport = require('passport');
-// const session = require('express-session');
 
 const app = express();
 
@@ -25,14 +24,8 @@ mongoose.connect('mongodb://localhost/articles', {
   .then(() => console.log('MongoDB Connected...'))
   .catch(err => console.log(err));
 
-// app.use(session({
-//   secret: 'secret',
-//   resave: true,
-//   saveUninitialized: true
-// }));
 
 app.use(passport.initialize());
-// app.use(passport.session());
 
 app.use(express.static(path.join(__dirname, 'dist')));
 
