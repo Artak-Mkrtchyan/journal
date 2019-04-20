@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 
 import { map, catchError } from 'rxjs/operators';
 
-import { HttpService } from '../http.service';
+import { UserService } from '@service/user.service';
 
 @Component({
   selector: 'app-home',
@@ -14,7 +14,7 @@ import { HttpService } from '../http.service';
 export class HomeComponent implements OnInit, OnChanges {
   articles: object;
 
-  constructor(private http: HttpClient,  private router: Router, private httpService: HttpService) { }
+  constructor(private http: HttpClient,  private router: Router, private userService: UserService) { }
 
   ngOnChanges() {}
 

@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 
-import { HttpService } from './http.service';
+import { UserService } from '@service/user.service';
 // import 'hammerjs';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  providers: [HttpService]
+  providers: [UserService]
 })
 export class AppComponent implements OnInit {
 

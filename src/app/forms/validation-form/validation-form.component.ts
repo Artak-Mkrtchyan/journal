@@ -1,18 +1,18 @@
 import { Component, OnInit, OnChanges , Input } from '@angular/core';
 import { FormBuilder, AbstractControl, Validators } from '@angular/forms';
 
-import { HttpService } from '../../http.service';
+import { UserService } from '@service/user.service';
 
 interface IUser {
-  name?: string,
+  name?: string;
   email: string;
   password: string;
   password2?: string;
 }
 
 const isConfirmPassword = (control: AbstractControl) => {
-  let password = control.root.get('password');
-  let confirmPassword = control.value;
+  const password = control.root.get('password');
+  const confirmPassword = control.value;
   if (password) {
     const passValue = password.value;
     if (passValue !== confirmPassword || passValue === '') {
@@ -22,7 +22,7 @@ const isConfirmPassword = (control: AbstractControl) => {
     }
   }
   return null;
-}
+};
 
 @Component({
   selector: 'app-validation-form',
@@ -38,22 +38,22 @@ export class ValidationFormComponent implements OnInit, OnChanges {
   objVal = Object.values;
 
   pageTitle: object = {
-    login: "Account Login",
-    registration: "Registration"
-  }
+    login: 'Account Login',
+    registration: 'Registration'
+  };
 
   errorsType: object = {
     name: 'minlength',
     email: 'email',
     password: 'minlength',
     password2: 'isError'
-  }
+  };
 
   errorsMessage: object = {
-    email: "Not a valid email",
-    minlength: "Too short",
-    isError: "Password and confirm password should match"
-  }
+    email: 'Not a valid email',
+    minlength: 'Too short',
+    isError: 'Password and confirm password should match'
+  };
 
   loginForm = {
     email: ['', [Validators.email, Validators.required]],
@@ -65,23 +65,23 @@ export class ValidationFormComponent implements OnInit, OnChanges {
     email: ['', [Validators.email, Validators.required]],
     password: ['', [Validators.minLength(4), Validators.required]],
     password2: ['', [isConfirmPassword, Validators.required]]
-  }
+  };
 
   form: any;
-  data = <IUser>{};
+  data = {} as IUser;
 
-  constructor(private fb: FormBuilder, private httpService: HttpService) { }
+  constructor(private fb: FormBuilder, private userService: UserService) { }
 
   error: any;
   onSubmit(arr: Array<string>) {
 
     arr.map(controlName => {
-      let control = this.form.get(controlName);
+      const control = this.form.get(controlName);
       this.data[controlName] = control.value;
     });
 
     if (!this.form.invalid) {
-      this.httpService.getData(this.data, this.linkAttr.actionLink).subscribe(data => {
+      this.userService.getUserInfo(this.data, this.linkAttr.actionLink).subscribe(data => {
         this.error = data.error;
         console.log(data);
       });

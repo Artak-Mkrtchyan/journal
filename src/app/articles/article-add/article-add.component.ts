@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 
-import { ArticlesService } from '../articles.service';
+import { ArticleService } from '@service/article.service';
 
 @Component({
   selector: 'app-article-add',
@@ -15,9 +15,9 @@ export class ArticleAddComponent implements OnInit {
     title: ['', Validators.required],
     description: ['', Validators.required],
     date: ['']
-  })
+  });
 
-  constructor(private artService: ArticlesService,private fb: FormBuilder) { }
+  constructor(private artService: ArticleService, private fb: FormBuilder) { }
 
   ngOnInit() {}
 

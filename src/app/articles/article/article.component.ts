@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
 
-import { ArticlesService } from '../articles.service';
+import { ArticleService } from '@service/article.service';
 
 @Component({
   selector: 'app-article',
@@ -17,7 +17,7 @@ export class ArticleComponent implements OnInit {
     date: ''
   };
 
-  constructor(private router: Router, private artService: ArticlesService) { }
+  constructor(private router: Router, private artService: ArticleService) { }
 
   ngOnInit() {
     console.log(this.router);

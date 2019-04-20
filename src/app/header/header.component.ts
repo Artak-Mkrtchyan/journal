@@ -3,7 +3,7 @@ import { catchError, retry } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 
-import { HttpService } from '../http.service';
+import { UserService } from '@service/user.service';
 
 @Component({
   selector: 'app-header',
@@ -12,7 +12,7 @@ import { HttpService } from '../http.service';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private httpService: HttpService) { }
+  constructor(private userService: UserService) { }
 
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
@@ -28,14 +28,14 @@ export class HeaderComponent implements OnInit {
     // return an observable with a user-facing error message
     return throwError(
       'Something bad happened; please try again later.');
-  };
+  }
 
   logout() {
-    this.httpService.logout().pipe(
+    this.userService.logout().pipe(
       catchError(this.handleError)
     ).subscribe(
       res => console.log(res)
-    )
+    );
   }
 
   ngOnInit() {

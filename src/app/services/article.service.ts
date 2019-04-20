@@ -5,7 +5,8 @@ import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
-export class ArticlesService {
+export class ArticleService {
+
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -26,5 +27,4 @@ export class ArticlesService {
   addArticle(title: string, description: string) {
     return this.http.post(`api/articles/add`, {title, description});
   }
-
 }

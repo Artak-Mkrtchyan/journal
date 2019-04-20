@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
-import { HttpService } from '../http.service';
+import { UserService } from '@service/user.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
-  providers: [HttpService]
+  providers: [UserService]
 })
 export class LoginComponent implements OnInit {
   error: string;

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
 
-import { ArticlesService } from '../articles.service';
+import { ArticleService } from '@service/article.service';
 
 @Component({
   selector: 'app-article-edit',
@@ -16,9 +16,9 @@ export class ArticleEditComponent implements OnInit {
     title: ['', Validators.required],
     description: ['', Validators.required],
     date: ['']
-  })
+  });
 
-  constructor(private fb: FormBuilder, private router: Router, private artService: ArticlesService) { }
+  constructor(private fb: FormBuilder, private router: Router, private artService: ArticleService) { }
 
   editArticle() {
     const { id, title, description } = this.editForm.value;

@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // import { AlertModule } from 'ngx-bootstrap';
 
 import { StoreModule, Store, select } from '@ngrx/store';
@@ -36,7 +36,7 @@ import {
   MatButtonModule
 } from '@angular/material';
 
-import { HttpService } from './http.service';
+import { UserService } from '@service/user.service';
 import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { ValidationFormComponent } from './forms/validation-form/validation-form.component';
@@ -66,7 +66,7 @@ import { ArticleAddComponent } from './articles/article-add/article-add.componen
   imports: [
 
 
-    StoreModule.forRoot({ userAuth: userAuth }),
+    StoreModule.forRoot({ userAuth }),
 
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
@@ -97,7 +97,7 @@ import { ArticleAddComponent } from './articles/article-add/article-add.componen
     MatCardModule
 
   ],
-  providers: [HttpService],
+  providers: [UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

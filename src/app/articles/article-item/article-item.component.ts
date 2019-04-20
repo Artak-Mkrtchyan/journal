@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { ArticlesService } from '../articles.service';
+import { ArticleService } from '@service/article.service';
 
 @Component({
   selector: 'app-article-item',
@@ -17,14 +17,14 @@ export class ArticleItemComponent implements OnInit {
   }
 
   show() {
-    this.router.navigate(['articles', this.article._id ])
+    this.router.navigate(['articles', this.article._id ]);
   }
 
   delete(id: string) {
     console.log(id);
   }
 
-  constructor(private artService: ArticlesService, private router: Router) { }
+  constructor(private artService: ArticleService, private router: Router) { }
 
   ngOnInit() {
     console.log(this.article);
