@@ -9,6 +9,7 @@ import { SetToken } from '../store/index';
 
 
 interface IUser {
+  name?: string;
   email: string;
   password: string;
 }
@@ -30,17 +31,30 @@ export class UserService {
     return this.http.get('api/user/logout', {headers: header});
   }
 
-  getUserInfo(user: IUser, action: string): Observable<void> {
-    console.log('user', user);
-    return this.http.post<any>('api/' + action, user).pipe(map(({userData, token}) => {
+
+  loginUser(user: IUser): Observable<void> {
+    return this.http.post<any>('api/user/login', user).pipe(map(({userData, token}) => {
       console.log(userData, token);
 
       const { _id, name, email } = userData;
 
-      this.store.dispatch(new SetToken({id: _id, name, email, token}));
+      // this.store.dispatch(new SetToken({id: _id, name, email, token}));
 
 
     }));
+  }
+
+  registerUser(user: IUser): Observable<void> {
+    return this.http.post<any>('api/user/registration', user).pipe(map(({userData, token}) => {
+      console.log(userData, token);
+
+      const { _id, name, email } = userData;
+
+      // this.store.dispatch(new SetToken({id: _id, name, email, token}));
+
+
+    }));
+
   }
 
   registrationUser(name: string, email: string, password: string): Observable<{ error: string }> {

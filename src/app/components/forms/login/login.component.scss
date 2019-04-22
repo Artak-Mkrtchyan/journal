@@ -1,3 +1,25 @@
+.login-form {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  width: 260px;
+}
+
+.button {
+  width: 84px;
+}
+
+.link {
+  color: #F44336;
+}
+
+.login-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
 .validation-form {
   display: flex;
   flex-direction: column;

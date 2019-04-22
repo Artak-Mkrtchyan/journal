@@ -17,10 +17,8 @@ import { UserService } from '@service/user.service';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from '@components/header/header.component';
 import { HomeComponent } from '@components/home/home.component';
-import { LoginComponent } from '@components/login/login.component';
-import { RegistrationComponent } from '@components/registration/registration.component';
-import { ValidationFormComponent } from '@components/forms/validation-form/validation-form.component';
-import { LogoutComponent } from '@components/logout/logout.component';
+import { LoginComponent } from '@components/forms/login/login.component';
+import { RegistrationComponent } from '@components/forms/registration/registration.component';
 import { ArticleItemComponent } from '@components/articles/article-item/article-item.component';
 import { ArticlesComponent } from '@components/articles/articles.component';
 import { ArticleEditComponent } from '@components/articles/article-edit/article-edit.component';
@@ -35,8 +33,6 @@ import { ArticleAddComponent } from '@components/articles/article-add/article-ad
     HomeComponent,
     LoginComponent,
     RegistrationComponent,
-    ValidationFormComponent,
-    LogoutComponent,
     ArticleItemComponent,
     ArticlesComponent,
     ArticleEditComponent,
