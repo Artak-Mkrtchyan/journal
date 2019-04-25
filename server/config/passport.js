@@ -38,9 +38,7 @@ module.exports = function (passport) {
       passwordField: 'password'
     },
   (email, password, done) => {
-    // console.log('passport', email, password);
     User.findOne({ email: email }).then(user => {
-      // console.log('user', user);
       if(!user) {
         return done(null, false, {message: 'No User Found'});
       }
@@ -50,6 +48,7 @@ module.exports = function (passport) {
         if(isMatch){
           return done(null, user);
         } else {
+          console.log('password')
           return done(null, false, {message: 'Password Incorrect'});
         }
       });

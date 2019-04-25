@@ -31,11 +31,7 @@ export class HeaderComponent implements OnInit {
   }
 
   logout() {
-    this.userService.logout().pipe(
-      catchError(this.handleError)
-    ).subscribe(
-      res => console.log(res)
-    );
+    this.userService.logout();
   }
 
   ngOnInit() {

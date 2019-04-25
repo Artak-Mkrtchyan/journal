@@ -14,24 +14,28 @@ const initialState = {
   token: ''
 };
 
-export function userAuth(state:IUser = initialState, action: Action) {
+export function userAuth(state: IUser = initialState, action: UserToken) {
   switch (action.type) {
     case 'LOGIN':
-      console.log('LOGIN', action);
       return {
-        id: '',
-        name: '',
-        email: '',
-        token: ''
+        ...action.payload
       };
+    case 'LOGOUT':
+      return initialState;
     default:
       return state;
   }
+}
+
+export class RemoveToken implements Action {
+  readonly type = 'LOGOUT';
 }
 
 
 export class SetToken implements Action {
   readonly type = 'LOGIN';
 
-  constructor(public user: {id: string, name: string, email: string, token: string}) {}
+  constructor(public payload: {id: string, name: string, email: string, token: string}) {}
 }
+
+type UserToken = SetToken | RemoveToken;

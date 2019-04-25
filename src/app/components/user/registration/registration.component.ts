@@ -35,9 +35,7 @@ export class RegistrationComponent implements OnInit {
   constructor(private fb: FormBuilder, private userService: UserService) { }
 
   register() {
-    this.userService.registerUser(this.registrationForm.value).subscribe(data => {
-      console.log(data);
-    });
+    this.userService.registerUser(this.registrationForm.value).subscribe();
   }
 
   ngOnInit() {

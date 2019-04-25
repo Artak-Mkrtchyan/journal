@@ -6,13 +6,14 @@ import { map } from 'rxjs/operators';
 import { Store, select } from '@ngrx/store';
 
 import { SnackBarService } from './snackBar.service';
-import { SetToken } from '../store/index';
+import { SetToken, RemoveToken } from '../store/index';
 
 
 interface IUser {
-  name?: string;
-  email: string;
+  id?: number;
+  name: string;
   password: string;
+  token?: string;
 }
 
 @Injectable({
@@ -28,57 +29,43 @@ export class UserService {
   ) { }
 
   logout() {
-    const token = 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFydGFrNjI5N0BnbWFpbC5jb20iLCJpYXQiOjE1NTU3MDI5NTN9.zhg8yTNesD3rBX4dqKLqQMABp2cYuFTYE5oERXwP4Q8';
-    const header = new HttpHeaders({
-      Authorization: token
-    });
+    this.store.dispatch(new RemoveToken());
+    this.router.navigate(['user/login']);
+  }
 
-    console.log(header);
-    return this.http.get('api/user/logout', {headers: header});
+  public get currentUserToken(): IUser {
+    let userInfo: IUser;
+    this.store.select('userAuth').subscribe(user => {
+      userInfo = user;
+    });
+    return userInfo;
   }
 
 
   loginUser(user: IUser): Observable<void> {
-    return this.http.post<any>('api/user/login', user).pipe(map(({userInfo, token}) => {
-      console.log(userInfo, token);
+    return this.http.post<any>('api/user/login', user).pipe(map(({userInfo, token, info}) => {
       if (!userInfo) {
-
+        this.snackBar.openSnackBar(info.message, '', 'snackbar-danger');
+        return;
       }
 
-      this.snackBar.openSnackBar('hello', 'cancel', 'snackbar-danger');
-      // const { _id, name, email } = userData;
-
-      // this.store.dispatch(new SetToken({id: _id, name, email, token}));
-
-
+      const { _id, name, email } = userInfo;
+      this.store.dispatch(new SetToken({id: _id, name, email, token}));
+      this.snackBar.openSnackBar('Success authorization', 'OK', 'snackbar-success');
+      this.router.navigate(['user/profile']);
     }));
   }
 
   registerUser(user: IUser): Observable<void> {
-    return this.http.post<any>('api/user/registration', user).pipe(map(({userData, token}) => {
-      console.log(userData, token);
-
-      const { _id, name, email } = userData;
-
-      // this.store.dispatch(new SetToken({id: _id, name, email, token}));
-
-
+    return this.http.post<any>('api/user/registration', user).pipe(map((isRegistered) => {
+      console.log(isRegistered);
+      if (isRegistered) {
+        this.snackBar.openSnackBar('You have registered successfully', 'Cancel', 'snackbar-success');
+        this.router.navigate(['user/login']);
+      } else {
+        this.snackBar.openSnackBar('The email address is already in use by another account', 'Cancel', 'snackbar-danger');
+      }
     }));
 
   }
-
-  registrationUser(name: string, email: string, password: string): Observable<{ error: string }> {
-    console.log('name', name, email, password);
-    return this.http.post<{redirect: boolean}>('user/registration', {name, email, password})
-      .pipe(map((data: {redirect: boolean}) => {
-          console.log(data);
-          // return user;
-          if (data.redirect) {
-            this.router.navigate(['/user/login']);
-          } else {
-            return { error: 'Incorrect email or password'};
-          }
-    }));
-  }
-
 }

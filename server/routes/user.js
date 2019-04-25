@@ -22,9 +22,12 @@ router.get('/logout', passport.authenticate('jwt', { session: false }),
 
 router.post('/login',  (req, res, next) => {
   passport.authenticate('local', function(err, user, info) {
-    if (err) { return next(err); }
+    console.log(err, user, info)
+    if (err) {
+      return next(err);
+    }
     if (!user) {
-      return res.send({ userInfo: false });
+      return res.send({ userInfo: false, info });
     }
 
     let { id, name, email } = user;
@@ -35,15 +38,11 @@ router.post('/login',  (req, res, next) => {
   })(req, res, next);
 });
 
-// router.get('/registration', (req, res) => {
-//   res.redirect('user/login');
-// })
-
 router.post('/registration', (req, res) => {
   User.findOne({email: req.body.email})
   .then(user => {
     if(user) {
-      return res.send({ redirect: 'user/registration', error: 'The email address is already in use by another account.' });
+      return res.send({ isRegistered: false });
     } else {
       const newUser = new User({
         name: req.body.name,
@@ -57,8 +56,7 @@ router.post('/registration', (req, res) => {
           newUser.password = hash;
           newUser.save()
           .then(user => {
-            console.log('redirect user/login');
-            return res.send({ redirect: 'user/login' });
+            return res.send({ isRegistered: true });
           })
           .catch(err => {
             return err;

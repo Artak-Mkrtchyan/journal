@@ -1,8 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-// import { AlertModule } from 'ngx-bootstrap';
 
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -15,16 +14,19 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { UserService } from '@service/user.service';
 
+import { JwtInterceptor } from './helpers/jwt.inspector';
+
 import { AppComponent } from './app.component';
 import { HeaderComponent } from '@components/header/header.component';
 import { HomeComponent } from '@components/home/home.component';
-import { LoginComponent } from '@components/forms/login/login.component';
-import { RegistrationComponent } from '@components/forms/registration/registration.component';
+import { LoginComponent } from '@components/user/login/login.component';
+import { RegistrationComponent } from '@components/user/registration/registration.component';
 import { ArticleItemComponent } from '@components/articles/article-item/article-item.component';
 import { ArticlesComponent } from '@components/articles/articles.component';
 import { ArticleEditComponent } from '@components/articles/article-edit/article-edit.component';
 import { ArticleComponent } from '@components/articles/article/article.component';
 import { ArticleAddComponent } from '@components/articles/article-add/article-add.component';
+import { UserProfileComponent } from './components/user/user-profile/user-profile.component';
 
 
 @NgModule({
@@ -38,7 +40,8 @@ import { ArticleAddComponent } from '@components/articles/article-add/article-ad
     ArticlesComponent,
     ArticleEditComponent,
     ArticleComponent,
-    ArticleAddComponent
+    ArticleAddComponent,
+    UserProfileComponent,
   ],
   imports: [
     StoreModule.forRoot({ userAuth }),
@@ -51,12 +54,14 @@ import { ArticleAddComponent } from '@components/articles/article-add/article-ad
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    // AlertModule.forRoot(),
     MaterialModule,
     FlexLayoutModule,
     BrowserAnimationsModule
   ],
-  providers: [UserService],
+  providers: [
+    UserService,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
