@@ -1,5 +1,5 @@
-import { Component, OnInit, OnChanges , Input } from '@angular/core';
-import { FormBuilder, AbstractControl, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 
 import { UserService } from '@service/user.service';
 
@@ -19,10 +19,7 @@ export class LoginComponent implements OnInit {
   constructor(private fb: FormBuilder, private userService: UserService) {}
 
   login() {
-    this.userService.loginUser(this.loginForm.value).subscribe(data => {
-
-      console.log(data);
-    });
+    this.userService.loginUser(this.loginForm.value).subscribe();
   }
 
   ngOnInit() {

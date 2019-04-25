@@ -1,7 +1,7 @@
 .card {
-  // height: 100%;
-  // width: 100%;
-  // overflow: hidden;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
   margin: 10px;
 }
 //
@@ -10,13 +10,13 @@
   text-overflow: ellipsis;
   width: 100%;
 }
-//
+
 .card-title {
-  // display: block;
-  // width: 100%;
-  // align-items: flex-start;
-  // text-overflow: ellipsis;
-  // overflow: hidden;
+  display: block;
+  width: 100%;
+  align-items: flex-start;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .mat-card-title {

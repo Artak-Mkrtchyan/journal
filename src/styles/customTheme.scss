@@ -1,0 +1,83 @@
+@import '~@angular/material/theming';
+@include mat-core();
+
+
+$primary: mat-palette($mat-deep-purple, 400);
+$accent: mat-palette($mat-orange, A200, A100, A400);
+$warn: mat-palette($mat-red);
+
+$my-theme-foreground: (
+  base:              white,
+  divider:           white,
+  dividers:          $dark-dividers,
+  disabled:          $dark-disabled-text,
+  disabled-button:   white,
+  disabled-text:     $dark-disabled-text,
+  elevation:         black,
+  hint-text:         $dark-disabled-text,
+  secondary-text:    white,
+  icon:              rgba(black, 0.54),
+  icons:             rgba(black, 0.54),
+  text:              rgb(255, 255, 255),
+  slider-min:        rgba(black, 0.87),
+  slider-off:        rgba(black, 0.26),
+  slider-off-active: rgba(black, 0.38),
+);
+
+$my-theme-background: (
+  status-bar: map_get($mat-grey, 300),
+  app-bar:    map_get($mat-grey, 100),
+  background: #303030,
+  hover:      rgba(black, 0.04),
+  card:       rgba(0, 0, 0, 0.2),
+  dialog:     #303030,
+  disabled-button: rgba(black, 0.12),
+  raised-button: white,
+  focused-button: $dark-focused,
+  selected-button: map_get($mat-grey, 300),
+  selected-disabled-button: map_get($mat-grey, 400),
+  disabled-button-toggle: map_get($mat-grey, 200),
+  unselected-chip: map_get($mat-grey, 300),
+  disabled-list-option: map_get($mat-grey, 200),
+);
+
+
+@function my-theme($primary, $accent, $warn: mat-palette($mat-red)) {
+  @return (
+    primary: $primary,
+    accent: $accent,
+    warn: $warn,
+    is-dark: false,
+    foreground: $my-theme-foreground,
+    background: $my-theme-background,
+  );
+}
+
+
+$theme: my-theme($primary, $accent, $warn);
+
+
+
+// @mixin my-theme($theme) {
+
+//   // retrieve variables from theme
+//   // (all possible variables, use only what you really need)
+//   $primary: map-get($theme, primary);
+//   $accent: map-get($theme, accent);
+//   $warn: map-get($theme, accent);
+//   $foreground: map-get($theme, foreground);
+//   $background: map-get($theme, background);
+
+// }
+
+// $background: map-get($theme, background);
+
+
+// $background: map-merge($background, (background: $background-color));
+
+// $theme: map-merge($theme, (background: $background));
+
+// @include my-theme();
+
+
+@include angular-material-theme($theme);

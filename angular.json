@@ -28,7 +28,7 @@
             ],
             "styles": [
               "src/styles/styles.scss",
-              "node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css"
+              "src/styles/customTheme.scss"
             ],
             "scripts": [],
             "es5BrowserSupport": true

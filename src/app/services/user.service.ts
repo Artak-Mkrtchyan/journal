@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Store, select } from '@ngrx/store';
 
+import { SnackBarService } from './snackBar.service';
 import { SetToken } from '../store/index';
 
 
@@ -19,7 +20,12 @@ interface IUser {
 })
 export class UserService {
 
-  constructor(private http: HttpClient, private router: Router, private store: Store<({ userAuth })>) { }
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private store: Store<({ userAuth })>,
+    private snackBar: SnackBarService
+  ) { }
 
   logout() {
     const token = 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFydGFrNjI5N0BnbWFpbC5jb20iLCJpYXQiOjE1NTU3MDI5NTN9.zhg8yTNesD3rBX4dqKLqQMABp2cYuFTYE5oERXwP4Q8';
@@ -33,10 +39,14 @@ export class UserService {
 
 
   loginUser(user: IUser): Observable<void> {
-    return this.http.post<any>('api/user/login', user).pipe(map(({userData, token}) => {
-      console.log(userData, token);
+    return this.http.post<any>('api/user/login', user).pipe(map(({userInfo, token}) => {
+      console.log(userInfo, token);
+      if (!userInfo) {
 
-      const { _id, name, email } = userData;
+      }
+
+      this.snackBar.openSnackBar('hello', 'cancel', 'snackbar-danger');
+      // const { _id, name, email } = userData;
 
       // this.store.dispatch(new SetToken({id: _id, name, email, token}));
 

@@ -1,7 +1,7 @@
 <form [formGroup]="registrationForm" (ngSubmit)="register()">
   <mat-card class="validation-form">
     <h3 class="text-center">Registration</h3>
-    <mat-form-field color="warn">
+    <mat-form-field color="primary">
       <input matInput type="text" placeholder="name" formControlName="name" required>
       <mat-error *ngIf="registrationForm.controls.name.hasError('required')">
         You must enter a value
@@ -10,7 +10,7 @@
         Password should contain 3 characters
       </mat-error>
     </mat-form-field>
-    <mat-form-field color="warn">
+    <mat-form-field color="primary">
       <input matInput type="email" placeholder="email" formControlName="email" required>
       <mat-error *ngIf="registrationForm.controls.email.hasError('required')">
         You must enter a value
@@ -19,7 +19,7 @@
         Not a valid email
       </mat-error>
     </mat-form-field>
-    <mat-form-field color="warn">
+    <mat-form-field color="primary">
       <input matInput type="password" placeholder="password" formControlName="password" required>
       <mat-error *ngIf="registrationForm.controls.password.hasError('required')">
         You must enter a value
@@ -28,7 +28,7 @@
         Password should contain 6 characters
       </mat-error>
     </mat-form-field>
-    <mat-form-field color="warn">
+    <mat-form-field color="primary">
       <input matInput type="password" placeholder="confirm password" formControlName="password2" required>
       <mat-error *ngIf="registrationForm.controls.password2.hasError('required')">
         You must enter a value
@@ -38,7 +38,7 @@
       </mat-error>
     </mat-form-field>
     <div class="validation-buttons">
-      <button class="button" mat-raised-button color="warn" [disabled]="registrationForm.invalid">Registration</button>
+      <button color="primary" class="button" mat-raised-button [disabled]="registrationForm.invalid">Registration</button>
       <a class="link" [href]="user/registration">Log in</a>
     </div>
   </mat-card>

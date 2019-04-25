@@ -24,13 +24,13 @@ router.post('/login',  (req, res, next) => {
   passport.authenticate('local', function(err, user, info) {
     if (err) { return next(err); }
     if (!user) {
-      return res.send({ redirect: 'user/login' });
+      return res.send({ userInfo: false });
     }
-    // console.log('user/login', user);
+
     let { id, name, email } = user;
     jwt.sign({ id, name, email }, 'myPrivateKey', function(err, token) {
-      console.log(token);
-      res.send({ user, token })
+      console.log(user);
+      res.send({ userInfo: user, token })
     });
   })(req, res, next);
 });
