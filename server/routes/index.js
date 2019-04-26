@@ -9,10 +9,8 @@ require('../models/article');
 const Article = mongoose.model('article');
 
 router.get('/', (req, res) => {
-  console.log('get');
   Article.find({})
     .then(article => {
-      // console.log(req);
       let articlesArr = [];
       Object.values(article).filter(article => {
         // if (`${article.userId}` !== `${req.user._id}`) {

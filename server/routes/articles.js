@@ -13,7 +13,6 @@ const Article = mongoose.model('article');
 
 router.get('/', (req, res) => {
   let userArtcle = [];
-  console.log(req, arguments)
   User.findOne({ _id: req.user._id })
     .then(user => {
       Object.keys(user.articlesList).map(key =>
@@ -44,7 +43,6 @@ router.get('/', (req, res) => {
 // })
 
 router.get('/:id', (req, res) => {
-  console.log(req.params)
   Article.findOne({
     _id: req.params.id
   })

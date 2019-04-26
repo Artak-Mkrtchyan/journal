@@ -39,6 +39,5 @@ export class RegistrationComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.registrationForm);
   }
 }

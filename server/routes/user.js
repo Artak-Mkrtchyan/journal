@@ -12,17 +12,14 @@ const User = mongoose.model('users');
 
 router.get('/logout', passport.authenticate('jwt', { session: false }),
   (req, res) => {
-    // req.logout();
     jwt.sign({ email: 'artak6297@gmail.com' }, 'myPrivateKey', function(err, token) {
-      console.log(token);
       res.send({ token })
     });
     return res.send({msg: 'logout'});
-})
+});
 
 router.post('/login',  (req, res, next) => {
   passport.authenticate('local', function(err, user, info) {
-    console.log(err, user, info)
     if (err) {
       return next(err);
     }
@@ -66,6 +63,10 @@ router.post('/registration', (req, res) => {
 
     }
   });
+});
+
+router.post('/profile', passport.authenticate('jwt', { session: false }), (req, res) => {
+  return res.send({ msg: 'ok' });
 })
 
 module.exports = router;

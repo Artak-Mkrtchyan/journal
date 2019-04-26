@@ -16,15 +16,12 @@ require('../models/user');
 const User = mongoose.model('users');
 
 module.exports = function (passport) {
-
   passport.use(new JwtStrategy(opts, function(jwt_payload, done) {
-    User.findOne({email: jwt_payload.id}, function(err, user) {
-      // console.log('jwt', jwt_payload, err, user);
+    User.findOne({_id: jwt_payload.id}, function(err, user) {
         if (err) {
           return done(err, false);
         }
         if (user) {
-          console.log('user')
           return done(null, user);
         } else {
           return done(null, false);
@@ -48,7 +45,6 @@ module.exports = function (passport) {
         if(isMatch){
           return done(null, user);
         } else {
-          console.log('password')
           return done(null, false, {message: 'Password Incorrect'});
         }
       });

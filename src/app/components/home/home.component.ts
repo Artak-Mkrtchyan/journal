@@ -24,15 +24,12 @@ export class HomeComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    // console.log('OnInit');
     // return this.http.post('', {})
     //   .pipe(
     //     map(data => {
-    //       console.log(data.article)
     //       this.articles = data.article;
     //     }),
     //     catchError(err => {
-    //       console.log(err);
     //       return err
     //     })
     //   ).subscribe();

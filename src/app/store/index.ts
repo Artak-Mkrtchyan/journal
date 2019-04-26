@@ -4,17 +4,15 @@ interface IUser {
   id: string;
   name: string;
   email: string;
-  token: string;
 }
 
 const initialState = {
   id: '',
   name: '',
-  email: '',
-  token: ''
+  email: ''
 };
 
-export function userAuth(state: IUser = initialState, action: UserToken) {
+export function userAuth(state: IUser = initialState, action: User) {
   switch (action.type) {
     case 'LOGIN':
       return {
@@ -27,15 +25,15 @@ export function userAuth(state: IUser = initialState, action: UserToken) {
   }
 }
 
-export class RemoveToken implements Action {
+export class RemoveUser implements Action {
   readonly type = 'LOGOUT';
 }
 
 
-export class SetToken implements Action {
+export class SetUser implements Action {
   readonly type = 'LOGIN';
 
-  constructor(public payload: {id: string, name: string, email: string, token: string}) {}
+  constructor(public payload: {id: string, name: string, email: string}) {}
 }
 
-type UserToken = SetToken | RemoveToken;
+type User = SetUser | RemoveUser;

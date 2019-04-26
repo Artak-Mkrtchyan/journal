@@ -6,7 +6,7 @@ import { map } from 'rxjs/operators';
 import { Store, select } from '@ngrx/store';
 
 import { SnackBarService } from './snackBar.service';
-import { SetToken, RemoveToken } from '../store/index';
+import { SetUser, RemoveUser } from '../store/index';
 
 
 interface IUser {
@@ -29,7 +29,7 @@ export class UserService {
   ) { }
 
   logout() {
-    this.store.dispatch(new RemoveToken());
+    this.store.dispatch(new RemoveUser());
     this.router.navigate(['user/login']);
   }
 
@@ -38,7 +38,8 @@ export class UserService {
     this.store.select('userAuth').subscribe(user => {
       userInfo = user;
     });
-    return userInfo;
+    const token = localStorage.getItem('currentUser');
+    return { ...userInfo, token};
   }
 
 
@@ -50,7 +51,8 @@ export class UserService {
       }
 
       const { _id, name, email } = userInfo;
-      this.store.dispatch(new SetToken({id: _id, name, email, token}));
+      this.store.dispatch(new SetUser({ id: _id, name, email }));
+      localStorage.setItem('currentUser', token);
       this.snackBar.openSnackBar('Success authorization', 'OK', 'snackbar-success');
       this.router.navigate(['user/profile']);
     }));
@@ -58,7 +60,6 @@ export class UserService {
 
   registerUser(user: IUser): Observable<void> {
     return this.http.post<any>('api/user/registration', user).pipe(map((isRegistered) => {
-      console.log(isRegistered);
       if (isRegistered) {
         this.snackBar.openSnackBar('You have registered successfully', 'Cancel', 'snackbar-success');
         this.router.navigate(['user/login']);

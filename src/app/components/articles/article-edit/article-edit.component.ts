@@ -22,12 +22,10 @@ export class ArticleEditComponent implements OnInit {
 
   editArticle() {
     const { id, title, description } = this.editForm.value;
-    console.log(title, description, this.editForm.value);
     this.artService.editArticle(id, title, description).subscribe(res => console.log(res));
   }
 
   ngOnInit() {
-    console.log('edit');
     // let articleId = this.router.url.split('/').slice(2,3).join('/');
 
     // this.artService.getArticle(articleId).subscribe(

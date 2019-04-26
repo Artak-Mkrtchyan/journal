@@ -11,7 +11,6 @@ export class ArticleService {
   constructor(private http: HttpClient, private router: Router) { }
 
   getArticles() {
-    console.log('art');
     return this.http.get('/api');
   }
 
