@@ -29,8 +29,7 @@ router.post('/login',  (req, res, next) => {
 
     let { id, name, email } = user;
     jwt.sign({ id, name, email }, 'myPrivateKey', function(err, token) {
-      console.log(user);
-      res.send({ userInfo: user, token })
+      res.send({ userInfo: { id, name, email, token }});
     });
   })(req, res, next);
 });
@@ -67,6 +66,12 @@ router.post('/registration', (req, res) => {
 
 router.post('/profile', passport.authenticate('jwt', { session: false }), (req, res) => {
   return res.send({ msg: 'ok' });
-})
+});
+
+router.post('/refresh', passport.authenticate('jwt', { session: false }), (req, res) => {
+  let token = req.body.token;
+  let { _id: id, name, email } = req.user;
+  return res.send({ id, name, email, token });
+});
 
 module.exports = router;

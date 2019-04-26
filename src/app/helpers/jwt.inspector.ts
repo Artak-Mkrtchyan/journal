@@ -10,6 +10,7 @@ export class JwtInterceptor implements HttpInterceptor {
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         const currentUser = this.userService.currentUserToken;
+
         if (currentUser && currentUser.token) {
             request = request.clone({
                 setHeaders: {
@@ -17,6 +18,10 @@ export class JwtInterceptor implements HttpInterceptor {
                 }
             });
         }
+
+        // if (currentUser.name === '') {
+        //   this.userService.refreshToken().subscribe();
+        // }
 
         return next.handle(request);
     }

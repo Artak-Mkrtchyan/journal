@@ -3,6 +3,13 @@ import { catchError, retry } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 
+interface IUser {
+  id?: string;
+  name: string;
+  password: string;
+  token?: string;
+}
+
 import { UserService } from '@service/user.service';
 
 @Component({
@@ -11,6 +18,7 @@ import { UserService } from '@service/user.service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+  currentUser: IUser;
 
   constructor(private userService: UserService) { }
 
@@ -35,6 +43,10 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.currentUser = this.userService.currentUserToken;
+    if (this.currentUser.name === '') {
+      this.userService.refreshToken().subscribe();
+    }
   }
 
 }

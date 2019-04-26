@@ -20,7 +20,6 @@ export class ArticleComponent implements OnInit {
   constructor(private router: Router, private artService: ArticleService) { }
 
   ngOnInit() {
-    console.log(this.router);
     const articleId = this.router.url.split('/').slice(2, 3).join('/');
 
     this.artService.getArticle(articleId).subscribe(

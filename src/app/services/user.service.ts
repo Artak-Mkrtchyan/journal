@@ -10,8 +10,9 @@ import { SetUser, RemoveUser } from '../store/index';
 
 
 interface IUser {
-  id?: number;
+  id?: string;
   name: string;
+  email?: string;
   password: string;
   token?: string;
 }
@@ -30,6 +31,7 @@ export class UserService {
 
   logout() {
     this.store.dispatch(new RemoveUser());
+    localStorage.removeItem('currentUser');
     this.router.navigate(['user/login']);
   }
 
@@ -44,14 +46,14 @@ export class UserService {
 
 
   loginUser(user: IUser): Observable<void> {
-    return this.http.post<any>('api/user/login', user).pipe(map(({userInfo, token, info}) => {
+    return this.http.post<any>('api/user/login', user).pipe(map(({userInfo, info}) => {
       if (!userInfo) {
         this.snackBar.openSnackBar(info.message, '', 'snackbar-danger');
         return;
       }
 
-      const { _id, name, email } = userInfo;
-      this.store.dispatch(new SetUser({ id: _id, name, email }));
+      const { id, name, email, token } = userInfo;
+      this.store.dispatch(new SetUser({ id, name, email }));
       localStorage.setItem('currentUser', token);
       this.snackBar.openSnackBar('Success authorization', 'OK', 'snackbar-success');
       this.router.navigate(['user/profile']);
@@ -67,6 +69,21 @@ export class UserService {
         this.snackBar.openSnackBar('The email address is already in use by another account', 'Cancel', 'snackbar-danger');
       }
     }));
+  }
 
+  refreshToken(): Observable<IUser> {
+    const token = localStorage.getItem('currentUser');
+
+    return this.http.post<IUser>('api/user/refresh', {token})
+      .pipe(
+        map(userInfo => {
+          const { id, name, email } = userInfo;
+
+          if (userInfo && userInfo.token) {
+            this.store.dispatch(new SetUser({ id, name, email }));
+          }
+
+          return userInfo as IUser;
+      }));
   }
 }
