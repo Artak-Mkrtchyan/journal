@@ -1,6 +1,6 @@
-<div [formGroup]="editForm" class="container" fxLayout="column">
+<div [formGroup]="editForm" *ngIf='formData' class="container" fxLayout="column">
   <mat-form-field>
-    <input matInput placeholder="Input"  formControlName="title">
+    <input matInput placeholder="Input" formControlName="title">
     <mat-error *ngIf="editForm.get('title').errors?.required">
       Title is required
     </mat-error>

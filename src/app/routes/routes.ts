@@ -1,3 +1,4 @@
+import { Component } from '@angular/core';
 import { Routes } from '@angular/router';
 
 import { HomeComponent } from '@components/home/home.component';
@@ -5,6 +6,7 @@ import { LoginComponent } from '@components/user/login/login.component';
 import { RegistrationComponent } from '@components/user/registration/registration.component';
 import { UserProfileComponent } from './../components/user/user-profile/user-profile.component';
 
+import { ArticlesComponent } from '@components/articles/articles.component';
 import { ArticleComponent } from '@components/articles/article/article.component';
 import { ArticleEditComponent } from '@components/articles/article-edit/article-edit.component';
 import { ArticleAddComponent } from '@components/articles/article-add/article-add.component';
@@ -13,13 +15,14 @@ import { AuthGuard } from '../guards/auth.guard';
 import { ActiveUserGuard } from '../guards/active-user.guard';
 
 const artileRoutes = [
+  { path: '', component: ArticlesComponent },
   { path: 'add', component: ArticleAddComponent },
   {
-    path: ':id',
+    path: '',
     pathMath: 'prefix',
     children: [
-      { path: '',  component: ArticleComponent },
-      { path: 'edit', component: ArticleEditComponent },
+      { path: ':id',  component: ArticleComponent },
+      { path: ':id/edit', component: ArticleEditComponent },
     ]
   },
 ];

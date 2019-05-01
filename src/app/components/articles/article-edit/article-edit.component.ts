@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 
 import { ArticleService } from '@service/article.service';
 
@@ -10,13 +10,8 @@ import { ArticleService } from '@service/article.service';
   styleUrls: ['./article-edit.component.scss']
 })
 export class ArticleEditComponent implements OnInit {
-
-  editForm = this.fb.group({
-    id: [''],
-    title: ['', Validators.required],
-    description: ['', Validators.required],
-    date: ['']
-  });
+  formData = false;
+  editForm: FormGroup;
 
   constructor(private fb: FormBuilder, private router: Router, private artService: ArticleService) { }
 
@@ -26,18 +21,20 @@ export class ArticleEditComponent implements OnInit {
   }
 
   ngOnInit() {
-    // let articleId = this.router.url.split('/').slice(2,3).join('/');
+    const articleId = this.router.url.split('/').slice(2, 3).join('/');
 
-    // this.artService.getArticle(articleId).subscribe(
-    //   ({article}) => {
-    //     this.editForm.patchValue({
-    //       id: article._id,
-    //       title: article.title,
-    //       description: article.description,
-    //       date: article.date
-    //     })
-    //   }
-    // );
+    this.artService.getArticle(articleId).subscribe(
+      ({article}: any) => {
+        const { _id: id, title, description, date } = article;
+
+        this.editForm = this.fb.group({
+          id: [id],
+          title: [title, Validators.required],
+          description: [description, Validators.required],
+          date: [date]
+        });
+        this.formData = true;
+      });
   }
 
 }

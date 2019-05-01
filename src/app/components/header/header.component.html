@@ -7,7 +7,7 @@
         <span>Journal</span>
       </a>
       <div>
-        <a *ngIf="isUserLogin" class="header-toolbar__content-item" routerLinkActive="" (click)="logout()">
+        <a *ngIf="isUserLogin" class="header-toolbar__content-item" (click)="logout()">
           <span>Logout</span>
         </a>
         <a *ngIf="!isUserLogin" class="header-toolbar__content-item" href="user/login">

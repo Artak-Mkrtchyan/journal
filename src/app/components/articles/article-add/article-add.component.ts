@@ -21,10 +21,9 @@ export class ArticleAddComponent implements OnInit {
 
   ngOnInit() {}
 
-  addArticle(title: string, description: string) {
-    this.artService.addArticle(title, description).subscribe(
-      data => console.log(data)
-    );
+  addArticle() {
+    const { title, description } = this.addForm.value;
+    this.artService.addArticle(title, description);
   }
 
 }

@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const passport = require('passport');
 
 const router = express.Router();
 
@@ -29,18 +30,18 @@ router.get('/', (req, res) => {
     });
 });
 
-// router.get('/read/:id', ensureAuthenticated, (req, res) => {
-//   Article.findOne({
-//     _id: req.params.id
-//   })
-//   .then(article => {
-//     res.render('articles/read', {
-//       id: article.id,
-//       title: article.title,
-//       description: article.description
-//     });
-//   });
-// })
+router.get('/read/:id', (req, res) => {
+  Article.findOne({
+    _id: req.params.id
+  })
+  .then(article => {
+    res.render('articles/read', {
+      id: article.id,
+      title: article.title,
+      description: article.description
+    });
+  });
+})
 
 router.get('/:id', (req, res) => {
   Article.findOne({
@@ -51,7 +52,7 @@ router.get('/:id', (req, res) => {
   });
 });
 
-router.post('/:id/edit', (req, res) => {
+router.post('/edit/:id', (req, res) => {
   // let errors = [];
   //
   // if (!req.body.title) {
@@ -101,31 +102,14 @@ router.post('/:id/edit', (req, res) => {
 //   });
 // });
 
-router.post('/add', (req, res) => {
-  // let errors = [];
-  //
-  // if (!req.body.title) {
-  //   errors.push({text:'Please add a title'});
-  // }
-  //
-  // if (!req.body.description) {
-  //   errors.push({text:'Please add some description'});
-  // }
+router.post('/add', passport.authenticate('jwt', { session: false }), (req, res) => {
+  const newArticle = {
+    title: req.body.title,
+    description: req.body.description,
+    userId: req.user._id
+  }
 
-  // if (errors.length > 0) {
-  //   res.render('articles/add', {
-  //     errors: errors,
-  //     title: req.body.title,
-  //     description: req.body.description
-  //   })
-  // } else {
-    const newArticle = {
-      title: req.body.title,
-      description: req.body.description,
-      userId: req.user._id
-    }
-
-    new Article(newArticle)
+  new Article(newArticle)
     .save()
     .then(article => {
       User.findOne({ _id: req.user._id })
@@ -135,10 +119,8 @@ router.post('/add', (req, res) => {
         user.articlesList = { ...user.articlesList, ...articleId };
         user.save();
       });
-      req.flash('success_msg', 'Article Added')
-      res.redirect('/')
+      res.send({ msg: 'Article saved' });
     });
-  // }
 });
 
 module.exports = router;
