@@ -1,0 +1,55 @@
+.header {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+
+  &-toolbar {
+    background: #7E57C2;
+  }
+
+  &-toolbar__content {
+    padding: 0;
+    flex: 1;
+    justify-content: space-between;
+    flex-direction: row;
+    display: flex;
+  }
+
+  &-toolbar__content-item {
+    margin: 0 10px;
+    cursor: pointer;
+  }
+
+  &-sidenav {
+    flex: 1;
+  }
+
+  &-sidenav__content {
+    position: fixed;
+    top: 64px;
+    width: 240px;
+  }
+
+  &-sidenav__content-item {
+    color: #7E57C2;
+    text-decoration: none;
+  }
+
+  &-sidenav__content-item:hover {
+    text-decoration: none;
+  }
+}
+
+@media (max-width: 599px) {
+  .header-sidenav__content {
+    top: 56px;
+  }
+}
+
+.none {
+  display: none;
+}

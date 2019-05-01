@@ -1,0 +1,29 @@
+.card {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  margin: 10px;
+}
+//
+::ng-deep .mat-card-header-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+}
+
+.card-title {
+  display: block;
+  width: 100%;
+  align-items: flex-start;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.mat-card-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.article-button {
+  margin: 0 10px;
+}

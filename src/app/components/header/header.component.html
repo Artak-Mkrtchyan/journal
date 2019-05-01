@@ -1,0 +1,36 @@
+<div class="header">
+  <mat-toolbar class="header-toolbar">
+    <button mat-icon-button (click)="sidenav.toggle()"><mat-icon>menu</mat-icon></button>
+
+    <mat-nav-list class="header-toolbar__content">
+      <a class="header-toolbar__content-item" href="/">
+        <span>Journal</span>
+      </a>
+      <div>
+        <a *ngIf="isUserLogin" class="header-toolbar__content-item" (click)="logout()">
+          <span>Logout</span>
+        </a>
+        <a *ngIf="!isUserLogin" class="header-toolbar__content-item" href="user/login">
+          <span>Login</span>
+        </a>
+        <a *ngIf="!isUserLogin" class="header-toolbar__content-item" href="user/registration">
+          <span>Register</span>
+        </a>
+      </div>
+    </mat-nav-list>
+  </mat-toolbar>
+
+  <mat-sidenav-container class="header-sidenav">
+    <mat-sidenav class="header-sidenav__content" #sidenav >
+      <mat-nav-list>
+        <a fxLayoutAlign="center center" class="header-sidenav__content-item" href="articles">
+          <span>Articles</span>
+        </a>
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <ng-content></ng-content>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

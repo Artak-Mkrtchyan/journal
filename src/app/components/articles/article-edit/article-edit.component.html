@@ -1,0 +1,18 @@
+<div [formGroup]="editForm" *ngIf='formData' class="container" fxLayout="column">
+  <mat-form-field>
+    <input matInput placeholder="Input" formControlName="title">
+    <mat-error *ngIf="editForm.get('title').errors?.required">
+      Title is required
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <textarea matInput placeholder="Textarea" formControlName="description"></textarea>
+    <mat-error *ngIf="editForm.get('description').errors?.required">
+      Description is required
+    </mat-error>
+  </mat-form-field>
+
+  {{editForm.controls.date.value}}
+  <button type="button" name="button" (click)="editArticle()">Edit</button>
+</div>

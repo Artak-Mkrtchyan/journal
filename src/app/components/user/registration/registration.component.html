@@ -1,0 +1,45 @@
+<form [formGroup]="registrationForm" (ngSubmit)="register()">
+  <mat-card class="validation-form">
+    <h3 class="text-center">Registration</h3>
+    <mat-form-field color="primary">
+      <input matInput type="text" placeholder="name" formControlName="name" required>
+      <mat-error *ngIf="registrationForm.controls.name.hasError('required')">
+        You must enter a value
+      </mat-error>
+      <mat-error *ngIf="registrationForm.controls.name.hasError('minlength')">
+        Password should contain 3 characters
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field color="primary">
+      <input matInput type="email" placeholder="email" formControlName="email" required>
+      <mat-error *ngIf="registrationForm.controls.email.hasError('required')">
+        You must enter a value
+      </mat-error>
+      <mat-error *ngIf="registrationForm.controls.email.hasError('email')">
+        Not a valid email
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field color="primary">
+      <input matInput type="password" placeholder="password" formControlName="password" required>
+      <mat-error *ngIf="registrationForm.controls.password.hasError('required')">
+        You must enter a value
+      </mat-error>
+      <mat-error *ngIf="registrationForm.controls.password.hasError('minlength')">
+        Password should contain 6 characters
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field color="primary">
+      <input matInput type="password" placeholder="confirm password" formControlName="password2" required>
+      <mat-error *ngIf="registrationForm.controls.password2.hasError('required')">
+        You must enter a value
+      </mat-error>
+      <mat-error *ngIf="registrationForm.controls.password2.hasError('isError')">
+        Password and confirm password should match
+      </mat-error>
+    </mat-form-field>
+    <div class="validation-buttons">
+      <button color="primary" class="button" mat-raised-button [disabled]="registrationForm.invalid">Registration</button>
+      <a class="link" [href]="user/registration">Log in</a>
+    </div>
+  </mat-card>
+</form>
