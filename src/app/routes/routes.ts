@@ -10,6 +10,7 @@ import { ArticleEditComponent } from '@components/articles/article-edit/article-
 import { ArticleAddComponent } from '@components/articles/article-add/article-add.component';
 
 import { AuthGuard } from '../guards/auth.guard';
+import { ActiveUserGuard } from '../guards/active-user.guard';
 
 const artileRoutes = [
   { path: 'add', component: ArticleAddComponent },
@@ -24,14 +25,13 @@ const artileRoutes = [
 ];
 
 const userRoutes = [
-  { path: 'login', component: LoginComponent },
-  { path: 'registration', component: RegistrationComponent },
+  { path: 'login', component: LoginComponent, canActivate: [ActiveUserGuard] },
+  { path: 'registration', component: RegistrationComponent, canActivate: [ActiveUserGuard] },
   { path: 'profile', component: UserProfileComponent, canActivate: [AuthGuard] }
 ];
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
-  // { path: 'user/logout', component: LogoutComponent },
 
   { path: 'user', children: userRoutes },
   { path: 'articles', children: artileRoutes },
