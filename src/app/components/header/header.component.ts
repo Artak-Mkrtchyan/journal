@@ -18,7 +18,8 @@ import { UserService } from '@service/user.service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  currentUser: IUser;
+  currentUser: boolean;
+  isUserLogin: boolean;
 
   constructor(private userService: UserService) { }
 
@@ -43,10 +44,14 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.currentUser = this.userService.currentUserToken;
-    if (this.currentUser.name === '') {
+    this.currentUser = this.userService.getCurrentAuth();
+    this.userService.getAuthState().subscribe(value => {
+      this.isUserLogin = value;
+    });
+
+    if (this.userService.getCurrentAuth() === true) {
       this.userService.refreshToken().subscribe();
     }
-  }
 
+  }
 }

@@ -6,8 +6,7 @@ import { UserService } from '@service/user.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
-  providers: [UserService]
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
 
@@ -22,7 +21,6 @@ export class LoginComponent implements OnInit {
     this.userService.loginUser(this.loginForm.value).subscribe();
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
 }

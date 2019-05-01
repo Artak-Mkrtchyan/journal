@@ -64,10 +64,6 @@ router.post('/registration', (req, res) => {
   });
 });
 
-router.post('/profile', passport.authenticate('jwt', { session: false }), (req, res) => {
-  return res.send({ msg: 'ok' });
-});
-
 router.post('/refresh', passport.authenticate('jwt', { session: false }), (req, res) => {
   let token = req.body.token;
   let { _id: id, name, email } = req.user;

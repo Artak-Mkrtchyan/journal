@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject, Subject, } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Store, select } from '@ngrx/store';
 
@@ -21,6 +21,18 @@ interface IUser {
   providedIn: 'root'
 })
 export class UserService {
+  private isAuth = new BehaviorSubject<boolean>(false);
+
+  getAuthState(): Observable<boolean> {
+    if (localStorage.getItem('currentUser') !== null) {
+      this.isAuth.next(true);
+    }
+    return this.isAuth.asObservable();
+  }
+
+  getCurrentAuth() {
+    return this.isAuth.getValue();
+  }
 
   constructor(
     private http: HttpClient,
@@ -32,18 +44,18 @@ export class UserService {
   logout() {
     this.store.dispatch(new RemoveUser());
     localStorage.removeItem('currentUser');
+    this.isAuth.next(false);
     this.router.navigate(['user/login']);
   }
 
-  public get currentUserToken(): IUser {
-    let userInfo: IUser;
+  currentUserToken(): IUser {
+    let userInfo;
     this.store.select('userAuth').subscribe(user => {
       userInfo = user;
     });
     const token = localStorage.getItem('currentUser');
     return { ...userInfo, token};
   }
-
 
   loginUser(user: IUser): Observable<void> {
     return this.http.post<any>('api/user/login', user).pipe(map(({userInfo, info}) => {
@@ -55,6 +67,7 @@ export class UserService {
       const { id, name, email, token } = userInfo;
       this.store.dispatch(new SetUser({ id, name, email }));
       localStorage.setItem('currentUser', token);
+      this.isAuth.next(true);
       this.snackBar.openSnackBar('Success authorization', 'OK', 'snackbar-success');
       this.router.navigate(['user/profile']);
     }));
@@ -73,7 +86,7 @@ export class UserService {
 
   refreshToken(): Observable<IUser> {
     const token = localStorage.getItem('currentUser');
-
+    this.isAuth.next(true);
     return this.http.post<IUser>('api/user/refresh', {token})
       .pipe(
         map(userInfo => {

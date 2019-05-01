@@ -10,10 +10,6 @@ export class UserProfileComponent implements OnInit {
 
   constructor(private http: HttpClient) { }
 
-  ngOnInit() {
-    this.http.post('api/user/profile', {}).subscribe(
-      data => console.log(data)
-    );
-  }
+  ngOnInit() { }
 
 }

@@ -7,13 +7,13 @@
         <span>Journal</span>
       </a>
       <div>
-        <a *ngIf="currentUser" class="header-toolbar__content-item" (click)="logout()">
+        <a *ngIf="isUserLogin" class="header-toolbar__content-item" (click)="logout()">
           <span>Logout</span>
         </a>
-        <a *ngIf="!currentUser" class="header-toolbar__content-item" href="user/login">
+        <a *ngIf="!isUserLogin" class="header-toolbar__content-item" href="user/login">
           <span>Login</span>
         </a>
-        <a *ngIf="!currentUser" class="header-toolbar__content-item" href="user/registration">
+        <a *ngIf="!isUserLogin" class="header-toolbar__content-item" href="user/registration">
           <span>Register</span>
         </a>
       </div>
