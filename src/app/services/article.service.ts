@@ -31,10 +31,15 @@ export class ArticleService {
 
   addArticle(title: string, description: string) {
     return this.http.post(`api/articles/add`, {title, description}).subscribe((res: {msg: string}) => {
-        console.log(res);
         this.snackBar.openSnackBar(res.msg, 'Cancel', 'snackbar-success');
         this.router.navigate(['articles']);
       }
     );
+  }
+
+  deleteArticle(id: string) {
+    return this.http.post(`api/articles/delete/${id}`, {id}).subscribe((res: {msg: string}) => {
+      this.snackBar.openSnackBar(res.msg, 'Cancel', 'snackbar-success');
+    });
   }
 }

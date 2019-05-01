@@ -30,7 +30,7 @@ router.get('/', (req, res) => {
     });
 });
 
-router.get('/read/:id', (req, res) => {
+router.get('/:id/read', (req, res) => {
   Article.findOne({
     _id: req.params.id
   })
@@ -52,55 +52,33 @@ router.get('/:id', (req, res) => {
   });
 });
 
-router.post('/edit/:id', (req, res) => {
-  // let errors = [];
-  //
-  // if (!req.body.title) {
-  //   errors.push({text:'Please add a title'});
-  // }
-  //
-  // if (!req.body.description) {
-  //   errors.push({text:'Please add some description'});
-  // }
-
+router.post('/:id/edit', (req, res) => {
   Article.findOne({
     _id: req.params.id
   })
   .then(article => {
-    // if (errors.length > 0) {
-    //   res.render(`articles/edit`, {
-    //     errors: errors,
-    //     id: req.params.id,
-    //     title: req.body.title,
-    //     description: req.body.description
-    //   })
-    // } else {
       article.title = req.body.title;
       article.description = req.body.description;
 
       article.save();
-      res.send({msg: 'ok'});
-    // }
+      res.send({msg: 'Article edited'});
   });
 
 });
 
-// router.get('/delete/:id', ensureAuthenticated, (req, res) => {
-//   Article.deleteOne({ _id: req.params.id })
-//   .then(() => {
-
-//     User.findOne({ _id: req.user._id })
-//       .then(user => {
-//         let artId = req.params.id;
-//         const { [artId]: key, ...newList } = user.articlesList;
-//         user.articlesList = newList;
-//         user.save();
-//       })
-
-//     req.flash('success_msg', 'Article removed');
-//     res.redirect('/');
-//   });
-// });
+router.post('/delete/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
+  Article.deleteOne({ _id: req.body.id })
+  .then(() => {
+    User.findOne({ _id: req.user._id })
+      .then(user => {
+        let artId = req.body.id;
+        const { [artId]: key, ...newList } = user.articlesList;
+        user.articlesList = newList;
+        user.save();
+      });
+      res.send({msg: 'Article deleted'});
+  });
+});
 
 router.post('/add', passport.authenticate('jwt', { session: false }), (req, res) => {
   const newArticle = {

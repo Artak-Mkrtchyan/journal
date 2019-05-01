@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 
 import { ArticleService } from '@service/article.service';
+import { SnackBarService } from '@service/snackBar.service';
 
 @Component({
   selector: 'app-article-edit',
@@ -13,11 +14,19 @@ export class ArticleEditComponent implements OnInit {
   formData = false;
   editForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private router: Router, private artService: ArticleService) { }
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private artService: ArticleService,
+    private snackBar: SnackBarService
+  ) { }
 
   editArticle() {
     const { id, title, description } = this.editForm.value;
-    this.artService.editArticle(id, title, description).subscribe(res => console.log(res));
+    this.artService.editArticle(id, title, description).subscribe((res: {msg: string}) => {
+      this.router.navigate(['articles']);
+      this.snackBar.openSnackBar(res.msg, 'Cancel', 'snackbar-success');
+    });
   }
 
   ngOnInit() {

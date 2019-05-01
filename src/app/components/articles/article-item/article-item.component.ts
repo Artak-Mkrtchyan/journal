@@ -28,7 +28,7 @@ export class ArticleItemComponent implements OnInit {
   }
 
   delete(id: string) {
-
+    this.artService.deleteArticle(id);
   }
 
   constructor(private artService: ArticleService, private router: Router) { }
