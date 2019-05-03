@@ -19,22 +19,19 @@ app.use(bodyParser.urlencoded({ extended: false }));
 mongoose.Promise = global.Promise;
 
 mongoose.connect('mongodb://localhost/articles', {
-  useNewUrlParser: true
-})
+    useNewUrlParser: true
+  })
   .then(() => console.log('MongoDB Connected...'))
   .catch(err => console.log(err));
 
 
 app.use(passport.initialize());
-
 app.use(express.static(path.join(__dirname, 'dist')));
-
-const { ensureAuthenticated } = require('./server/helpers/auth');
 
 app.use('/api', mainRoute);
 app.use('/api/articles', articles);
 app.use('/api/user', user);
-//
+
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist/index.html'));
 });

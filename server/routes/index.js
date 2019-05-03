@@ -1,8 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
 
-const { ensureAuthenticated } = require('../helpers/auth');
-
 const router = express.Router();
 
 require('../models/article');
