@@ -15,12 +15,15 @@ export class ArticleService {
     private snackBar: SnackBarService
   ) { }
 
-  getArticles() {
-    return this.http.get('/api');
+  getArticles(id: string) {
+    return this.http.post('/api/articles', {id});
+  }
+
+  getMyArticles(id: string) {
+    return this.http.post('/api/articles/user', {id});
   }
 
   getArticle(id: string) {
-    // this.router.navigate([`articles/${id}`]);
     return this.http.get(`api/articles/${id}`);
   }
 

@@ -3,17 +3,17 @@
     <button mat-icon-button (click)="sidenav.toggle()"><mat-icon>menu</mat-icon></button>
 
     <mat-nav-list class="header-toolbar__content">
-      <a class="header-toolbar__content-item" href="/">
+      <a class="header-toolbar__content-item" (click)="toUrl('/')">
         <span>Journal</span>
       </a>
       <div>
         <a *ngIf="isUserLogin" class="header-toolbar__content-item" (click)="logout()">
           <span>Logout</span>
         </a>
-        <a *ngIf="!isUserLogin" class="header-toolbar__content-item" href="user/login">
+        <a *ngIf="!isUserLogin" class="header-toolbar__content-item" (click)="toUrl('user/login')">
           <span>Login</span>
         </a>
-        <a *ngIf="!isUserLogin" class="header-toolbar__content-item" href="user/registration">
+        <a *ngIf="!isUserLogin" class="header-toolbar__content-item" (click)="toUrl('user/registration')">
           <span>Register</span>
         </a>
       </div>
@@ -23,8 +23,11 @@
   <mat-sidenav-container class="header-sidenav">
     <mat-sidenav class="header-sidenav__content" #sidenav >
       <mat-nav-list>
-        <a fxLayoutAlign="center center" class="header-sidenav__content-item" href="articles">
+        <a fxLayoutAlign="center center" class="header-sidenav__content-item" (click)="toUrl('articles')">
           <span>Articles</span>
+        </a>
+        <a fxLayoutAlign="center center" class="header-sidenav__content-item" (click)="toUrl('user/profile')">
+          <span>Profile</span>
         </a>
       </mat-nav-list>
     </mat-sidenav>

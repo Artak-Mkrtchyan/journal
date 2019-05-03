@@ -10,9 +10,28 @@ import '../models/user';
 const User = model('users');
 const Article = model('article');
 
-router.get('/', (req, res) => {
+router.post('/', (req, res) => {
+  Article.find({})
+    .then(article => {
+      let articlesArr = [];
+      Object.values(article).filter(article => {
+        if (`${article.userId}` === `${req.body.id}`) {
+          articlesArr.push(article);
+        }
+      });
+      return articlesArr;
+    })
+    .then(articles => {
+      res.send({
+        articles: articles
+      });
+    });
+});
+
+router.post('/user', passport.authenticate('jwt', { session: false }), (req, res) => {
   let userArtcle = [];
-  User.findOne({ _id: req.user._id })
+  console.log(req.body);
+  User.findOne({ _id: req.body.id })
     .then(user => {
       Object.keys(user.articlesList).map(key =>
         Article.findOne({ _id: key })
@@ -21,9 +40,8 @@ router.get('/', (req, res) => {
           }));
     })
     .then(() => {
-      res.render('articles/main', {
-        article: userArtcle,
-        isMyArticles: true
+      res.send({
+        article: userArtcle
       });
     });
 });

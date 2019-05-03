@@ -1,3 +1,11 @@
-<p>
-  user-profile works!
-</p>
+<div class="container articles">
+  <div class="article-add" fxFlex="100" fxLayoutGap="15px" fxLayoutAlign="center center">
+    <h2>
+      Add article
+    </h2>
+    <button mat-mini-fab (click)="add()">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+  <app-article-item *ngFor="let article of articles" fxFlex="33" [article]="article"></app-article-item>
+</div>

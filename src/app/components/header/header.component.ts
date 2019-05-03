@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { catchError, retry } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
+import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 
 interface IUser {
@@ -21,7 +22,7 @@ export class HeaderComponent implements OnInit {
   currentUser: boolean;
   isUserLogin: boolean;
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private router: Router) { }
 
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
@@ -37,6 +38,10 @@ export class HeaderComponent implements OnInit {
     // return an observable with a user-facing error message
     return throwError(
       'Something bad happened; please try again later.');
+  }
+
+  toUrl(url: string) {
+    this.router.navigate([url]);
   }
 
   logout() {

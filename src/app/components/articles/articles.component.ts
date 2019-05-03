@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 
 import { ArticleService } from '@service/article.service';
 
@@ -12,15 +13,16 @@ import { ArticleService } from '@service/article.service';
 export class ArticlesComponent implements OnInit {
   articles: Array<object>;
 
-  add() {
-    this.router.navigate(['articles/add']);
-  }
-
-  constructor(private artService: ArticleService, private router: Router) { }
+  constructor(
+    private artService: ArticleService,
+    private store: Store<({ userAuth })>,
+  ) { }
 
   ngOnInit() {
-    this.artService.getArticles().subscribe((data: {articles}) => {
-      this.articles = data.articles;
+    this.store.select('userAuth').subscribe(user => {
+      this.artService.getArticles(user.id).subscribe((data: {articles}) => {
+        this.articles = data.articles;
+      });
     });
   }
 
