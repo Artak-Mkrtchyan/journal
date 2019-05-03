@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
+import { Schema as _Schema, model } from 'mongoose';
 
-const Schema = mongoose.Schema;
+const Schema = _Schema;
 
 const UserScema = new Schema({
 	name:{
@@ -25,4 +25,4 @@ const UserScema = new Schema({
   }
 });
 
-mongoose.model('users', UserScema);
+model('users', UserScema);

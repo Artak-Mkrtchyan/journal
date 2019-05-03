@@ -1,18 +1,18 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
-const passport = require('passport');
+import { Router } from 'express';
+import { model } from 'mongoose';
+import { genSalt, hash as _hash } from 'bcrypt';
+import passport from 'passport';
 
-const jwt = require('jsonwebtoken');
+import { sign } from 'jsonwebtoken';
 
-const router = express.Router();
+const router = new Router();
 
-require('../models/user');
-const User = mongoose.model('users');
+import '../models/user';
+const User = model('users');
 
 router.get('/logout', passport.authenticate('jwt', { session: false }),
   (req, res) => {
-    jwt.sign({ email: 'artak6297@gmail.com' }, 'myPrivateKey', function(err, token) {
+    sign({ email: 'artak6297@gmail.com' }, 'myPrivateKey', function(err, token) {
       res.send({ token });
     });
     return res.send({msg: 'logout'});
@@ -28,7 +28,7 @@ router.post('/login',  (req, res, next) => {
     }
 
     let { id, name, email } = user;
-    jwt.sign({ id, name, email }, 'myPrivateKey', function(err, token) {
+    sign({ id, name, email }, 'myPrivateKey', function(err, token) {
       res.send({ userInfo: { id, name, email, token }});
     });
   })(req, res, next);
@@ -46,9 +46,9 @@ router.post('/registration', (req, res) => {
         password: req.body.password,
         articlesList: []
       });
-      bcrypt.genSalt(10, function(err, salt) {
-        bcrypt.hash(newUser.password, salt, function(err, hash) {
-          if(err) throw err;
+      genSalt(10, function(err, salt) {
+        _hash(newUser.password, salt, function(err, hash) {
+          if(err) { throw err }
           newUser.password = hash;
           newUser.save()
           .then(user => {
@@ -70,4 +70,4 @@ router.post('/refresh', passport.authenticate('jwt', { session: false }), (req, 
   return res.send({ id, name, email, token });
 });
 
-module.exports = router;
+export default router;

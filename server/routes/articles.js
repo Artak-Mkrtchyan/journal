@@ -1,14 +1,14 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const passport = require('passport');
+import { Router } from 'express';
+import { model } from 'mongoose';
+import passport from 'passport';
 
-const router = express.Router();
+const router = new Router();
 
-require('../models/article');
-require('../models/user');
+import '../models/article';
+import '../models/user';
 
-const User = mongoose.model('users');
-const Article = mongoose.model('article');
+const User = model('users');
+const Article = model('article');
 
 router.get('/', (req, res) => {
   let userArtcle = [];
@@ -99,4 +99,4 @@ router.post('/add', passport.authenticate('jwt', { session: false }), (req, res)
     });
 });
 
-module.exports = router;
+export default router;

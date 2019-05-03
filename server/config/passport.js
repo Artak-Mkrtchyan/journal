@@ -1,9 +1,9 @@
-const LocalStrategy = require('passport-local').Strategy;
-const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
+import { Strategy as LocalStrategy } from 'passport-local';
+import { model } from 'mongoose';
+import { compare } from 'bcrypt';
 
-const JwtStrategy = require('passport-jwt').Strategy,
-    ExtractJwt = require('passport-jwt').ExtractJwt;
+import { Strategy as JwtStrategy } from 'passport-jwt';
+import { ExtractJwt } from 'passport-jwt';
 
 const opts = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme('JWT'),
@@ -12,10 +12,10 @@ const opts = {
   // audience: 'yoursite.net',
 };
 
-require('../models/user');
-const User = mongoose.model('users');
+import '../models/user';
+const User = model('users');
 
-module.exports = function (passport) {
+export default function passportInit(passport) {
   passport.use(new JwtStrategy(opts, function(jwt_payload, done) {
     User.findOne({_id: jwt_payload.id}, function(err, user) {
         if (err) {
@@ -40,8 +40,8 @@ module.exports = function (passport) {
         return done(null, false, {message: 'No User Found'});
       }
 
-      bcrypt.compare(password, user.password, (err, isMatch) => {
-        if(err) throw err;
+      compare(password, user.password, (err, isMatch) => {
+        if(err) { throw err }
         if(isMatch){
           return done(null, user);
         } else {
@@ -50,4 +50,4 @@ module.exports = function (passport) {
       });
     });
   }));
-};
+}

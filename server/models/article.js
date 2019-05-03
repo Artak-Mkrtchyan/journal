@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
+import { Schema as _Schema, model } from 'mongoose';
 
-const Schema = mongoose.Schema;
+const Schema = _Schema;
 
 
 const ArticleScema = new Schema({
@@ -22,4 +22,4 @@ const ArticleScema = new Schema({
   }
 });
 
-mongoose.model('article', ArticleScema);
+model('article', ArticleScema);
