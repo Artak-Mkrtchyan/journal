@@ -39,7 +39,7 @@ router.get('/:id/read', (req, res) => {
       description: article.description
     });
   });
-})
+});
 
 router.get('/:id', (req, res) => {
   Article.findOne({
@@ -83,7 +83,7 @@ router.post('/add', passport.authenticate('jwt', { session: false }), (req, res)
     title: req.body.title,
     description: req.body.description,
     userId: req.user._id
-  }
+  };
 
   new Article(newArticle)
     .save()

@@ -10,7 +10,7 @@ const opts = {
   secretOrKey: 'myPrivateKey',
   // issuer: 'accounts.examplesoft.com',
   // audience: 'yoursite.net',
-}
+};
 
 require('../models/user');
 const User = mongoose.model('users');
@@ -48,6 +48,6 @@ module.exports = function (passport) {
           return done(null, false, {message: 'Password Incorrect'});
         }
       });
-    })
+    });
   }));
-}
+};

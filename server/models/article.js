@@ -20,6 +20,6 @@ const ArticleScema = new Schema({
     type: Date,
     default: Date.now
   }
-})
+});
 
 mongoose.model('article', ArticleScema);

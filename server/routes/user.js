@@ -13,7 +13,7 @@ const User = mongoose.model('users');
 router.get('/logout', passport.authenticate('jwt', { session: false }),
   (req, res) => {
     jwt.sign({ email: 'artak6297@gmail.com' }, 'myPrivateKey', function(err, token) {
-      res.send({ token })
+      res.send({ token });
     });
     return res.send({msg: 'logout'});
 });
