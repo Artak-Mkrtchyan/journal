@@ -23,7 +23,7 @@ export class ArticleComponent implements OnInit {
     const articleId = this.router.url.split('/').slice(2, 3).join('/');
 
     this.artService.getArticle(articleId).subscribe(
-      ({article}) => {
+      ({article}: any) => {
         this.article = {
           id: article._id,
           title: article.title,

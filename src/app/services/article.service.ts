@@ -9,7 +9,6 @@ import { SnackBarService } from '@service/snackBar.service';
 })
 export class ArticleService {
 
-
   constructor(
     private http: HttpClient,
     private router: Router,

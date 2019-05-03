@@ -1,18 +1,21 @@
 .card {
-  height: 100%;
-  width: 100%;
   overflow: hidden;
   margin: 10px;
 }
-//
+
 ::ng-deep .mat-card-header-text {
   overflow: hidden;
   text-overflow: ellipsis;
   width: 100%;
+  flex: 1;
+}
+
+::ng-deep .mat-icon {
+  cursor: pointer;
 }
 
 .card-title {
-  display: block;
+  // display: block;
   width: 100%;
   align-items: flex-start;
   text-overflow: ellipsis;

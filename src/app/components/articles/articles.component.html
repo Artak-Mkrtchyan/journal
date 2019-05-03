@@ -1,7 +1,11 @@
-<button (click)="add()" type="button" name="button">
-  <mat-icon>add</mat-icon>
-</button>
-
-<div class="container articles" fxLayout="row" *ngFor="let article of articles">
-  <app-article-item fxFlex="30" [article]="article"></app-article-item>
+<div class="container articles">
+  <div class="article-add" fxFlex="100" fxLayoutGap="15px" fxLayoutAlign="center center">
+    <h2>
+      Add article
+    </h2>
+    <button mat-mini-fab (click)="add()">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+  <app-article-item *ngFor="let article of articles" fxFlex="33" [article]="article"></app-article-item>
 </div>

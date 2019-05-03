@@ -19,7 +19,7 @@ export class ArticlesComponent implements OnInit {
   constructor(private artService: ArticleService, private router: Router) { }
 
   ngOnInit() {
-    this.artService.getArticles().subscribe(data => {
+    this.artService.getArticles().subscribe((data: {articles}) => {
       this.articles = data.articles;
     });
   }

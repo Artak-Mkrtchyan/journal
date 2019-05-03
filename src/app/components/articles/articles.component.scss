@@ -6,3 +6,12 @@
 .articles {
   flex-wrap: wrap;
 }
+
+.article-add {
+  margin: 10px 0;
+  border-radius: 50%;
+}
+
+::ng-deep .mat-mini-fab .mat-button-wrapper {
+  line-height: 22px!important;
+}

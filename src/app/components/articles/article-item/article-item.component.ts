@@ -27,14 +27,12 @@ export class ArticleItemComponent implements OnInit {
     this.router.navigate(['articles', this.article._id ]);
   }
 
-  delete(id: string) {
-    this.artService.deleteArticle(id);
+  delete() {
+    this.artService.deleteArticle(this.article._id);
   }
 
   constructor(private artService: ArticleService, private router: Router) { }
 
-  ngOnInit() {
-    // this.link = `articles/${this.article._id}/edit`;
-  }
+  ngOnInit() { }
 
 }
