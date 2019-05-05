@@ -66,7 +66,7 @@ router.get('/:id/read', (req, res) => {
   });
 });
 
-router.get('/:id', (req, res) => {
+router.get('/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
   Article.findOne({
     _id: req.params.id
   })
