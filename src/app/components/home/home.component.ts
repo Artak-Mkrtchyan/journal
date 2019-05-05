@@ -18,11 +18,6 @@ export class HomeComponent implements OnInit, OnChanges {
 
   ngOnChanges() {}
 
-  getArticles() {
-
-
-  }
-
   ngOnInit() {
     // return this.http.post('', {})
     //   .pipe(

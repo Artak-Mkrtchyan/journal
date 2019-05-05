@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
 import { ArticleService } from '@service/article.service';
+import { UserService } from '@service/user.service';
 
 @Component({
   selector: 'app-articles',
@@ -16,14 +17,15 @@ export class ArticlesComponent implements OnInit {
   constructor(
     private artService: ArticleService,
     private store: Store<({ userAuth })>,
-  ) { }
+    private userService: UserService
+  ) {}
 
   ngOnInit() {
+    const IsUserAuth = this.userService.getCurrentAuth();
     this.store.select('userAuth').subscribe(user => {
-      this.artService.getArticles(user.id).subscribe((data: {articles}) => {
+      this.artService.getArticles(user.id, IsUserAuth).subscribe((data: {articles}) => {
         this.articles = data.articles;
       });
     });
   }
-
 }

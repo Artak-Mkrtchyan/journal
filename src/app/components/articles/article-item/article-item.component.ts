@@ -16,6 +16,7 @@ interface IArticle {
   styleUrls: ['./article-item.component.scss']
 })
 export class ArticleItemComponent implements OnInit {
+  @Input() isUserArticle: boolean;
   @Input() article: IArticle;
   link: string;
 

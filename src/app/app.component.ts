@@ -7,12 +7,16 @@ import { UserService } from '@service/user.service';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  providers: [UserService]
 })
 export class AppComponent implements OnInit {
 
-  constructor() {}
+  constructor(private userService: UserService) {}
 
   ngOnInit() {
+    this.userService.getAuthState().subscribe();
+
+    if (this.userService.getCurrentAuth() === true) {
+      this.userService.refreshToken().subscribe();
+    }
   }
 }

@@ -10,12 +10,28 @@ import '../models/user';
 const User = model('users');
 const Article = model('article');
 
+router.get('/', (req, res) => {
+  Article.find({})
+    .then(article => {
+      let articlesArr = [];
+      Object.values(article).filter(article => {
+        articlesArr.push(article);
+      });
+      return articlesArr;
+    })
+    .then(articles => {
+      res.send({
+        articles: articles
+      });
+    });
+});
+
 router.post('/', (req, res) => {
   Article.find({})
     .then(article => {
       let articlesArr = [];
       Object.values(article).filter(article => {
-        if (`${article.userId}` === `${req.body.id}`) {
+        if (`${article.userId}` !== `${req.body.id}`) {
           articlesArr.push(article);
         }
       });
@@ -28,20 +44,11 @@ router.post('/', (req, res) => {
     });
 });
 
-router.post('/user', passport.authenticate('jwt', { session: false }), (req, res) => {
-  let userArtcle = [];
-  console.log(req.body);
-  User.findOne({ _id: req.body.id })
-    .then(user => {
-      Object.keys(user.articlesList).map(key =>
-        Article.findOne({ _id: key })
-          .then(article => {
-            userArtcle.push(article);
-          }));
-    })
-    .then(() => {
+router.get('/user', passport.authenticate('jwt', { session: false }), (req, res) => {
+  Article.find({ _id: { $in: Object.keys(req.user.articlesList)} })
+    .then(article => {
       res.send({
-        article: userArtcle
+        article: article
       });
     });
 });

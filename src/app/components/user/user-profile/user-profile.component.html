@@ -1,4 +1,4 @@
-<div class="container articles">
+<div *ngIf="!loading" class="container articles">
   <div class="article-add" fxFlex="100" fxLayoutGap="15px" fxLayoutAlign="center center">
     <h2>
       Add article
@@ -7,5 +7,15 @@
       <mat-icon>add</mat-icon>
     </button>
   </div>
-  <app-article-item *ngFor="let article of articles" fxFlex="33" [article]="article"></app-article-item>
 </div>
+<div class="container articles">
+  <app-article-item *ngFor="let article of articles" [isUserArticle]="true" fxFlex="33" [article]="article"></app-article-item>
+</div>
+<mat-progress-spinner
+  *ngIf="loading"
+  class="spinner"
+  color="primary"
+  mode="indeterminate"
+  diameter="60"
+  value="100"
+></mat-progress-spinner>

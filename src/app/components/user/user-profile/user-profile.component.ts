@@ -11,6 +11,11 @@ import { ArticleService } from '@service/article.service';
 })
 export class UserProfileComponent implements OnInit {
   articles;
+  loading = true;
+
+  color = 'primary';
+  mode = 'indeterminate';
+  value = 100;
 
   add() {
     this.router.navigate(['articles/add']);
@@ -23,11 +28,9 @@ export class UserProfileComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.store.select('userAuth').subscribe(user => {
-      console.log(user);
-      this.artService.getMyArticles(user.id).subscribe((data: {articles}) => {
-        this.articles = data.articles;
-      });
+    this.artService.getMyArticles().subscribe((data: {article}) => {
+      this.articles = data.article;
+      this.loading = false;
     });
   }
 

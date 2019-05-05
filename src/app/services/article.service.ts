@@ -15,12 +15,16 @@ export class ArticleService {
     private snackBar: SnackBarService
   ) { }
 
-  getArticles(id: string) {
-    return this.http.post('/api/articles', {id});
+  getArticles(id: string, isUserAuth: boolean) {
+    if (isUserAuth) {
+      return this.http.post('/api/articles', {id});
+    } else {
+      return this.http.get('/api/articles');
+    }
   }
 
-  getMyArticles(id: string) {
-    return this.http.post('/api/articles/user', {id});
+  getMyArticles() {
+    return this.http.get('/api/articles/user');
   }
 
   getArticle(id: string) {

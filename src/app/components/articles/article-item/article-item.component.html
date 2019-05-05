@@ -1,8 +1,8 @@
 <mat-card class="card">
   <mat-card-header  class="card-title">
     <mat-card-title>{{article.title}}</mat-card-title>
-    <mat-icon (click)="edit()">edit</mat-icon>
-    <mat-icon (click)="delete()">delete</mat-icon>
+    <mat-icon *ngIf="isUserArticle"  (click)="edit()">edit</mat-icon>
+    <mat-icon *ngIf="isUserArticle"  (click)="delete()">delete</mat-icon>
   </mat-card-header>
 
   <mat-card-content>
