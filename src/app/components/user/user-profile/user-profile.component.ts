@@ -23,7 +23,6 @@ export class UserProfileComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private store: Store<({ userAuth })>,
     private artService: ArticleService
   ) { }
 

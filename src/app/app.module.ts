@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { userAuth } from './store';
+import { appReducers } from './store/reducers/app.reducers';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -27,7 +27,8 @@ import { ArticleEditComponent } from '@components/articles/article-edit/article-
 import { ArticleComponent } from '@components/articles/article/article.component';
 import { ArticleAddComponent } from '@components/articles/article-add/article-add.component';
 import { UserProfileComponent } from './components/user/user-profile/user-profile.component';
-
+import { MusicComponent } from './components/music/music/music.component';
+import { PlayerComponent } from './components/music/player/player.component';
 
 @NgModule({
   declarations: [
@@ -42,9 +43,11 @@ import { UserProfileComponent } from './components/user/user-profile/user-profil
     ArticleComponent,
     ArticleAddComponent,
     UserProfileComponent,
+    MusicComponent,
+    PlayerComponent,
   ],
   imports: [
-    StoreModule.forRoot({ userAuth }),
+    StoreModule.forRoot(appReducers),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
     }),

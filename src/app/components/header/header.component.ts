@@ -1,13 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-interface IUser {
-  id?: string;
-  name: string;
-  password: string;
-  token?: string;
-}
-
 import { UserService } from '@service/user.service';
 
 @Component({

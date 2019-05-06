@@ -20,8 +20,7 @@ const isConfirmPassword = (control: AbstractControl) => {
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
-  styleUrls: ['./registration.component.scss'],
-  providers: [UserService]
+  styleUrls: ['./registration.component.scss']
 })
 export class RegistrationComponent implements OnInit {
 

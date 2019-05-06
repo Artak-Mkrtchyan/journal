@@ -6,16 +6,14 @@ import { map } from 'rxjs/operators';
 import { Store, select } from '@ngrx/store';
 
 import { SnackBarService } from './snackBar.service';
-import { SetUser, RemoveUser } from '../store/index';
+// import { SetUser, RemoveUser } from '../store/index';
 
+import { selectUser } from './../store/selectors/user.selector';
 
-interface IUser {
-  id?: string;
-  name: string;
-  email?: string;
-  password: string;
-  token?: string;
-}
+import { IAppState } from '../store/state/app.state';
+import { IUser } from '../models/user.interface';
+import { RemoveUser, SetUser } from '../store/actions/user.actions';
+
 
 @Injectable({
   providedIn: 'root'
@@ -37,7 +35,7 @@ export class UserService {
   constructor(
     private http: HttpClient,
     private router: Router,
-    private store: Store<({ userAuth })>,
+    private store: Store<IAppState>,
     private snackBar: SnackBarService
   ) { }
 
@@ -50,7 +48,7 @@ export class UserService {
 
   currentUserToken(): IUser {
     let userInfo;
-    this.store.select('userAuth').subscribe(user => {
+    this.store.select(selectUser).subscribe(user => {
       userInfo = user;
     });
     const token = localStorage.getItem('currentUser');
