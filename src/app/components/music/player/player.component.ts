@@ -1,11 +1,8 @@
-import { SetVolume } from './../../../store/actions/player.actions';
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
 
 import { PlayerService } from '@service/player.service';
 
 import { IPlayer } from '@models/player.interface';
-import { IAppState } from '@store/state/app.state';
 
 @Component({
   selector: 'app-player',
@@ -15,57 +12,78 @@ import { IAppState } from '@store/state/app.state';
 export class PlayerComponent implements OnInit {
   playerState: IPlayer;
   progressValue = 0;
-  name = '';
+  name = 'Select song';
   duration = 0;
+  volumeOff = false;
 
   music = new Audio();
 
   constructor(
-    private playerService: PlayerService,
-    private store: Store<IAppState>
+    private playerService: PlayerService
   ) {
     this.playerService.getPlayerState().subscribe((player: IPlayer) => {
       console.log(player);
       this.playerState = player;
+
     });
   }
 
-  changeVolume(event: {value: number}) {
-    console.log('chnged', event.value);
+  getVolumeIcon() {
+    const pS = this.playerState;
 
-    this.music.volume = event.value * 0.01;
-    this.store.dispatch(new SetVolume(event.value));
+    const volumeUp = pS.volume >= 0.70 ? 'volume_up' : false;
+    const volumeDown = pS.volume >= 0.30 && pS.volume < 0.70 ? 'volume_down' : false;
+    const volumeMute = pS.volume <= 0.29 && pS.volume !== 0.00 ? 'volume_mute' : false;
+    const volumeOff = pS.volume === 0.00 || this.volumeOff ? 'volume_off' : false;
+
+    const resultIcon =  volumeOff || volumeDown || volumeUp || volumeMute;
+
+    return resultIcon;
+  }
+
+  changeVolume(event: {value: number}) {
+    this.music.volume = event.value;
+    // this.store.dispatch(new SetVolume(event.value));
+    this.playerService.setVolume(event.value);
+  }
+
+  setCurrentTime(event: {value: number}) {
+    // console.log('123456', event);
+    // this.progressValue = this.music.currentTime / (this.music.duration / 100);
+    const currentTime = (this.music.duration / 100) * event.value;
+    // this.playerService.setCurrentTime(currentTime);
+    this.music.currentTime = currentTime;
   }
 
   load() {
     this.name = this.playerState.file.name;
     const reader = new FileReader();
+    this.togglePlayerStatus();
     reader.readAsDataURL(this.playerState.file);
     reader.onload = () => {
       this.music.src = reader.result as string;
       this.music.ontimeupdate = () => {
+        console.log(this.progressValue, this.music.currentTime);
+        // this.playerService.setCurrentTime(this.music.currentTime);
         this.progressValue = this.music.currentTime / (this.music.duration / 100);
       };
-
     };
   }
 
-  startPlayer() {
-    this.music.play();
-    this.playerService.startPlayer();
+  togglePlay() {
+    this.playerService.switchSongStatus();
+
+    return this.music.paused ? this.music.play() : this.music.pause();
   }
 
-  stopPlayer() {
-    this.music.pause();
-    this.playerService.stopPlayer();
+  toggleVolume() {
+    console.log(this.music.volume);
+    this.volumeOff = !this.volumeOff;
+    return (this.music.volume !== 0) ? this.music.volume = 0 : this.music.volume = this.playerState.volume;
   }
 
-  openPlayer() {
-    this.playerService.openPlayer();
-  }
-
-  closePlayer() {
-    this.playerService.closePlayer();
+  togglePlayerStatus() {
+    this.playerService.togglePlayerStatus();
   }
 
   ngOnInit() {}

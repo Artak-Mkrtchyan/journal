@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
+
+import { Validators, FormBuilder } from '@angular/forms';
+import { PlayerService } from '@service/player.service';
 
 @Component({
   selector: 'app-music-upload',
@@ -7,9 +10,39 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MusicUploadComponent implements OnInit {
 
-  constructor() {}
+  @ViewChild('inputFile') inputFile: ElementRef;
 
-  ngOnInit() {
+  formGroup = this.fb.group({
+    file: [null, Validators.required]
+  });
 
+
+  constructor(
+    private fb: FormBuilder,
+    private cd: ChangeDetectorRef,
+    private playerService: PlayerService
+  ) {}
+
+
+  onFileChange(event) {
+    const reader = new FileReader();
+    if (event.target.files && event.target.files.length) {
+      const [file] = event.target.files;
+
+      reader.readAsDataURL(file);
+
+      reader.onload = () => {
+        this.formGroup.patchValue({
+          file: reader.result
+        });
+
+        const fileData = (reader.result as string).split(',')[1];
+
+        this.playerService.setAudioFile(file, fileData);
+        this.cd.markForCheck();
+      };
+    }
   }
+
+  ngOnInit() { }
 }

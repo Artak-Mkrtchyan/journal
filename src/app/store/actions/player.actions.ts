@@ -1,28 +1,25 @@
 import { Action } from '@ngrx/store';
 
 export enum EPlayerActions {
-  StartPlayer = '[Player] Start',
-  StopPlayer = '[Player] Stop',
-  OpenPlayer = '[Player] Open Player',
-  ClosePlayer = '[Player] Close Player',
+  TogglePlayerStatus = '[Player] Change Player Status',
+  SetCurrentTime = '[Player] Set Duration',
+  SwitchSongStatus = '[Player] Change Song Status',
   LoadLocalFile = '[Player] Load Local File',
   SetVolume = '[Player] Set Volume',
 }
 
-export class OpenPlayer implements Action {
-  readonly type = EPlayerActions.OpenPlayer;
+export class TogglePlayerStatus implements Action {
+  readonly type = EPlayerActions.TogglePlayerStatus;
 }
 
-export class ClosePlayer implements Action {
-  readonly type = EPlayerActions.ClosePlayer;
+export class SetCurrentTime implements Action {
+  readonly type = EPlayerActions.SetCurrentTime;
+
+  constructor(public payload: number) {}
 }
 
-export class StartPlayer implements Action {
-  readonly type = EPlayerActions.StartPlayer;
-}
-
-export class StopPlayer implements Action {
-  readonly type = EPlayerActions.StopPlayer;
+export class SwitchSongStatus implements Action {
+  readonly type = EPlayerActions.SwitchSongStatus;
 }
 
 export class LoadLocalFile implements Action {
@@ -38,9 +35,8 @@ export class SetVolume implements Action {
 }
 
 export type PlayerActions =
-  | StopPlayer
-  | StartPlayer
-  | OpenPlayer
-  | ClosePlayer
+  | SwitchSongStatus
+  | TogglePlayerStatus
   | SetVolume
+  | SetCurrentTime
   | LoadLocalFile;

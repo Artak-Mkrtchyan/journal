@@ -56,28 +56,4 @@ $my-theme-background: (
 
 $theme: my-theme($primary, $accent, $warn);
 
-
-
-// @mixin my-theme($theme) {
-
-//   // retrieve variables from theme
-//   // (all possible variables, use only what you really need)
-//   $primary: map-get($theme, primary);
-//   $accent: map-get($theme, accent);
-//   $warn: map-get($theme, accent);
-//   $foreground: map-get($theme, foreground);
-//   $background: map-get($theme, background);
-
-// }
-
-// $background: map-get($theme, background);
-
-
-// $background: map-merge($background, (background: $background-color));
-
-// $theme: map-merge($theme, (background: $background));
-
-// @include my-theme();
-
-
 @include angular-material-theme($theme);

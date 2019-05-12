@@ -1,6 +1,7 @@
 export interface IPlayer {
-  isOpen: boolean;
+  isHasSong: boolean;
   isPlay: boolean;
   file: File;
   volume: number;
+  // currentTime: number;
 }

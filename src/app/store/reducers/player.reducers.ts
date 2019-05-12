@@ -13,35 +13,29 @@ export const playerReducers = (
         file: action.payload,
       };
 
-    case EPlayerActions.OpenPlayer:
+    // case EPlayerActions.SetCurrentTime:
+    //   return {
+    //     ...state,
+    //     currentTime: action.payload
+    //   };
+
+    case EPlayerActions.TogglePlayerStatus:
       return {
         ...state,
-        isOpen: true
+        isHasSong: !state.isHasSong
       };
 
-    case EPlayerActions.StartPlayer:
+    case EPlayerActions.SwitchSongStatus:
       return {
         ...state,
-        isPlay: true
-      };
-
-    case EPlayerActions.StopPlayer:
-      return {
-        ...state,
-        isPlay: false
-      };
-
-    case EPlayerActions.ClosePlayer:
-      return {
-        ...state,
-        isOpen: false
+        isPlay: !state.isPlay
       };
 
     case EPlayerActions.SetVolume:
       return {
         ...state,
         volume: action.payload
-      }
+      };
 
     default:
       return state;

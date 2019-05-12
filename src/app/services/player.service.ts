@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
@@ -6,7 +7,13 @@ import { selectPlayer } from '@store/selectors/player.selector';
 
 import { IAppState } from '@store/state/app.state';
 import { IPlayer } from '@models/player.interface';
-import { OpenPlayer, ClosePlayer, StartPlayer, StopPlayer } from '@store/actions/player.actions';
+import {
+  TogglePlayerStatus,
+  LoadLocalFile,
+  SwitchSongStatus,
+  // SetCurrentTime,
+  SetVolume
+} from '@store/actions/player.actions';
 
 @Injectable({
   providedIn: 'root'
@@ -14,26 +21,39 @@ import { OpenPlayer, ClosePlayer, StartPlayer, StopPlayer } from '@store/actions
 export class PlayerService {
 
   constructor(
-    private store: Store<IAppState>
+    private store: Store<IAppState>,
+    private http: HttpClient
   ) {}
 
   getPlayerState(): Observable<IPlayer> {
     return this.store.select(selectPlayer);
   }
 
-  startPlayer() {
-    this.store.dispatch(new StartPlayer());
+  setAudioFile(file: File, fileData: string) {
+    this.store.dispatch(new LoadLocalFile(file));
+
+    this.http.post('api/player', { file: fileData })
+      .subscribe(
+          (data: any) => {
+              console.log('Subscribe data', data);
+          }
+      );
+
   }
 
-  stopPlayer() {
-    this.store.dispatch(new StopPlayer());
+  setVolume(volumeValue: number) {
+    this.store.dispatch(new SetVolume(volumeValue));
   }
 
-  openPlayer() {
-    this.store.dispatch(new OpenPlayer());
+  // setCurrentTime(currentTime: number) {
+  //   this.store.dispatch(new SetCurrentTime(currentTime));
+  // }
+
+  switchSongStatus() {
+    this.store.dispatch(new SwitchSongStatus());
   }
 
-  closePlayer() {
-    this.store.dispatch(new ClosePlayer());
+  togglePlayerStatus() {
+    this.store.dispatch(new TogglePlayerStatus());
   }
 }

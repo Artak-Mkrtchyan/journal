@@ -1,6 +1,8 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
     "baseUrl": "./",
     "paths": {
       "@service/*": ["src/app/services/*"],

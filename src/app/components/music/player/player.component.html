@@ -1,18 +1,20 @@
-<p>
-  {{duration}} player works! {{name}}
-</p>
 <button (click)="load()">load</button>
-<div>
-  <mat-progress-bar mode="determinate" [value]="progressValue"></mat-progress-bar>
-  <mat-icon>skip_previous</mat-icon>
-  <mat-icon *ngIf="!playerState.isPlay" (click)="startPlayer()">play_arrow</mat-icon>
-  <mat-icon *ngIf="playerState.isPlay" (click)="stopPlayer()">pause</mat-icon>
-  <mat-icon>skip_next</mat-icon>
 
-  <mat-slider (input)="changeVolume($event)" color="primary" min="0" max="100" [value]="playerState.volume"></mat-slider>
-  <mat-icon *ngIf="playerState.volume >= 70">volume_up</mat-icon>
-  <mat-icon *ngIf="(playerState.volume >= 30) && (playerState.volume < 70)">volume_down</mat-icon>
-  <mat-icon *ngIf="playerState.volume <= 29 && playerState.volume !== 0">volume_mute</mat-icon>
-  <mat-icon *ngIf="playerState.volume === 0">volume_off</mat-icon>
-</div>
-
+<mat-card fxFlex="40" fxLayout="column">
+  <h3>{{name}}</h3>
+  <div fxLayout="row" fxLayoutAlign="center center" >
+    <mat-icon>skip_previous</mat-icon>
+    <button mat-button [disabled]="!playerState.isHasSong" (click)="togglePlay()">
+      <mat-icon *ngIf="!playerState.isPlay">play_arrow</mat-icon>
+      <mat-icon *ngIf="playerState.isPlay">pause</mat-icon>
+    </button>
+    <mat-icon>skip_next</mat-icon>
+    <div fxLayoutAlign="space-around center">
+      <button (click)="toggleVolume()" mat-icon-button>
+        <mat-icon>{{getVolumeIcon()}}</mat-icon>
+      </button>
+      <mat-slider (input)="changeVolume($event)" color="primary" min="0.00" max="1.00" step="0.01" [value]="(volumeOff) ? 0 : playerState.volume "></mat-slider>
+    </div>
+  </div>
+  <mat-slider (input)="setCurrentTime($event)" [disabled]="!playerState.isHasSong" color="primary" mode="determinate" [value]="progressValue"></mat-slider>
+</mat-card>
