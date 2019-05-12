@@ -5,8 +5,8 @@ import { ArticleService } from '@service/article.service';
 import { UserService } from '@service/user.service';
 
 
-import { selectUser } from '../../store/selectors/user.selector';
-import { IAppState } from 'src/app/store/state/app.state';
+import { selectUser } from '@store/selectors/user.selector';
+import { IAppState } from '@store/state/app.state';
 
 @Component({
   selector: 'app-articles',

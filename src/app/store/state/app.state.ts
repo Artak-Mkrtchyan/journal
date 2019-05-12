@@ -1,8 +1,8 @@
-import { initialPlayerState } from './player.state';
-import { initialUserState } from './user.state';
+import { initialPlayerState } from '@store/state/player.state';
+import { initialUserState } from '@store/state/user.state';
 
-import { IPlayer } from './../../models/player.interface';
-import { IUser } from 'src/app/models/user.interface';
+import { IPlayer } from '@models/player.interface';
+import { IUser } from '@models/user.interface';
 
 export interface IAppState {
   user: IUser;

@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { appReducers } from './store/reducers/app.reducers';
+import { appReducers } from '@store/reducers/app.reducers';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -14,7 +14,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { UserService } from '@service/user.service';
 
-import { JwtInterceptor } from './helpers/jwt.inspector';
+import { JwtInterceptor } from '@helpers/jwt.inspector';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from '@components/header/header.component';
@@ -26,9 +26,10 @@ import { ArticlesComponent } from '@components/articles/articles.component';
 import { ArticleEditComponent } from '@components/articles/article-edit/article-edit.component';
 import { ArticleComponent } from '@components/articles/article/article.component';
 import { ArticleAddComponent } from '@components/articles/article-add/article-add.component';
-import { UserProfileComponent } from './components/user/user-profile/user-profile.component';
-import { MusicComponent } from './components/music/music/music.component';
-import { PlayerComponent } from './components/music/player/player.component';
+import { UserProfileComponent } from '@components/user/user-profile/user-profile.component';
+import { MusicComponent } from '@components/music/music/music.component';
+import { PlayerComponent } from '@components/music/player/player.component';
+import { MusicUploadComponent } from '@components/music/music-upload/music-upload.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { PlayerComponent } from './components/music/player/player.component';
     UserProfileComponent,
     MusicComponent,
     PlayerComponent,
+    MusicUploadComponent
   ],
   imports: [
     StoreModule.forRoot(appReducers),

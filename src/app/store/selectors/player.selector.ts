@@ -1,7 +1,7 @@
-import { IPlayer } from './../../models/player.interface';
+import { IPlayer } from '@models/player.interface';
 import { createSelector } from '@ngrx/store';
 
-import { IAppState } from '../state/app.state';
+import { IAppState } from '@store/state/app.state';
 
 const Player = (state: IAppState) => state.player;
 

@@ -3,7 +3,7 @@ import { Routes } from '@angular/router';
 import { HomeComponent } from '@components/home/home.component';
 import { LoginComponent } from '@components/user/login/login.component';
 import { RegistrationComponent } from '@components/user/registration/registration.component';
-import { UserProfileComponent } from './../components/user/user-profile/user-profile.component';
+import { UserProfileComponent } from '@components/user/user-profile/user-profile.component';
 
 import { ArticlesComponent } from '@components/articles/articles.component';
 import { ArticleComponent } from '@components/articles/article/article.component';
@@ -12,8 +12,8 @@ import { ArticleAddComponent } from '@components/articles/article-add/article-ad
 
 import { MusicComponent } from '@components/music/music/music.component';
 
-import { AuthGuard } from '../guards/auth.guard';
-import { ActiveUserGuard } from '../guards/active-user.guard';
+import { AuthGuard } from '@guards/auth.guard';
+import { ActiveUserGuard } from '@guards/active-user.guard';
 
 const artileRoutes = [
   { path: '', component: ArticlesComponent },

@@ -1,7 +1,7 @@
 import { createSelector } from '@ngrx/store';
 
-import { IAppState } from '../state/app.state';
-import { IUser } from 'src/app/models/user.interface';
+import { IAppState } from '@store/state/app.state';
+import { IUser } from '@models/user.interface';
 
 const User = (state: IAppState) => state.user;
 

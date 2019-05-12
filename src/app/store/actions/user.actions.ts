@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 
-import { IUser } from '../../models/user.interface';
+import { IUser } from '@models/user.interface';
 
 export enum EUserActions {
   SetUser = '[User] Log In',

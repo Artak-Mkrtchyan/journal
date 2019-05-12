@@ -11,12 +11,13 @@ const app = express();
 import mainRoute from './server/routes/index';
 import articles from './server/routes/articles';
 import user from './server/routes/user';
+import player from './server/routes/player';
 
 import passportInit from './server/config/passport';
 
 passportInit(passport);
 
-app.use(json());
+app.use(json({limit: '50mb', extended: true}));
 app.use(urlencoded({ extended: false }));
 
 mongoose.Promise = global.Promise;
@@ -34,6 +35,7 @@ app.use(express.static(join(__dirname, 'dist')));
 app.use('/api', mainRoute);
 app.use('/api/articles', articles);
 app.use('/api/user', user);
+app.use('/api', player);
 
 app.get('*', (req, res) => {
   res.sendFile(join(__dirname, 'dist/index.html'));

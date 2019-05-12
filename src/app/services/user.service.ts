@@ -5,14 +5,13 @@ import { Observable, BehaviorSubject, Subject, } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Store, select } from '@ngrx/store';
 
-import { SnackBarService } from './snackBar.service';
-// import { SetUser, RemoveUser } from '../store/index';
+import { SnackBarService } from '@service/snackBar.service';
 
-import { selectUser } from './../store/selectors/user.selector';
+import { selectUser } from '@store/selectors/user.selector';
 
-import { IAppState } from '../store/state/app.state';
-import { IUser } from '../models/user.interface';
-import { RemoveUser, SetUser } from '../store/actions/user.actions';
+import { IAppState } from '@store/state/app.state';
+import { IUser } from '@models/user.interface';
+import { RemoveUser, SetUser } from '@store/actions/user.actions';
 
 
 @Injectable({
