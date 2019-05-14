@@ -1,20 +1,35 @@
-<button (click)="load()">load</button>
-
 <mat-card fxFlex="40" fxLayout="column">
-  <h3>{{name}}</h3>
-  <div fxLayout="row" fxLayoutAlign="center center" >
+  <h3>{{ name }}</h3>
+  <div fxLayout="row" fxLayoutAlign="center center">
     <mat-icon>skip_previous</mat-icon>
-    <button mat-button [disabled]="!playerState.isHasSong" (click)="togglePlay()">
+    <button
+      mat-button
+      [disabled]="!playerState.isHasSong"
+      (click)="togglePlay()"
+    >
       <mat-icon *ngIf="!playerState.isPlay">play_arrow</mat-icon>
       <mat-icon *ngIf="playerState.isPlay">pause</mat-icon>
     </button>
     <mat-icon>skip_next</mat-icon>
     <div fxLayoutAlign="space-around center">
       <button (click)="toggleVolume()" mat-icon-button>
-        <mat-icon>{{getVolumeIcon()}}</mat-icon>
+        <mat-icon>{{ getVolumeIcon() }}</mat-icon>
       </button>
-      <mat-slider (input)="changeVolume($event)" color="primary" min="0.00" max="1.00" step="0.01" [value]="(volumeOff) ? 0 : playerState.volume "></mat-slider>
+      <mat-slider
+        (input)="changeVolume($event)"
+        color="primary"
+        min="0.00"
+        max="1.00"
+        step="0.01"
+        [value]="volumeOff ? 0 : playerState.volume"
+      ></mat-slider>
     </div>
   </div>
-  <mat-slider (input)="setCurrentTime($event)" [disabled]="!playerState.isHasSong" color="primary" mode="determinate" [value]="progressValue"></mat-slider>
+  <mat-slider
+    (input)="setCurrentTime($event)"
+    [disabled]="!playerState.isHasSong"
+    color="primary"
+    mode="determinate"
+    [value]="progressValue"
+  ></mat-slider>
 </mat-card>

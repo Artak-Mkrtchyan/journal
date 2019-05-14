@@ -1,6 +1,9 @@
-upload works
-
 <form [formGroup]="formGroup" novalidate (ngSubmit)="onSubmit()">
-  <input #inputFile type="file" accept="audio/mp3" placeholder="Upload file..." (change)="onFileChange($event)" />
-  <button type="submit" [disabled]="formGroup.invalid || formGroup.prestine">Submit</button>
+  <input
+    #inputFile
+    type="file"
+    accept="audio/mp3"
+    placeholder="Upload file..."
+    (change)="onFileChange($event)"
+  />
 </form>

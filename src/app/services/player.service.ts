@@ -3,7 +3,10 @@ import { HttpClient } from '@angular/common/http';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
-import { selectPlayer } from '@store/selectors/player.selector';
+import {
+  selectPlayer,
+  selectPlayerStatus
+} from '@store/selectors/player.selector';
 
 import { IAppState } from '@store/state/app.state';
 import { IPlayer } from '@models/player.interface';
@@ -19,11 +22,7 @@ import {
   providedIn: 'root'
 })
 export class PlayerService {
-
-  constructor(
-    private store: Store<IAppState>,
-    private http: HttpClient
-  ) {}
+  constructor(private store: Store<IAppState>, private http: HttpClient) {}
 
   getPlayerState(): Observable<IPlayer> {
     return this.store.select(selectPlayer);
@@ -31,14 +30,13 @@ export class PlayerService {
 
   setAudioFile(file: File, fileData: string) {
     this.store.dispatch(new LoadLocalFile(file));
-
-    this.http.post('api/player', { file: fileData })
-      .subscribe(
-          (data: any) => {
-              console.log('Subscribe data', data);
-          }
-      );
-
+    const fileName = file.name.split('.')[0];
+    console.log(fileName);
+    this.http
+      .post('api/player', { fileName, fileData })
+      .subscribe((data: any) => {
+        console.log('Subscribe data', data);
+      });
   }
 
   setVolume(volumeValue: number) {
@@ -51,6 +49,10 @@ export class PlayerService {
 
   switchSongStatus() {
     this.store.dispatch(new SwitchSongStatus());
+  }
+
+  getPlayerStatus() {
+    return this.store.select(selectPlayerStatus);
   }
 
   togglePlayerStatus() {

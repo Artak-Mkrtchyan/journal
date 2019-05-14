@@ -15,59 +15,37 @@ export class PlayerComponent implements OnInit {
   name = 'Select song';
   duration = 0;
   volumeOff = false;
-
   music = new Audio();
 
-  constructor(
-    private playerService: PlayerService
-  ) {
+  constructor(private playerService: PlayerService) {
     this.playerService.getPlayerState().subscribe((player: IPlayer) => {
-      console.log(player);
       this.playerState = player;
-
     });
   }
 
   getVolumeIcon() {
     const pS = this.playerState;
 
-    const volumeUp = pS.volume >= 0.70 ? 'volume_up' : false;
-    const volumeDown = pS.volume >= 0.30 && pS.volume < 0.70 ? 'volume_down' : false;
-    const volumeMute = pS.volume <= 0.29 && pS.volume !== 0.00 ? 'volume_mute' : false;
-    const volumeOff = pS.volume === 0.00 || this.volumeOff ? 'volume_off' : false;
-
-    const resultIcon =  volumeOff || volumeDown || volumeUp || volumeMute;
+    const volumeUp = pS.volume >= 0.7 ? 'volume_up' : false;
+    const volumeDown =
+      pS.volume >= 0.3 && pS.volume < 0.7 ? 'volume_down' : false;
+    const volumeMute =
+      pS.volume <= 0.29 && pS.volume !== 0.0 ? 'volume_mute' : false;
+    const volumeOff =
+      pS.volume === 0.0 || this.volumeOff ? 'volume_off' : false;
+    const resultIcon = volumeOff || volumeDown || volumeUp || volumeMute;
 
     return resultIcon;
   }
 
-  changeVolume(event: {value: number}) {
+  changeVolume(event: { value: number }) {
     this.music.volume = event.value;
-    // this.store.dispatch(new SetVolume(event.value));
     this.playerService.setVolume(event.value);
   }
 
-  setCurrentTime(event: {value: number}) {
-    // console.log('123456', event);
-    // this.progressValue = this.music.currentTime / (this.music.duration / 100);
+  setCurrentTime(event: { value: number }) {
     const currentTime = (this.music.duration / 100) * event.value;
-    // this.playerService.setCurrentTime(currentTime);
     this.music.currentTime = currentTime;
-  }
-
-  load() {
-    this.name = this.playerState.file.name;
-    const reader = new FileReader();
-    this.togglePlayerStatus();
-    reader.readAsDataURL(this.playerState.file);
-    reader.onload = () => {
-      this.music.src = reader.result as string;
-      this.music.ontimeupdate = () => {
-        console.log(this.progressValue, this.music.currentTime);
-        // this.playerService.setCurrentTime(this.music.currentTime);
-        this.progressValue = this.music.currentTime / (this.music.duration / 100);
-      };
-    };
   }
 
   togglePlay() {
@@ -77,14 +55,30 @@ export class PlayerComponent implements OnInit {
   }
 
   toggleVolume() {
-    console.log(this.music.volume);
     this.volumeOff = !this.volumeOff;
-    return (this.music.volume !== 0) ? this.music.volume = 0 : this.music.volume = this.playerState.volume;
+    return this.music.volume !== 0
+      ? (this.music.volume = 0)
+      : (this.music.volume = this.playerState.volume);
   }
 
   togglePlayerStatus() {
     this.playerService.togglePlayerStatus();
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.playerService.getPlayerStatus().subscribe(isHasSong => {
+      if (isHasSong) {
+        this.name = this.playerState.file.name;
+        const reader = new FileReader();
+        reader.readAsDataURL(this.playerState.file);
+        reader.onload = () => {
+          this.music.src = reader.result as string;
+          this.music.ontimeupdate = () => {
+            this.progressValue =
+              this.music.currentTime / (this.music.duration / 100);
+          };
+        };
+      }
+    });
+  }
 }
