@@ -17,21 +17,21 @@ export class ArticleComponent implements OnInit {
     date: ''
   };
 
-  constructor(private router: Router, private artService: ArticleService) { }
+  constructor(private router: Router, private artService: ArticleService) {}
 
   ngOnInit() {
-    const articleId = this.router.url.split('/').slice(2, 3).join('/');
+    const articleId = this.router.url
+      .split('/')
+      .slice(2, 3)
+      .join('/');
 
-    this.artService.getArticle(articleId).subscribe(
-      ({article}: any) => {
-        this.article = {
-          id: article._id,
-          title: article.title,
-          description: article.description,
-          date: article.date
-        };
-      }
-    );
+    this.artService.getArticle(articleId).subscribe(({ article }: any) => {
+      this.article = {
+        id: article._id,
+        title: article.title,
+        description: article.description,
+        date: article.date
+      };
+    });
   }
-
 }

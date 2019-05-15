@@ -1,6 +1,11 @@
 <form [formGroup]="formGroup" novalidate (ngSubmit)="onSubmit()">
+  <label for="file-upload" class="file-upload">
+    <mat-icon>backup</mat-icon>
+  </label>
   <input
     #inputFile
+    id="file-upload"
+    class=""
     type="file"
     accept="audio/mp3"
     placeholder="Upload file..."

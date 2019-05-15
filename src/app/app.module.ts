@@ -30,6 +30,7 @@ import { UserProfileComponent } from '@components/user/user-profile/user-profile
 import { MusicComponent } from '@components/music/music/music.component';
 import { PlayerComponent } from '@components/music/player/player.component';
 import { MusicUploadComponent } from '@components/music/music-upload/music-upload.component';
+import { SearchComponent } from '@components/music/mixcloud/search/search.component';
 
 @NgModule({
   declarations: [
@@ -46,12 +47,13 @@ import { MusicUploadComponent } from '@components/music/music-upload/music-uploa
     UserProfileComponent,
     MusicComponent,
     PlayerComponent,
+    SearchComponent,
     MusicUploadComponent
   ],
   imports: [
     StoreModule.forRoot(appReducers),
     StoreDevtoolsModule.instrument({
-      maxAge: 25,
+      maxAge: 25
     }),
 
     BrowserModule,
@@ -65,8 +67,8 @@ import { MusicUploadComponent } from '@components/music/music-upload/music-uploa
   ],
   providers: [
     UserService,
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

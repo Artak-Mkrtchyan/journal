@@ -14,6 +14,7 @@ import { MusicComponent } from '@components/music/music/music.component';
 
 import { AuthGuard } from '@guards/auth.guard';
 import { ActiveUserGuard } from '@guards/active-user.guard';
+import { SearchComponent } from '@components/music/mixcloud/search/search.component';
 
 const artileRoutes = [
   { path: '', component: ArticlesComponent },
@@ -22,20 +23,25 @@ const artileRoutes = [
     path: '',
     pathMath: 'prefix',
     children: [
-      { path: ':id',  component: ArticleComponent },
-      { path: ':id/edit', component: ArticleEditComponent },
+      { path: ':id', component: ArticleComponent },
+      { path: ':id/edit', component: ArticleEditComponent }
     ]
-  },
+  }
 ];
 
 const userRoutes = [
   { path: 'login', component: LoginComponent, canActivate: [ActiveUserGuard] },
-  { path: 'registration', component: RegistrationComponent, canActivate: [ActiveUserGuard] },
+  {
+    path: 'registration',
+    component: RegistrationComponent,
+    canActivate: [ActiveUserGuard]
+  },
   { path: 'profile', component: UserProfileComponent, canActivate: [AuthGuard] }
 ];
 
 const musicRoutes = [
   { path: '', component: MusicComponent },
+  { path: 'mixcloud', component: SearchComponent }
 ];
 
 export const routes: Routes = [
@@ -43,5 +49,5 @@ export const routes: Routes = [
 
   { path: 'user', children: userRoutes },
   { path: 'articles', children: artileRoutes },
-  { path: 'music', children: musicRoutes },
+  { path: 'music', children: musicRoutes }
 ];
