@@ -8,10 +8,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['search.component.scss']
 })
 export class SearchComponent implements OnInit {
-  constructor(private http: HttpClient, private route: Router) {}
+  constructor(
+    private http: HttpClient, 
+    // private route: Router
+  ) {}
 
   ngOnInit() {
-    const headers = new HttpHeaders();
+    // const headers = new HttpHeaders();
     // headers.append('Access-Control-Allow-Origin', '*');
 
     // headers.append(
