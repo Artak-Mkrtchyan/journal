@@ -1,4 +1,4 @@
-import { Router } from '@angular/router';
+// import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
@@ -8,10 +8,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['search.component.scss']
 })
 export class SearchComponent implements OnInit {
-  constructor(
-    private http: HttpClient, 
-    // private route: Router
-  ) {}
+  constructor(private http: HttpClient) {}
 
   ngOnInit() {
     // const headers = new HttpHeaders();
