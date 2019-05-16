@@ -9,7 +9,7 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "heroku-prebuild": "npm install --save-dev @angular-devkit/build-angular && npm install -g npm-run-all && npm install -g @angular/cli && npm install -g nodemon"
+    "heroku-prebuild": "npm install babel-cli && npm install --save-dev @angular-devkit/build-angular && npm install -g npm-run-all && npm install -g @angular/cli && npm install -g nodemon"
   },
   "private": true,
   "dependencies": {
