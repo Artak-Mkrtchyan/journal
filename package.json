@@ -10,7 +10,7 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "heroku-prebuild": "npm install -g npm-run-all"
+    "heroku-prebuild": "npm install -g npm-run-all @angular/cli nodemon"
   },
   "private": true,
   "dependencies": {
