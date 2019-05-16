@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "nodemon --exec npx babel --watch server.js",
+    "start": "nodemon --exec npx babel-node --watch server.js",
     "watch": "npm-run-all --parallel watch:*",
-    "watch:server": "nodemon --exec npx babel --watch server.js --watch ./server/**/* --exec 'nodemon --exec npx babel server.js'",
+    "watch:server": "nodemon --exec npx babel-node --watch server.js --watch ./server/**/* --exec 'nodemon --exec npx babel-node server.js'",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
