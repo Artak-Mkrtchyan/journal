@@ -4,14 +4,13 @@ import { Store } from '@ngrx/store';
 import { ArticleService } from '@service/article.service';
 import { UserService } from '@service/user.service';
 
-
 import { selectUser } from '@store/selectors/user.selector';
 import { IAppState } from '@store/state/app.state';
 
 @Component({
   selector: 'app-articles',
   templateUrl: './articles.component.html',
-  styleUrls: ['./articles.component.scss'],
+  styleUrls: ['./articles.component.scss']
 })
 export class ArticlesComponent implements OnInit {
   articles: Array<object>;
@@ -25,9 +24,9 @@ export class ArticlesComponent implements OnInit {
   ngOnInit() {
     const IsUserAuth = this.userService.getCurrentAuth();
     this.store.select(selectUser).subscribe(user => {
-      this.artService.getArticles(user.id, IsUserAuth).subscribe((data: {articles}) => {
-        this.articles = data.articles;
-      });
+      // this.artService.getArticles(user.id, IsUserAuth).subscribe((data: {articles}) => {
+      //   this.articles = data.articles;
+      // });
     });
   }
 }
