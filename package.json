@@ -2,8 +2,6 @@
   "name": "journal",
   "version": "0.0.0",
   "scripts": {
-    "preinstall": "npm install -g angular-cli",
-    "heroku-postbuild": "npm run build",
     "ng": "ng",
     "start": "nodemon --exec npx babel-node --watch server.js",
     "watch": "npm-run-all --parallel watch:*",
@@ -12,7 +10,7 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "postinstall": "ng build --prod"
   },
   "private": true,
   "dependencies": {
