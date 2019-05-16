@@ -2,6 +2,7 @@
   "name": "journal",
   "version": "0.0.0",
   "scripts": {
+    "preinstall": "npm install -g angular-cli",
     "heroku-postbuild": "npm run build",
     "ng": "ng",
     "start": "nodemon --exec npx babel-node --watch server.js",
