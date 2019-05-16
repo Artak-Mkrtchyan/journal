@@ -9,7 +9,8 @@
     "watch:build": "ng build --watch",
     "build": "ng build",
     "test": "ng test",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "heroku-prebuild": "npm install npm-run-all --save-dev"
   },
   "private": true,
   "dependencies": {
