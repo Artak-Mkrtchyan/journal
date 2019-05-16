@@ -1,1 +1,1 @@
-web: npm run watch
+web: npx babel-node server.js
