@@ -10,7 +10,7 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "heroku-prebuild": "npm install npm-run-all --save-dev"
+    "heroku-prebuild": "npm install -g npm-run-all"
   },
   "private": true,
   "dependencies": {
