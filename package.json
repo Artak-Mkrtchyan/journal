@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "nodemon --exec babel-node server.js",
+    "start": "node server.js",
     "watch": "npm-run-all --parallel watch:*",
     "watch:server": "nodemon --exec npx babel-node --watch server.js --watch ./server/**/* --exec 'nodemon --exec npx babel-node server.js'",
     "build": "npm-run-all --parallel build:*",
@@ -11,8 +11,7 @@
     "build:server": "babel server --out-dir dist/server && babel server.js --out-file dist/server.js",
     "test": "ng test",
     "lint": "ng lint",
-    "heroku-prebuild": "npm install -g babel-cli && npm install --save-dev @angular-devkit/build-angular && npm install -g npm-run-all && npm install -g @angular/cli && npm install -g nodemon",
-    "heroku-postbuid": "cross-env NODE_ENV=production WEBPACK_CONFIG=browser_prod,server_prod webpack --colors"
+    "heroku-prebuild": "npm install -g babel-cli && npm install --save-dev @angular-devkit/build-angular && npm install -g npm-run-all && npm install -g @angular/cli && npm install -g nodemon"
   },
   "private": true,
   "dependencies": {
