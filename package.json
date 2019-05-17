@@ -11,7 +11,7 @@
     "build:server": "babel server --out-dir dist/server && babel server.js --out-file dist/server.js",
     "test": "ng test",
     "lint": "ng lint",
-    "heroku-prebuild": "npm install --save-dev @angular-devkit/build-angular && npm install -g npm-run-all && npm install -g @angular/cli && npm install -g nodemon",
+    "heroku-prebuild": "npm install -g babel-cli && npm install --save-dev @angular-devkit/build-angular && npm install -g npm-run-all && npm install -g @angular/cli && npm install -g nodemon",
     "heroku-postbuid": "cross-env NODE_ENV=production WEBPACK_CONFIG=browser_prod,server_prod webpack --colors"
   },
   "private": true,
