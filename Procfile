@@ -1,1 +1,1 @@
-web: npx babel-node server.js
+web: node dist/server.js
