@@ -1,5 +1,5 @@
 /* globals global, __dirname */
-import { join } from "path";
+import { join, resolve } from "path";
 import express from "express";
 import { json, urlencoded } from "body-parser";
 import mongoose from "mongoose";
@@ -38,8 +38,14 @@ app.use("/api/articles", articles);
 app.use("/api/user", user);
 app.use("/api", player);
 
+const allowed = [".js", ".css", ".png", ".jpg"];
+
 app.get("*", (req, res) => {
-  res.sendFile(join(__dirname, "dist/index.html"));
+  if (allowed.filter(ext => req.url.indexOf(ext) > 0).length > 0) {
+    res.sendFile(resolve(`dist/${req.url}`));
+  } else {
+    res.sendFile(join(__dirname, "index.html"));
+  }
 });
 
 // app.use(cors());
