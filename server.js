@@ -5,9 +5,12 @@ import { json, urlencoded } from "body-parser";
 import mongoose from "mongoose";
 import { createServer } from "http";
 import passport from "passport";
+import dotenv from "dotenv";
 import cors from "cors";
 
 const app = express();
+
+dotenv.config();
 
 import mainRoute from "./server/routes/index";
 import articles from "./server/routes/articles";
@@ -24,12 +27,9 @@ app.use(urlencoded({ extended: false }));
 mongoose.Promise = global.Promise;
 
 mongoose
-  .connect(
-    "mongodb+srv://Artak:987654321@cluster0-wojd2.mongodb.net/test?retryWrites=true",
-    {
-      useNewUrlParser: true
-    }
-  )
+  .connect(process.env.PROD_MONGODB, {
+    useNewUrlParser: true
+  })
   .then(() => console.log("MongoDB Connected..."))
   .catch(err => console.log(err));
 
