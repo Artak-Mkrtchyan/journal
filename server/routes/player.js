@@ -2,7 +2,7 @@
 import { Router } from "express";
 import multer from "multer";
 import fs from "fs";
-import request from "request";
+// import request from "request";
 
 var upload = multer({ dest: "uploads/" });
 
@@ -18,18 +18,18 @@ router.post("/player", upload.single("file"), (req, res) => {
 });
 
 router.get("/music", (req, response) => {
-  request.get(
-    "https://api.mixcloud.com/search/?q=eminem&type=cloudcast",
-    { json: true },
-    (err, res, body) => {
-      if (err) {
-        return console.log(err);
-      }
-      console.log(res.body, body.url);
-      console.log(body.explanation);
-      response.send({ data: res.body });
-    }
-  );
+  // request.get(
+  //   "https://api.mixcloud.com/search/?q=eminem&type=cloudcast",
+  //   { json: true },
+  //   (err, res, body) => {
+  //     if (err) {
+  //       return console.log(err);
+  //     }
+  //     console.log(res.body, body.url);
+  //     console.log(body.explanation);
+  //     response.send({ data: res.body });
+  //   }
+  // );
 });
 
 export default router;
