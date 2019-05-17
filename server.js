@@ -24,9 +24,12 @@ app.use(urlencoded({ extended: false }));
 mongoose.Promise = global.Promise;
 
 mongoose
-  .connect("mongodb://localhost/articles", {
-    useNewUrlParser: true
-  })
+  .connect(
+    "mongodb+srv://Artak:987654321@cluster0-wojd2.mongodb.net/test?retryWrites=true",
+    {
+      useNewUrlParser: true
+    }
+  )
   .then(() => console.log("MongoDB Connected..."))
   .catch(err => console.log(err));
 
