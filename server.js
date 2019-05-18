@@ -1,4 +1,4 @@
-/* globals global, __dirname */
+/* globals global, __dirname, process */
 import { join, resolve } from "path";
 import express from "express";
 import { json, urlencoded } from "body-parser";
@@ -54,8 +54,10 @@ app.get("*", (req, res) => {
 // app.use(cors());
 
 const port = 3000;
-app.set("port", port);
+const host = "0.0.0.0";
 
-const server = createServer(app);
+app.set("port", process.env.PORT || port);
 
-server.listen(port, () => console.log(`Running on localhost:${port}`));
+app.listen(process.env.PORT || port, host, function() {
+  console.log("Server started.......");
+});
