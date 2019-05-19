@@ -3,9 +3,10 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "node server.js",
+    "start": "node dist/server.js",
     "watch": "npm-run-all --parallel watch:*",
-    "watch:server": "nodemon --exec npx babel-node --watch server.js --watch ./server/**/* --exec 'nodemon --exec npx babel-node server.js'",
+    "watch:client": "ng build --watch",
+    "watch:server": "nodemon -L",
     "build": "npm-run-all --parallel build:*",
     "build:client": "ng build",
     "build:server": "babel server --out-dir dist/server && babel server.js --out-file dist/server.js",

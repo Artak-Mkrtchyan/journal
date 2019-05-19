@@ -1,10 +1,10 @@
-import { Router } from 'express';
-import { model } from 'mongoose';
+import { Router } from "express";
+import { model } from "mongoose";
 
 const router = new Router();
 
-import '../models/article';
-const Article = model('article');
+import "../models/article";
+const Article = model("article");
 
 // router.get('/', (req, res) => {
 //   Article.find({})

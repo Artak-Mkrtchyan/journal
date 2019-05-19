@@ -3,7 +3,6 @@ import { join, resolve } from "path";
 import express from "express";
 import { json, urlencoded } from "body-parser";
 import mongoose from "mongoose";
-import { createServer } from "http";
 import passport from "passport";
 import dotenv from "dotenv";
 import cors from "cors";
@@ -47,7 +46,7 @@ app.get("*", (req, res) => {
   if (allowed.filter(ext => req.url.indexOf(ext) > 0).length > 0) {
     res.sendFile(resolve(`dist/${req.url}`));
   } else {
-    res.sendFile(join(__dirname, "index.html"));
+    res.sendFile(join(__dirname, process.env.PATH_HTML));
   }
 });
 
