@@ -52,11 +52,10 @@ app.get("*", (req, res) => {
 
 // app.use(cors());
 
-const port = 3000;
 const host = "0.0.0.0";
 
-app.set("port", process.env.PORT || port);
+// app.set("port", process.env.PORT);
 
-app.listen(process.env.PORT || port, host, function() {
-  console.log("Server started.......");
+app.listen(process.env.PORT, host, function() {
+  console.log("Server started......");
 });

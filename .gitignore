@@ -50,4 +50,3 @@ settings.json
 
 # dotenv environment variables file
 .env
-.env.test

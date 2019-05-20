@@ -13,7 +13,6 @@ export class SearchComponent implements OnInit {
   ngOnInit() {
     // const headers = new HttpHeaders();
     // headers.append('Access-Control-Allow-Origin', '*');
-
     // headers.append(
     //   'Access-Control-Allow-Methods',
     //   'GET, POST, PATCH, PUT, DELETE, OPTIONS'
@@ -22,20 +21,16 @@ export class SearchComponent implements OnInit {
     //   'Access-Control-Allow-Headers',
     //   'Origin, Content-Type, X-Auth-Token'
     // );
-
     // headers.append(
     //   'Content-Type',
     //   'application/json' /*or whatever type is relevant */
     // );
-
     // headers.append('Accept', 'application/json');
-
     // headers.append('Access-Control-Allow-Credentials', 'true');
-
-    this.http
-      .get('https://api.mixcloud.com/search/?q=eminem&type=cloudcast')
-      .subscribe(info => {
-        console.log(info);
-      });
+    // this.http
+    //   .get('https://api.mixcloud.com/search/?q=eminem&type=cloudcast')
+    //   .subscribe(info => {
+    //     console.log(info);
+    //   });
   }
 }

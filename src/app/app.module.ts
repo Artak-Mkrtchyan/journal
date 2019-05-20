@@ -4,6 +4,10 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { StoreModule } from '@ngrx/store';
+import {
+  StoreRouterConnectingModule,
+  NavigationActionTiming
+} from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { appReducers } from '@store/reducers/app.reducers';
 
@@ -54,6 +58,9 @@ import { SearchComponent } from '@components/music/mixcloud/search/search.compon
     StoreModule.forRoot(appReducers),
     StoreDevtoolsModule.instrument({
       maxAge: 25
+    }),
+    StoreRouterConnectingModule.forRoot({
+      navigationActionTiming: NavigationActionTiming.PostActivation
     }),
 
     BrowserModule,
