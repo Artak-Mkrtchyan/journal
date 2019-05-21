@@ -1,16 +1,16 @@
 import { PlayerActions, EPlayerActions } from '@store/actions/player.actions';
-import { initialPlayerState } from '@store/state/player.state';
+import { PlayerState } from '@store/state/player.state';
 import { IPlayer } from '@models/player.interface';
 
 export const playerReducers = (
-  state = initialPlayerState,
+  state = PlayerState,
   action: PlayerActions
 ): IPlayer => {
   switch (action.type) {
     case EPlayerActions.LoadLocalFile:
       return {
         ...state,
-        file: action.payload,
+        file: action.payload
       };
 
     // case EPlayerActions.SetCurrentTime:

@@ -16,8 +16,6 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MaterialModule } from './material-module';
 import { AppRoutingModule } from './app-routing.module';
 
-import { UserService } from '@service/user.service';
-
 import { JwtInterceptor } from '@helpers/jwt.inspector';
 
 import { AppComponent } from './app.component';
@@ -34,7 +32,7 @@ import { UserProfileComponent } from '@components/user/user-profile/user-profile
 import { MusicComponent } from '@components/music/music/music.component';
 import { PlayerComponent } from '@components/music/player/player.component';
 import { MusicUploadComponent } from '@components/music/music-upload/music-upload.component';
-import { SearchComponent } from '@components/music/mixcloud/search/search.component';
+import { SearchComponent } from '@components/music/napster/search/search.component';
 
 @NgModule({
   declarations: [
@@ -73,7 +71,6 @@ import { SearchComponent } from '@components/music/mixcloud/search/search.compon
     BrowserAnimationsModule
   ],
   providers: [
-    UserService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]

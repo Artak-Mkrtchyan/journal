@@ -1,9 +1,9 @@
 import { IPlayer } from '@models/player.interface';
 
-export const initialPlayerState: IPlayer = {
+export const PlayerState: IPlayer = {
   isHasSong: false,
   isPlay: false,
   file: null,
-  volume: 0.5,
+  volume: 0.5
   // currentTime: 0
 };

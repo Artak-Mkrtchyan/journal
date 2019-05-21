@@ -14,7 +14,7 @@ import { MusicComponent } from '@components/music/music/music.component';
 
 import { AuthGuard } from '@guards/auth.guard';
 import { ActiveUserGuard } from '@guards/active-user.guard';
-import { SearchComponent } from '@components/music/mixcloud/search/search.component';
+import { SearchComponent } from '@components/music/napster/search/search.component';
 
 const artileRoutes = [
   { path: '', component: ArticlesComponent },
@@ -41,7 +41,7 @@ const userRoutes = [
 
 const musicRoutes = [
   { path: '', component: MusicComponent },
-  { path: 'mixcloud', component: SearchComponent }
+  { path: 'napster', component: SearchComponent }
 ];
 
 export const routes: Routes = [
@@ -49,5 +49,5 @@ export const routes: Routes = [
 
   { path: 'user', children: userRoutes },
   { path: 'articles', children: artileRoutes },
-  { path: 'music', children: musicRoutes }
+  { path: 'music', children: musicRoutes, canActivate: [AuthGuard] }
 ];
