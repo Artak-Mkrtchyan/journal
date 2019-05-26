@@ -4,8 +4,9 @@ export enum EPlayerActions {
   TogglePlayerStatus = '[Player] Change Player Status',
   SetCurrentTime = '[Player] Set Duration',
   SwitchSongStatus = '[Player] Change Song Status',
-  LoadLocalFile = '[Player] Load Local File',
+  // LoadLocalFile = '[Player] Load Local File',
   SetVolume = '[Player] Set Volume',
+  LoadSong = '[Player] Load Song'
 }
 
 export class TogglePlayerStatus implements Action {
@@ -22,10 +23,24 @@ export class SwitchSongStatus implements Action {
   readonly type = EPlayerActions.SwitchSongStatus;
 }
 
-export class LoadLocalFile implements Action {
-  readonly type = EPlayerActions.LoadLocalFile;
+// export class LoadLocalFile implements Action {
+//   readonly type = EPlayerActions.LoadLocalFile;
 
-  constructor(public payload: File) {}
+//   constructor(public payload: object) {}
+// }
+
+export class LoadSong implements Action {
+  readonly type = EPlayerActions.LoadSong;
+
+  constructor(
+    public payload: {
+      albumId?: string;
+      albumName?: string;
+      artistName?: string;
+      name: string;
+      musicSrc: ArrayBuffer | string;
+    }
+  ) {}
 }
 
 export class SetVolume implements Action {
@@ -39,4 +54,5 @@ export type PlayerActions =
   | TogglePlayerStatus
   | SetVolume
   | SetCurrentTime
-  | LoadLocalFile;
+  | LoadSong;
+// | LoadLocalFile;

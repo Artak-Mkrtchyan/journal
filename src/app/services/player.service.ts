@@ -5,14 +5,14 @@ import { Observable } from 'rxjs';
 
 import {
   selectPlayer,
-  selectPlayerStatus
+  selectPlayerTrackName
 } from '@store/selectors/player.selector';
 
 import { IAppState } from '@store/state/app.state';
 import { IPlayer } from '@models/player.interface';
 import {
   TogglePlayerStatus,
-  LoadLocalFile,
+  LoadSong,
   SwitchSongStatus,
   // SetCurrentTime,
   SetVolume
@@ -28,15 +28,14 @@ export class PlayerService {
     return this.store.select(selectPlayer);
   }
 
-  setAudioFile(file: File, fileData: string) {
-    this.store.dispatch(new LoadLocalFile(file));
-    const fileName = file.name.split('.')[0];
-    console.log(fileName);
-    this.http
-      .post('api/player', { fileName, fileData })
-      .subscribe((data: any) => {
-        console.log('Subscribe data', data);
-      });
+  setAudioFile(file: File, musicSrc: string | ArrayBuffer) {
+    const name = file.name.split('.')[0];
+    const fileData = (musicSrc as string).split(',')[1];
+    console.log(name, musicSrc);
+    this.store.dispatch(new LoadSong({ name, musicSrc }));
+    this.http.post('api/player', { name, fileData }).subscribe((data: any) => {
+      console.log('Subscribe data', data);
+    });
   }
 
   setVolume(volumeValue: number) {
@@ -51,8 +50,8 @@ export class PlayerService {
     this.store.dispatch(new SwitchSongStatus());
   }
 
-  getPlayerStatus() {
-    return this.store.select(selectPlayerStatus);
+  getPlayerTrackName() {
+    return this.store.select(selectPlayerTrackName);
   }
 
   togglePlayerStatus() {

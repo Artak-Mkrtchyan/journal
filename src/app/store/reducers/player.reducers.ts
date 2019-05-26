@@ -7,22 +7,30 @@ export const playerReducers = (
   action: PlayerActions
 ): IPlayer => {
   switch (action.type) {
-    case EPlayerActions.LoadLocalFile:
-      return {
-        ...state,
-        file: action.payload
-      };
-
     // case EPlayerActions.SetCurrentTime:
     //   return {
     //     ...state,
     //     currentTime: action.payload
     //   };
 
-    case EPlayerActions.TogglePlayerStatus:
+    case EPlayerActions.LoadSong:
+      console.log(action.payload);
       return {
         ...state,
-        isHasSong: !state.isHasSong
+        artistInfo: {
+          albumId: action.payload.albumId,
+          albumName: action.payload.albumName,
+          artistName: action.payload.artistName
+        },
+        isHasSong: true,
+        name: action.payload.name,
+        musicSrc: action.payload.musicSrc
+      };
+
+    case EPlayerActions.TogglePlayerStatus:
+      return {
+        ...state
+        // isHasSong: !state.isHasSong
       };
 
     case EPlayerActions.SwitchSongStatus:

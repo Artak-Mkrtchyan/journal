@@ -39,9 +39,9 @@ export class MusicUploadComponent implements OnInit {
           file: reader.result
         });
 
-        const fileData = (reader.result as string).split(',')[1];
+        // const fileData = (reader.result as string).split(',')[1];
 
-        this.playerService.setAudioFile(file, fileData);
+        this.playerService.setAudioFile(file, reader.result);
         this.cd.markForCheck();
         this.togglePlayerStatus();
       };

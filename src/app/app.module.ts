@@ -33,6 +33,7 @@ import { MusicComponent } from '@components/music/music/music.component';
 import { PlayerComponent } from '@components/music/player/player.component';
 import { MusicUploadComponent } from '@components/music/music-upload/music-upload.component';
 import { SearchComponent } from '@components/music/napster/search/search.component';
+import { NapsterPlaylistComponent } from '@components/music/napster/playlist/playlist.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { SearchComponent } from '@components/music/napster/search/search.compone
     MusicComponent,
     PlayerComponent,
     SearchComponent,
-    MusicUploadComponent
+    MusicUploadComponent,
+    NapsterPlaylistComponent
   ],
   imports: [
     StoreModule.forRoot(appReducers),

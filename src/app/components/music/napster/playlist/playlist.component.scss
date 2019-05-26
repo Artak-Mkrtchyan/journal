@@ -1,0 +1,48 @@
+.track {
+  margin: 20px 0px;
+
+  &__name {
+    margin: 0px;
+  }
+
+  &__album-name {
+    margin: 0;
+  }
+
+  &__artist-name {
+    margin: 0;
+    margin-top: 10px;
+  }
+
+  &__button {
+    width: 70px;
+    height: 70px;
+    border: 0;
+  }
+
+  &__titles {
+    margin: 0 10px;
+  }
+
+}
+
+.track__titles:hover .track__name {
+  text-decoration: underline;
+}
+
+
+.track-list li:nth-child(2n) {
+  background: #3a3a3a;
+  border: 10px solid #3a3a3a;
+  border-radius: 5px;
+}
+
+.icon_none {
+  display: none;
+}
+
+.track:hover {
+  .icon_none {
+    display: block;
+  }
+}

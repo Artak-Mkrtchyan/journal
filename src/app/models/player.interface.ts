@@ -1,7 +1,9 @@
 export interface IPlayer {
   isHasSong: boolean;
   isPlay: boolean;
-  file: File;
   volume: number;
+  artistInfo: object;
+  name: string;
+  musicSrc: string | ArrayBuffer;
   // currentTime: number;
 }

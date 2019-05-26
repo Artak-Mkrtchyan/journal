@@ -1,4 +1,4 @@
-/* globals Buffer */
+/* globals Buffer, __dirname */
 import { Router } from "express";
 import multer from "multer";
 import fs from "fs";
@@ -12,7 +12,10 @@ router.post("/player", upload.single("file"), (req, res) => {
   var data_url = req.body.fileData;
 
   var encodedstring = Buffer.from(data_url);
-  fs.writeFileSync(`./uploads/tracks/${req.body.fileName}.mp3`, encodedstring);
+  fs.writeFileSync(
+    __dirname + `/uploads/tracks/${req.body.fileName}.mp3`,
+    encodedstring
+  );
 
   res.send({ body: req.body.file });
 });

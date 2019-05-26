@@ -50,8 +50,9 @@ export class PlayerComponent implements OnInit {
 
   togglePlay() {
     this.playerService.switchSongStatus();
+    console.log(this.music.currentTime, this.music.src);
 
-    return this.music.paused ? this.music.play() : this.music.pause();
+    return this.playerState.isPlay ? this.music.play() : this.music.pause();
   }
 
   toggleVolume() {
@@ -66,17 +67,14 @@ export class PlayerComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.playerService.getPlayerStatus().subscribe(isHasSong => {
-      if (isHasSong) {
-        this.name = this.playerState.file.name;
-        const reader = new FileReader();
-        reader.readAsDataURL(this.playerState.file);
-        reader.onload = () => {
-          this.music.src = reader.result as string;
-          this.music.ontimeupdate = () => {
-            this.progressValue =
-              this.music.currentTime / (this.music.duration / 100);
-          };
+    this.playerService.getPlayerTrackName().subscribe(songName => {
+      console.log('changeStatus', songName);
+      if (songName) {
+        this.name = this.playerState.name;
+        this.music.src = this.playerState.musicSrc as string;
+        this.music.ontimeupdate = () => {
+          this.progressValue =
+            this.music.currentTime / (this.music.duration / 100);
         };
       }
     });

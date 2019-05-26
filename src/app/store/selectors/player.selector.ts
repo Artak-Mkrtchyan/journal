@@ -12,7 +12,7 @@ export const selectPlayer = createSelector(
   (state: IPlayer) => state
 );
 
-export const selectPlayerStatus = createSelector(
+export const selectPlayerTrackName = createSelector(
   PlayerStatus,
-  (state: IPlayer) => state.isHasSong
+  (state: IPlayer) => state.name
 );
