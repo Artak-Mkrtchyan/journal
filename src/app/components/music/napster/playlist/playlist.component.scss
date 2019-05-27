@@ -1,5 +1,6 @@
 .track {
-  margin: 20px 0px;
+  // margin: 20px 0px;
+  padding: 10px;
 
   &__name {
     margin: 0px;
@@ -23,17 +24,14 @@
   &__titles {
     margin: 0 10px;
   }
-
 }
 
 .track__titles:hover .track__name {
   text-decoration: underline;
 }
 
-
 .track-list li:nth-child(2n) {
   background: #3a3a3a;
-  border: 10px solid #3a3a3a;
   border-radius: 5px;
 }
 

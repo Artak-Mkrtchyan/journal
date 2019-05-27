@@ -32,7 +32,8 @@ export class NapsterPlaylistComponent implements OnInit {
   }
 
   toggleTrack(indexTrack: string) {
-    this.store.dispatch(new LoadSong(this.tracks[indexTrack]));
+    console.log(this.tracks[indexTrack]);
+    this.napsterService.setSong(this.tracks[indexTrack]);
   }
 
   ngOnInit() {

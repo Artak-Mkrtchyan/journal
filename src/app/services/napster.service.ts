@@ -23,23 +23,21 @@ export class NapsterService {
       .subscribe((response: { tracks: Array<any> }) => {
         console.log(response);
         this.setPlaylist(response.tracks);
-        const {
-          albumId,
-          albumName,
-          artistName,
-          previewURL,
-          name
-        } = response.tracks[0];
-        this.store.dispatch(
-          new LoadSong({
-            albumId,
-            albumName,
-            artistName,
-            musicSrc: previewURL,
-            name
-          })
-        );
+        this.setSong(response.tracks[0]);
       });
+  }
+
+  setSong(track) {
+    const { albumId, albumName, artistName, previewURL, name } = track;
+    this.store.dispatch(
+      new LoadSong({
+        albumId,
+        albumName,
+        artistName,
+        musicSrc: previewURL,
+        name
+      })
+    );
   }
 
   loadImageTrack(albId: string): Observable<any> {
