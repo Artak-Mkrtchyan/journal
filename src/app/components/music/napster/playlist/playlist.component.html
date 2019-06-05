@@ -13,21 +13,24 @@
           '/images/70x70.jpg)'
         "
       >
-        <div class="icon_none" (click)="toggleTrack(i)">
-          <mat-icon>play_arrow</mat-icon>
-          <!-- <mat-icon>pause</mat-icon> -->
+        <div class="icon_none">
+          <mat-icon
+            (click)="togglePlayTrack(i, true)"
+            *ngIf="!isPlay || name !== track.name"
+            >play_arrow</mat-icon
+          >
+          <mat-icon
+            (click)="togglePlayTrack(i, false)"
+            *ngIf="name === track.name && isPlay"
+            >pause</mat-icon
+          >
         </div>
       </button>
 
       <div class="track__titles" fxLayout="column" (click)="playTrack()">
-        <!-- <p class="track__album-name">{{ track.albumName }}</p> -->
         <p class="track__name">{{ track.name }}</p>
         <p class="track__artist-name">{{ track.artistName }}</p>
       </div>
     </li>
   </ul>
-  <audio
-    src="https://listen.hs.llnwd.net/g3/5/3/4/3/5/1498053435.mp3"
-    controls
-  ></audio>
 </mat-card>

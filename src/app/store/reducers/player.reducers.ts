@@ -39,6 +39,18 @@ export const playerReducers = (
         isPlay: !state.isPlay
       };
 
+    case EPlayerActions.PlaySong:
+      return {
+        ...state,
+        isPlay: true
+      };
+
+    case EPlayerActions.StopSong:
+      return {
+        ...state,
+        isPlay: false
+      };
+
     case EPlayerActions.SetVolume:
       return {
         ...state,

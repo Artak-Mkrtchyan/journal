@@ -50,9 +50,6 @@ export class PlayerComponent implements OnInit {
 
   togglePlay() {
     this.playerService.switchSongStatus();
-    console.log(this.music.currentTime, this.music.src);
-
-    return this.playerState.isPlay ? this.music.play() : this.music.pause();
   }
 
   toggleVolume() {
@@ -68,7 +65,6 @@ export class PlayerComponent implements OnInit {
 
   ngOnInit() {
     this.playerService.getPlayerTrackName().subscribe(songName => {
-      console.log('changeStatus', songName);
       if (songName) {
         this.name = this.playerState.name;
         this.music.src = this.playerState.musicSrc as string;
@@ -76,7 +72,14 @@ export class PlayerComponent implements OnInit {
           this.progressValue =
             this.music.currentTime / (this.music.duration / 100);
         };
+        this.music.onended = () => {
+          this.playerService.stopSong();
+          this.music.currentTime = 0;
+        };
       }
+    });
+    this.playerService.getPlayerStatus().subscribe(({ isPlay, name }) => {
+      return isPlay ? this.music.play() : this.music.pause();
     });
   }
 }

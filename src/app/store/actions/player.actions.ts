@@ -4,6 +4,8 @@ export enum EPlayerActions {
   TogglePlayerStatus = '[Player] Change Player Status',
   SetCurrentTime = '[Player] Set Duration',
   SwitchSongStatus = '[Player] Change Song Status',
+  PlaySong = '[Player] Play Song',
+  StopSong = '[Player] Stop Song',
   // LoadLocalFile = '[Player] Load Local File',
   SetVolume = '[Player] Set Volume',
   LoadSong = '[Player] Load Song'
@@ -23,6 +25,13 @@ export class SwitchSongStatus implements Action {
   readonly type = EPlayerActions.SwitchSongStatus;
 }
 
+export class PlaySong implements Action {
+  readonly type = EPlayerActions.PlaySong;
+}
+
+export class StopSong implements Action {
+  readonly type = EPlayerActions.StopSong;
+}
 // export class LoadLocalFile implements Action {
 //   readonly type = EPlayerActions.LoadLocalFile;
 
@@ -51,6 +60,8 @@ export class SetVolume implements Action {
 
 export type PlayerActions =
   | SwitchSongStatus
+  | PlaySong
+  | StopSong
   | TogglePlayerStatus
   | SetVolume
   | SetCurrentTime

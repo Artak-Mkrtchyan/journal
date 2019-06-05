@@ -1,9 +1,7 @@
-import { IAppState } from '@store/state/app.state';
 import { Component, OnInit } from '@angular/core';
 
 import { NapsterService } from '@service/napster.service';
-import { Store } from '@ngrx/store';
-import { LoadSong } from '@store/actions/player.actions';
+import { PlayerService } from '@service/player.service';
 
 // неработает завершение трека
 // и переключение
@@ -14,12 +12,13 @@ import { LoadSong } from '@store/actions/player.actions';
   styleUrls: ['playlist.component.scss']
 })
 export class NapsterPlaylistComponent implements OnInit {
-  music = new Audio();
   tracks = null;
+  isPlay: boolean;
+  name: string;
 
   constructor(
     private napsterService: NapsterService,
-    private store: Store<IAppState>
+    private playerService: PlayerService
   ) {
     this.napsterService.loadTracks();
     // this.http
@@ -31,15 +30,21 @@ export class NapsterPlaylistComponent implements OnInit {
     //   });
   }
 
-  toggleTrack(indexTrack: string) {
-    console.log(this.tracks[indexTrack]);
+  togglePlayTrack(indexTrack: number, isPlay: boolean) {
     this.napsterService.setSong(this.tracks[indexTrack]);
+
+    return isPlay
+      ? this.playerService.playSong()
+      : this.playerService.stopSong();
   }
 
   ngOnInit() {
     this.napsterService.getPlaylist().subscribe(response => {
-      console.log(response);
       this.tracks = response.tracks;
+    });
+    this.playerService.getPlayerStatus().subscribe(({ isPlay, name }) => {
+      this.isPlay = isPlay;
+      this.name = name;
     });
     // this.http
     //   .get(

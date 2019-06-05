@@ -1,3 +1,4 @@
+import { StopSong } from './../store/actions/player.actions';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Store } from '@ngrx/store';
@@ -5,7 +6,8 @@ import { Observable } from 'rxjs';
 
 import {
   selectPlayer,
-  selectPlayerTrackName
+  selectPlayerTrackName,
+  selectPlayerStatus
 } from '@store/selectors/player.selector';
 
 import { IAppState } from '@store/state/app.state';
@@ -15,7 +17,8 @@ import {
   LoadSong,
   SwitchSongStatus,
   // SetCurrentTime,
-  SetVolume
+  SetVolume,
+  PlaySong
 } from '@store/actions/player.actions';
 
 @Injectable({
@@ -26,6 +29,10 @@ export class PlayerService {
 
   getPlayerState(): Observable<IPlayer> {
     return this.store.select(selectPlayer);
+  }
+
+  getPlayerStatus() {
+    return this.store.select(selectPlayerStatus);
   }
 
   setAudioFile(file: File, musicSrc: string | ArrayBuffer) {
@@ -45,6 +52,14 @@ export class PlayerService {
   // setCurrentTime(currentTime: number) {
   //   this.store.dispatch(new SetCurrentTime(currentTime));
   // }
+
+  playSong() {
+    this.store.dispatch(new PlaySong());
+  }
+
+  stopSong() {
+    this.store.dispatch(new StopSong());
+  }
 
   switchSongStatus() {
     this.store.dispatch(new SwitchSongStatus());
