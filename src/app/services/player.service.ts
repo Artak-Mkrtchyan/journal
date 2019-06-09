@@ -38,7 +38,6 @@ export class PlayerService {
   setAudioFile(file: File, musicSrc: string | ArrayBuffer) {
     const name = file.name.split('.')[0];
     const fileData = (musicSrc as string).split(',')[1];
-    console.log(name, musicSrc);
     this.store.dispatch(new LoadSong({ name, musicSrc }));
     this.http.post('api/player', { name, fileData }).subscribe((data: any) => {
       console.log('Subscribe data', data);

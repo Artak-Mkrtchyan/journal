@@ -1,13 +1,20 @@
 import { Action } from '@ngrx/store';
 
 export enum EPlaylistActions {
-  SetPlaylist = '[Playlist] Set Playlist'
+  SetTopPlaylist = '[Playlist] Set Top Playlist',
+  SetSearchPlaylist = '[Playlist] Set Search Playlist'
 }
 
-export class SetPlaylist implements Action {
-  readonly type = EPlaylistActions.SetPlaylist;
+export class SetTopPlaylist implements Action {
+  readonly type = EPlaylistActions.SetTopPlaylist;
 
   constructor(public payload: Array<object>) {}
 }
 
-export type PlaylistAction = SetPlaylist;
+export class SetSearchPlaylist implements Action {
+  readonly type = EPlaylistActions.SetSearchPlaylist;
+
+  constructor(public payload: Array<object>) {}
+}
+
+export type PlaylistAction = SetSearchPlaylist | SetTopPlaylist;

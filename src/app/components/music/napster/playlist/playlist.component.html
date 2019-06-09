@@ -1,36 +1,39 @@
-<mat-card fxFlex="50" fxLayout="column">
-  <ul class="track-list">
-    <li
-      class="track"
-      *ngFor="let track of tracks; let i = index"
-      fxLayout="row"
+<!-- <mat-card fxFlex="50" fxLayout="column"> -->
+<!-- <mat-tab-group mat-align-tabs="center">
+  <mat-tab label="Top 10 song"> -->
+<ul class="track-list">
+  <li class="track" *ngFor="let track of tracks; let i = index" fxLayout="row">
+    <button
+      class="track__button"
+      [style.background-image]="
+        'url(https://api.napster.com/imageserver/v2/albums/' +
+        track.albumId +
+        '/images/70x70.jpg)'
+      "
     >
-      <button
-        class="track__button"
-        [style.background-image]="
-          'url(https://api.napster.com/imageserver/v2/albums/' +
-          track.albumId +
-          '/images/70x70.jpg)'
-        "
-      >
-        <div class="icon_none">
-          <mat-icon
-            (click)="togglePlayTrack(i, true)"
-            *ngIf="!isPlay || name !== track.name"
-            >play_arrow</mat-icon
-          >
-          <mat-icon
-            (click)="togglePlayTrack(i, false)"
-            *ngIf="name === track.name && isPlay"
-            >pause</mat-icon
-          >
-        </div>
-      </button>
-
-      <div class="track__titles" fxLayout="column" (click)="playTrack()">
-        <p class="track__name">{{ track.name }}</p>
-        <p class="track__artist-name">{{ track.artistName }}</p>
+      <div class="icon_none">
+        <mat-icon
+          (click)="togglePlayTrack(i, true)"
+          *ngIf="!isPlay || name !== track.name"
+          >play_arrow</mat-icon
+        >
+        <mat-icon
+          (click)="togglePlayTrack(i, false)"
+          *ngIf="name === track.name && isPlay"
+          >pause</mat-icon
+        >
       </div>
-    </li>
-  </ul>
-</mat-card>
+    </button>
+
+    <div class="track__titles" fxLayout="column" (click)="playTrack()">
+      <p class="track__name">{{ track.name }}</p>
+      <p class="track__artist-name">{{ track.artistName }}</p>
+    </div>
+  </li>
+</ul>
+<!-- </mat-tab>
+  <mat-tab label="Search">
+    <app-napster-search></app-napster-search>
+  </mat-tab>
+</mat-tab-group> -->
+<!-- </mat-card> -->

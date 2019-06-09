@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 import { NapsterService } from '@service/napster.service';
 import { PlayerService } from '@service/player.service';
@@ -12,6 +12,7 @@ import { PlayerService } from '@service/player.service';
   styleUrls: ['playlist.component.scss']
 })
 export class NapsterPlaylistComponent implements OnInit {
+  @Input() isSearchPlaylist: boolean;
   tracks = null;
   isPlay: boolean;
   name: string;
@@ -40,7 +41,9 @@ export class NapsterPlaylistComponent implements OnInit {
 
   ngOnInit() {
     this.napsterService.getPlaylist().subscribe(response => {
-      this.tracks = response.tracks;
+      this.tracks = this.isSearchPlaylist
+        ? response.searchTracks
+        : response.topTracks;
     });
     this.playerService.getPlayerStatus().subscribe(({ isPlay, name }) => {
       this.isPlay = isPlay;

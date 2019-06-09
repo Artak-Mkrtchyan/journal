@@ -1,3 +1,4 @@
 export interface IPlaylist {
-  tracks: Array<object>;
+  topTracks: Array<object>;
+  searchTracks: Array<object>;
 }

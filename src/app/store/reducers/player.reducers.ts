@@ -14,7 +14,6 @@ export const playerReducers = (
     //   };
 
     case EPlayerActions.LoadSong:
-      console.log(action.payload);
       return {
         ...state,
         artistInfo: {

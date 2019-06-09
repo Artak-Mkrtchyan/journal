@@ -10,9 +10,16 @@ export const playlistReducers = (
   action: PlaylistAction
 ): IPlaylist => {
   switch (action.type) {
-    case EPlaylistActions.SetPlaylist:
+    case EPlaylistActions.SetTopPlaylist:
       return {
-        tracks: action.payload
+        ...state,
+        topTracks: action.payload
+      };
+
+    case EPlaylistActions.SetSearchPlaylist:
+      return {
+        ...state,
+        searchTracks: action.payload
       };
 
     default:

@@ -1,4 +1,13 @@
-<app-music-upload></app-music-upload>
-<app-player></app-player>
+<div fxLayout="column">
+  <app-music-upload></app-music-upload>
+  <app-player></app-player>
 
-<app-napster-playlist></app-napster-playlist>
+  <mat-tab-group mat-align-tabs="center">
+    <mat-tab label="Top 10 Songs">
+      <app-napster-playlist [isSearchPlaylist]="true"></app-napster-playlist>
+    </mat-tab>
+    <mat-tab label="Search">
+      <app-napster-search></app-napster-search>
+    </mat-tab>
+  </mat-tab-group>
+</div>

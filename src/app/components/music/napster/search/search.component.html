@@ -1,0 +1,13 @@
+<mat-form-field>
+  <input
+    matInput
+    type="text"
+    placeholder="search track..."
+    [formControl]="search"
+  />
+  <button mat-icon-button (click)="searchTrack()" matSuffix>
+    <mat-icon>search</mat-icon>
+  </button>
+
+  <app-napster-playlist [isSearchPlaylist]="false"></app-napster-playlist>
+</mat-form-field>
