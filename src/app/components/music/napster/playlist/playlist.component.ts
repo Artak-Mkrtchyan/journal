@@ -3,8 +3,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { NapsterService } from '@service/napster.service';
 import { PlayerService } from '@service/player.service';
 
-// неработает завершение трека
-// и переключение
+// неработает переключение трека
 
 @Component({
   selector: 'app-napster-playlist',
@@ -22,13 +21,6 @@ export class NapsterPlaylistComponent implements OnInit {
     private playerService: PlayerService
   ) {
     this.napsterService.loadTracks();
-    // this.http
-    //   .get(
-    //     'http://api.napster.com/v2.2/tracks/tra.5156528?apikey=YTkxZTRhNzAtODdlNy00ZjMzLTg0MWItOTc0NmZmNjU4Yzk4'
-    //   )
-    //   .subscribe(info => {
-    //     console.log(info);
-    //   });
   }
 
   togglePlayTrack(indexTrack: number, isPlay: boolean) {
@@ -49,12 +41,5 @@ export class NapsterPlaylistComponent implements OnInit {
       this.isPlay = isPlay;
       this.name = name;
     });
-    // this.http
-    //   .get(
-    //     'http://api.napster.com/v2.2/tracks/top?apikey=YTkxZTRhNzAtODdlNy00ZjMzLTg0MWItOTc0NmZmNjU4Yzk4'
-    //   )
-    //   .subscribe(info => {
-    //     console.log(info);
-    //   });
   }
 }

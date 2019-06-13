@@ -16,7 +16,6 @@ import {
   TogglePlayerStatus,
   LoadSong,
   SwitchSongStatus,
-  // SetCurrentTime,
   SetVolume,
   PlaySong
 } from '@store/actions/player.actions';
@@ -47,10 +46,6 @@ export class PlayerService {
   setVolume(volumeValue: number) {
     this.store.dispatch(new SetVolume(volumeValue));
   }
-
-  // setCurrentTime(currentTime: number) {
-  //   this.store.dispatch(new SetCurrentTime(currentTime));
-  // }
 
   playSong() {
     this.store.dispatch(new PlaySong());

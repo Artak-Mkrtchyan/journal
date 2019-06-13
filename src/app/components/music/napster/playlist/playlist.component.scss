@@ -1,6 +1,10 @@
 .track {
   padding: 10px;
 
+  &-list {
+    padding: 0;
+  }
+
   &__name {
     margin: 0px;
   }

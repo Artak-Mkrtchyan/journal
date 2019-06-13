@@ -1,4 +1,16 @@
-<mat-card fxFlex="40" fxLayout="column">
+<div class="player" fxLayout="column">
+  <div *ngIf="!isLoaded" class="spinner" fxLayoutAlign="center center">
+    <mat-spinner></mat-spinner>
+  </div>
+  <img
+    *ngIf="isLoaded"
+    [src]="
+      'https://api.napster.com/imageserver/v2/albums/' +
+      playerState.artistInfo.albumId +
+      '/images/300x300.jpg'
+    "
+    alt=""
+  />
   <h3>{{ name }}</h3>
   <div fxLayout="row" fxLayoutAlign="center center">
     <mat-icon>skip_previous</mat-icon>
@@ -24,6 +36,7 @@
         [value]="volumeOff ? 0 : playerState.volume"
       ></mat-slider>
     </div>
+    <app-music-upload></app-music-upload>
   </div>
   <mat-slider
     (input)="setCurrentTime($event)"
@@ -32,4 +45,4 @@
     mode="determinate"
     [value]="progressValue"
   ></mat-slider>
-</mat-card>
+</div>

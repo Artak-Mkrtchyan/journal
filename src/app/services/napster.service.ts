@@ -55,12 +55,6 @@ export class NapsterService {
     );
   }
 
-  loadImageTrack(albId: string): Observable<any> {
-    return this.http.get(
-      `https://api.napster.com/imageserver/v2/albums/Alb.111750366/images/170x170.jpg`
-    );
-  }
-
   getPlaylist(): Observable<IPlaylist> {
     return this.store.select(selectPlaylist);
   }

@@ -16,10 +16,12 @@ export class PlayerComponent implements OnInit {
   duration = 0;
   volumeOff = false;
   music = new Audio();
+  isLoaded = false;
 
   constructor(private playerService: PlayerService) {
     this.playerService.getPlayerState().subscribe((player: IPlayer) => {
       this.playerState = player;
+      this.isLoaded = player.artistInfo ? true : false;
     });
   }
 
