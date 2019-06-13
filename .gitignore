@@ -25,7 +25,9 @@ package-lock.json
 *.sublime-workspace
 
 # IDE - VSCode
-.VSCodeCounter/*
+.VSCodeCounter/results.csv
+.VSCodeCounter/results.md
+.VSCodeCounter/results.txt
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
