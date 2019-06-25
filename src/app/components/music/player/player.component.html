@@ -13,7 +13,9 @@
   />
   <h3>{{ name }}</h3>
   <div fxLayout="row" fxLayoutAlign="center center">
-    <mat-icon>skip_previous</mat-icon>
+    <button mat-button (click)="previousSong()">
+      <mat-icon>skip_previous</mat-icon>
+    </button>
     <button
       mat-button
       [disabled]="!playerState.isHasSong"
@@ -22,7 +24,9 @@
       <mat-icon *ngIf="!playerState.isPlay">play_arrow</mat-icon>
       <mat-icon *ngIf="playerState.isPlay">pause</mat-icon>
     </button>
-    <mat-icon>skip_next</mat-icon>
+    <button mat-button (click)="nextSong()">
+      <mat-icon>skip_next</mat-icon>
+    </button>
     <div fxLayoutAlign="space-around center">
       <button (click)="toggleVolume()" mat-icon-button>
         <mat-icon>{{ getVolumeIcon() }}</mat-icon>

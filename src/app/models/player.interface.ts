@@ -7,7 +7,13 @@ export interface IPlayer {
     albumName: string;
     artistName: string;
   };
+  activePlaylist: object;
   name: string;
   musicSrc: string | ArrayBuffer;
-  // currentTime: number;
+  playlistIndexes: {
+    topMaxIndex: number;
+    searchMaxIndex: number;
+    myTracksMaxIndex: number;
+    currentIndex: number;
+  };
 }

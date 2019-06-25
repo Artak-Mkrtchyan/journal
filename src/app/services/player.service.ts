@@ -1,4 +1,3 @@
-import { StopSong } from './../store/actions/player.actions';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Store } from '@ngrx/store';
@@ -17,7 +16,11 @@ import {
   LoadSong,
   SwitchSongStatus,
   SetVolume,
-  PlaySong
+  PlaySong,
+  StopSong,
+  NextSong,
+  PreviousSong,
+  SetCurrentPlaylistIndex
 } from '@store/actions/player.actions';
 
 @Injectable({
@@ -26,7 +29,7 @@ import {
 export class PlayerService {
   constructor(private store: Store<IAppState>, private http: HttpClient) {}
 
-  getPlayerState(): Observable<IPlayer> {
+  getPlayerState(): Observable<any> {
     return this.store.select(selectPlayer);
   }
 
@@ -41,6 +44,18 @@ export class PlayerService {
     this.http.post('api/player', { name, fileData }).subscribe((data: any) => {
       console.log('Subscribe data', data);
     });
+  }
+
+  setTrackIndex(trackIndex: number) {
+    this.store.dispatch(new SetCurrentPlaylistIndex(trackIndex));
+  }
+
+  nextSong() {
+    this.store.dispatch(new NextSong());
+  }
+
+  previousSong() {
+    this.store.dispatch(new PreviousSong());
   }
 
   setVolume(volumeValue: number) {

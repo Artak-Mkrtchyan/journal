@@ -6,6 +6,12 @@ export const PlayerState: IPlayer = {
   volume: 0.5,
   artistInfo: null,
   name: null,
-  musicSrc: null
-  // currentTime: 0
+  musicSrc: null,
+  activePlaylist: null,
+  playlistIndexes: {
+    topMaxIndex: 10,
+    searchMaxIndex: null,
+    myTracksMaxIndex: null,
+    currentIndex: 0
+  }
 };

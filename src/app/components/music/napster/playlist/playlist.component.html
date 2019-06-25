@@ -9,16 +9,22 @@
       "
     >
       <div class="icon_none">
-        <mat-icon
-          (click)="togglePlayTrack(i, true)"
+        <button
           *ngIf="!isPlay || name !== track.name"
-          >play_arrow</mat-icon
+          mat-mini-fab
+          color="primary"
+          (click)="togglePlayTrack(i, true)"
         >
-        <mat-icon
-          (click)="togglePlayTrack(i, false)"
+          <mat-icon>play_arrow</mat-icon>
+        </button>
+        <button
           *ngIf="name === track.name && isPlay"
-          >pause</mat-icon
+          mat-mini-fab
+          color="primary"
+          (click)="togglePlayTrack(i, false)"
         >
+          <mat-icon>pause</mat-icon>
+        </button>
       </div>
     </button>
 

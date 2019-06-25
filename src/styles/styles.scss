@@ -3,17 +3,16 @@
 @import './snackbar.scss';
 
 html {
-  overflow: scroll;
   overflow-x: hidden;
 }
 
 ::-webkit-scrollbar {
-  width: 0px;
+  width: 4px;
   background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #FF0000;
+  background: grey;
 }
 
 input:-webkit-autofill,

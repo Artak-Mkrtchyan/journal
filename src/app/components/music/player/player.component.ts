@@ -2,27 +2,50 @@ import { Component, OnInit } from '@angular/core';
 
 import { PlayerService } from '@service/player.service';
 
-import { IPlayer } from '@models/player.interface';
-
 @Component({
   selector: 'app-player',
   templateUrl: './player.component.html',
   styleUrls: ['./player.component.scss']
 })
 export class PlayerComponent implements OnInit {
-  playerState: IPlayer;
+  playerState;
   progressValue = 0;
   name = 'Select song';
-  duration = 0;
   volumeOff = false;
   music = new Audio();
   isLoaded = false;
+  duration: number;
+  currentTrackIndex: number;
 
   constructor(private playerService: PlayerService) {
-    this.playerService.getPlayerState().subscribe((player: IPlayer) => {
-      this.playerState = player;
-      this.isLoaded = player.artistInfo ? true : false;
+    this.playerService.getPlayerState().subscribe(playerState => {
+      this.playerState = playerState;
+      this.isLoaded = playerState.artistInfo ? true : false;
     });
+
+    this.playerService
+      .getPlayerTrackName()
+      .subscribe(({ songName, currentTrackIndex }) => {
+        if (this.currentTrackIndex !== currentTrackIndex) {
+          this.resetPlayer();
+        }
+        this.currentTrackIndex = currentTrackIndex;
+        if (songName && this.playerState.activePlaylist) {
+          this.music.src = this.playerState.activePlaylist[
+            currentTrackIndex
+          ].previewURL;
+          this.music.preload = 'metadata';
+        }
+      });
+
+    this.music.onloadedmetadata = () => {
+      this.duration = this.music.duration;
+    };
+  }
+
+  resetPlayer() {
+    this.music.currentTime = 0;
+    this.progressValue = 0;
   }
 
   getVolumeIcon() {
@@ -65,23 +88,32 @@ export class PlayerComponent implements OnInit {
     this.playerService.togglePlayerStatus();
   }
 
+  nextSong() {
+    this.playerService.nextSong();
+  }
+
+  previousSong() {
+    this.playerService.previousSong();
+  }
+
   ngOnInit() {
-    this.playerService.getPlayerTrackName().subscribe(songName => {
-      if (songName) {
-        this.name = this.playerState.name;
-        this.music.src = this.playerState.musicSrc as string;
-        this.music.ontimeupdate = () => {
-          this.progressValue =
-            this.music.currentTime / (this.music.duration / 100);
-        };
-        this.music.onended = () => {
-          this.playerService.stopSong();
-          this.music.currentTime = 0;
-        };
-      }
-    });
     this.playerService.getPlayerStatus().subscribe(({ isPlay, name }) => {
-      return isPlay ? this.music.play() : this.music.pause();
+      this.name = name;
+      return isPlay ? this.music.play().catch(() => {}) : this.music.pause();
     });
+
+    this.music.ontimeupdate = () => {
+      if (!this.music.paused) {
+        if (this.progressValue !== 0 && this.music.currentTime === 0) {
+          this.music.currentTime = (this.duration / 100) * this.progressValue;
+        }
+        this.progressValue = this.music.currentTime / (this.duration / 100);
+      }
+    };
+
+    this.music.onended = () => {
+      this.playerService.stopSong();
+      this.resetPlayer();
+    };
   }
 }

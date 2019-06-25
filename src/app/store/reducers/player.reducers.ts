@@ -7,12 +7,6 @@ export const playerReducers = (
   action: PlayerActions
 ): IPlayer => {
   switch (action.type) {
-    // case EPlayerActions.SetCurrentTime:
-    //   return {
-    //     ...state,
-    //     currentTime: action.payload
-    //   };
-
     case EPlayerActions.LoadSong:
       return {
         ...state,
@@ -30,6 +24,12 @@ export const playerReducers = (
       return {
         ...state
         // isHasSong: !state.isHasSong
+      };
+
+    case EPlayerActions.SetActivePlaylist:
+      return {
+        ...state,
+        activePlaylist: action.playlist
       };
 
     case EPlayerActions.SwitchSongStatus:
@@ -50,10 +50,57 @@ export const playerReducers = (
         isPlay: false
       };
 
+    case EPlayerActions.NextSong:
+      return {
+        ...state,
+        playlistIndexes: {
+          ...state.playlistIndexes,
+          currentIndex: state.playlistIndexes.currentIndex + 1
+        }
+      };
+
+    case EPlayerActions.PreviousSong:
+      return {
+        ...state,
+        playlistIndexes: {
+          ...state.playlistIndexes,
+          currentIndex: state.playlistIndexes.currentIndex - 1
+        }
+      };
+
     case EPlayerActions.SetVolume:
       return {
         ...state,
         volume: action.payload
+      };
+
+    case EPlayerActions.SetCurrentPlaylistIndex:
+      return {
+        ...state,
+        playlistIndexes: {
+          ...state.playlistIndexes,
+          currentIndex: action.payload
+        }
+      };
+
+    case EPlayerActions.SetMaxPlaylistIndex:
+      return {
+        ...state,
+        playlistIndexes: {
+          ...state.playlistIndexes,
+          topMaxIndex:
+            action.typeIndex === 'top'
+              ? action.maxIndex
+              : state.playlistIndexes.topMaxIndex,
+          searchMaxIndex:
+            action.typeIndex === 'search'
+              ? action.maxIndex
+              : state.playlistIndexes.searchMaxIndex,
+          myTracksMaxIndex:
+            action.typeIndex === 'myTrack'
+              ? action.maxIndex
+              : state.playlistIndexes.myTracksMaxIndex
+        }
       };
 
     default:

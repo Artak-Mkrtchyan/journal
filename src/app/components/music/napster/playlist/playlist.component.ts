@@ -3,8 +3,6 @@ import { Component, OnInit, Input } from '@angular/core';
 import { NapsterService } from '@service/napster.service';
 import { PlayerService } from '@service/player.service';
 
-// неработает переключение трека
-
 @Component({
   selector: 'app-napster-playlist',
   templateUrl: 'playlist.component.html',
@@ -19,12 +17,12 @@ export class NapsterPlaylistComponent implements OnInit {
   constructor(
     private napsterService: NapsterService,
     private playerService: PlayerService
-  ) {
-    this.napsterService.loadTracks();
-  }
+  ) {}
 
   togglePlayTrack(indexTrack: number, isPlay: boolean) {
     this.napsterService.setSong(this.tracks[indexTrack]);
+
+    this.playerService.setTrackIndex(indexTrack);
 
     return isPlay
       ? this.playerService.playSong()
@@ -32,10 +30,10 @@ export class NapsterPlaylistComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.napsterService.getPlaylist().subscribe(response => {
+    this.napsterService.getPlaylist().subscribe(playlist => {
       this.tracks = this.isSearchPlaylist
-        ? response.searchTracks
-        : response.topTracks;
+        ? playlist.topTracks
+        : playlist.searchTracks;
     });
     this.playerService.getPlayerStatus().subscribe(({ isPlay, name }) => {
       this.isPlay = isPlay;
